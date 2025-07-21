@@ -1,0 +1,55 @@
+/* src/components/ AddToCartButton.css */
+
+.shoppe-minimal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f8f6f4;
+  border: 1px solid #dad3cd;
+  border-radius: 2rem;
+  color: #5a4b3b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.03);
+}
+
+.shoppe-minimal-btn:hover {
+  background: #f2efec;
+  border-color: #cbbfb7;
+}
+
+.shoppe-minimal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cart-icon-wrapper {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.shoppe-minimal-btn:hover .cart-icon-wrapper i {
+  animation: jello-vertical 0.9s both;
+  transform-origin: left;
+}
+
+.cart-icon-wrapper i {
+  font-size: 1rem;
+  color: #7b6d5b;
+}
+
+/* jello animation */
+@keyframes jello-vertical {
+  0% { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(0.75, 1.25, 1); }
+  40% { transform: scale3d(1.25, 0.75, 1); }
+  50% { transform: scale3d(0.85, 1.15, 1); }
+  65% { transform: scale3d(1.05, 0.95, 1); }
+  75% { transform: scale3d(0.95, 1.05, 1); }
+  100% { transform: scale3d(1, 1, 1); }
+}
