@@ -1,0 +1,37 @@
+import { Routes, Route } from 'react-router-dom';
+import ProductGrid from './components/ProductGrid';
+import ProductPage from './components/ProductPage'; // ✅ Use this one
+import Cart from './components/Cart';
+import Footer from './components/Footer';
+
+function ShoppeRoutes(props) {
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <ProductGrid {...props} />
+            <Footer />
+          </>
+        }
+      />
+      <Route
+        path="/product/:id"
+        element={<ProductPage {...props} />}
+      />
+      <Route
+        path="/cart"
+        element={
+          <Cart
+            cartItems={props.cartItems}
+            updateCartQuantity={props.updateCartQuantity}
+            removeFromCart={props.removeFromCart}
+          />
+        }
+      />
+    </Routes>
+  );
+}
+
+export default ShoppeRoutes;

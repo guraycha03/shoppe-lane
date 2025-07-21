@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "name": "Abstract Flower Style Mouse Pad",
+    "price": "₱240",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005047/mouse_pad_1_du2zff.png",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005357/mouse_pad_2_yujzsd.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005450/mouse_pad_3_nvrgrc.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005479/mouse_pad_4_arlshv.png"
+    ],
+    "categories": [
+      "Tech Accessories",
+      "Office",
+      "Essentials"
+    ],
+    "description": "Elevate your workspace with this comfortable Abstract Flower Style Mouse Pad. Featuring high-definition floral print on a silky-smooth fabric surface for precise mouse control. Its non-slip rubber base keeps it firmly in place during fast-paced movements. Compact, lightweight, and beautifully designed—perfect for daily use or gifting.",
+    "seller": "Serenity Supplies",
+    "rating": 4.7,
+    "sold": "2.1k+ sold",
+    "reviews": "260",
+    "delivery": "Delivery in 2–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Easy Returns",
+      "Locally Sourced"
+    ],
+    "specs": {
+      "brand": "Bloom Edge",
+      "series": "Mouse Pad",
+      "model": "mouse-pads",
+      "dimensions": "8.7 x 7.1 x 0.1 inches",
+      "weight": "4.2 ounces",
+      "material": "Rubber base with smooth cloth surface",
+      "color": "Black",
+      "surface": "Ultra-smooth, high-definition print",
+      "support": "Soft wrist support",
+      "recommendedUse": "Office, gaming, general use",
+      "features": "Non-slip base, lightweight, durable edges",
+      "care": "Wipe clean with a cloth"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Abstract Flower Style Mouse Pad",
+    "price": "₱240",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005047/mouse_pad_1_du2zff.png",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005357/mouse_pad_2_yujzsd.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005450/mouse_pad_3_nvrgrc.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753005479/mouse_pad_4_arlshv.png"
+    ],
+    "categories": [
+      "Tech Accessories",
+      "Office",
+      "Essentials"
+    ],
+    "description": "Elevate your workspace with this comfortable Abstract Flower Style Mouse Pad. Featuring high-definition floral print on a silky-smooth fabric surface for precise mouse control. Its non-slip rubber base keeps it firmly in place during fast-paced movements. Compact, lightweight, and beautifully designed—perfect for daily use or gifting.",
+    "seller": "Serenity Supplies",
+    "rating": 4.7,
+    "sold": "2.1k+ sold",
+    "reviews": "260",
+    "delivery": "Delivery in 2–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Easy Returns",
+      "Locally Sourced"
+    ],
+    "specs": {
+      "brand": "Bloom Edge",
+      "series": "Mouse Pad",
+      "model": "mouse-pads",
+      "dimensions": "8.7 x 7.1 x 0.1 inches",
+      "weight": "4.2 ounces",
+      "material": "Rubber base with smooth cloth surface",
+      "color": "Black",
+      "surface": "Ultra-smooth, high-definition print",
+      "support": "Soft wrist support",
+      "recommendedUse": "Office, gaming, general use",
+      "features": "Non-slip base, lightweight, durable edges",
+      "care": "Wipe clean with a cloth"
+    }
+  },
+  
+  
+   {
+      id: 12,
+      name: "Satin Straw Wedge Sandals",
+      price: "₱899",
+      image: "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996855/Satin-Straw-Wedge-Sandals_s1hqaa.jpg",
+      images: [
+        "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996973/Satin-Straw-Wedge-Sandals-Brown_u68ifo.jpg",
+        "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997009/Satin-Straw-Wedge-Sandals-Black_sp1gyl.jpg"
+      ],
+      variants: [
+        {
+          name: "Brown",
+          image: "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996973/Satin-Straw-Wedge-Sandals-Brown_u68ifo.jpg"
+        },
+        {
+          name: "Black",
+          image: "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997009/Satin-Straw-Wedge-Sandals-Black_sp1gyl.jpg"
+        }
+      ],      
+      categories: ["Shoes", "Summer", "Boho Chic"],
+      description:
+        "Breezy and flattering, these open-toe wedge sandals feature soft satin, a straw heel, and a comfy memory foam sole—perfect for warm days and stylish strolls.",
+      seller: "Shoppe Lane Finds",
+      rating: 4.6,
+      sold: "620+ sold",
+      reviews: "78",
+      delivery: "Delivery in 3–5 days",
+      shipping: "Free shipping",
+      courier: "J&T Express",
+      guarantee: ["Cash on Delivery", "Free returns", "Secure packaging"],
+      specs: {
+        material: "Satin upper, faux leather lining",
+        color: "Brown and Black",
+        brand: "SHOPPE LANE",
+        heel: "3.5\" straw wedge, 1.2\" platform",
+        fit: "True to size (Size up if in between)",
+        style: "Boho, Casual",
+        features: ["Adjustable buckle", "Memory foam insole", "Lightweight"],
+        toe: "Open toe",
+        occasion: "Summer, Beach, Everyday",
+        closure: "Buckle strap",
+      },
+    },
+  
+]

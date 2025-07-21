@@ -1,0 +1,55 @@
+
+File	         Purpose
+
+main.jsx   Entry point, routes through BrowserRouter, loads App.jsx.
+
+App.jsx   Main layout with header/footer and route definitions.
+
+ShoppeRoutes.jsx    Contains all route paths and connects components.
+
+ProductPage.jsx   Product detail view with image gallery, info, and recommendations.
+
+ProductResultsPage.jsx    Category/search results page using ProductGrid.
+
+RatingModal.jsx   Modal UI for user ratings and comments.
+
+RatingSection.jsx   Inline rating summary with star breakdown.
+
+Header.jsx   Fully featured header with wishlist/cart badge, search, category dropdown, and burger menu.
+
+Cart.jsx   Well-structured cart interface. Lets users: Adjust item quantities. Remove items. Place an order (placeholder action). Uses responsive layout and consistent Bootstrap styling
+
+
+ ProductCard.jsx & ProductGrid.jsx
+ProductCard is used in various grid views and supports:
+
+Compact/full mode
+
+Like button
+
+Fly-to-cart animation
+
+ProductGrid maps product data to cards and handles search filtering
+
+
+
+ ScrollToTop.jsx
+Tiny but important UX enhancer
+
+Ensures scroll reset on every route change — ✅ nice touch!
+
+
+
+
+
+
+
+
+
+
+
+- Routing: main.jsx, App.jsx, ShoppeRoutes.jsx
+- Pages: ProductPage, ProductResultsPage, Cart, Home
+- Components: Header, Footer, ProductCard, ProductGrid, RatingModal, AddToCartButton, etc.
+- UX helpers: ScrollToTop, FlyToCartAnimation
+- Product data: [not yet — still need products.js]

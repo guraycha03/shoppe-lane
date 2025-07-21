@@ -1,0 +1,59 @@
+import React from 'react';
+import classNames from 'classnames';
+
+function AddToCartButton({ onClick, isLoading = false }) {
+  const buttonClass = classNames('neu-button-small', {
+    loading: isLoading,
+  });
+
+  return (
+    <button
+  type="button"
+  className={buttonClass}
+  onClick={onClick}
+  disabled={isLoading}
+  aria-busy={isLoading}
+
+      style={{
+        fontSize: '0.8rem',
+        borderRadius: '2rem',
+        padding: '0.35rem 0.75rem',
+        backgroundColor: '#e0e0e0',
+        border: '2px solid #cecece',
+        boxShadow: isLoading
+          ? 'inset 2px 2px 5px #c5c5c5, inset -2px -2px 5px #ffffff'
+          : '4px 4px 10px #c5c5c5, -4px -4px 10px #ffffff',
+
+        color: '#4d4d4d',
+        whiteSpace: 'nowrap', 
+        gap: '0.35rem',
+        maxWidth: '100%',
+        flexShrink: 0,        
+      }}
+    >
+      {isLoading ? (
+        <>
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          <span className="ms-1">Adding...</span>
+        </>
+      ) : (
+        <>
+          <i
+            className="bi bi-cart2"
+            style={{
+              fontSize: '1rem',
+              color: '#7b6d5b', // ✅ Light aesthetic cart icon
+            }}
+          ></i>
+          <span>Add to Cart</span>
+        </>
+      )}
+    </button>
+  );
+}
+
+export default AddToCartButton;

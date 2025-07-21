@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shoppe Lane</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --brand-color: #4b392b;
+      --bg-soft: #fdf8f3;
+      --ribbon-color: #e7d7c7;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      background: var(--bg-soft);
+    }
+
+    /* Splash Screen */
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      background: url('public/images/loader-bg.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1050;
+      transition: opacity 1s ease;
+    }
+
+    .splash-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
+    }
+
+    .ribbon-wrapper {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ribbon-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 200px;
+      background-color: var(--ribbon-color);
+      z-index: 1;
+    }
+
+    .svg-bow {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      max-width: 80%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .splash-title {
+      position: relative;
+      z-index: 2;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--brand-color);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0;
+      background: var(--ribbon-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+
+    /* App Content */
+    .app-content {
+      display: none;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .app-content.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .splash-logo {
+        width: 140px;
+        height: 140px;
+      }
+
+      .svg-bow {
+        width: 420px;
+      }
+
+      .splash-title {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash" class="splash-screen">
+    <img src="public/images/logo.png" class="splash-logo" alt="Shoppe Lane Logo" />
+
+    <div class="ribbon-wrapper">
+      <div class="ribbon-bg"></div>
+      <img src="public/images/gift-bow.svg" alt="Bow" class="svg-bow" />
+      <h1 class="splash-title">Shoppe Lane</h1>
+    </div>
+  </div>
+
+  <!-- Main App Content -->
+  <div id="app" class="app-content container">
+    <h1 class="display-5 text-dark fw-semibold">Welcome to Shoppe Lane 🎁</h1>
+    <p class="text-secondary fs-5">Gifts of style, wrapped with love and care.</p>
+  </div>
+
+  <!-- Fade out splash -->
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("splash").classList.add("fade-out");
+        document.getElementById("app").classList.add("show");
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
+
+<!-- 
+// src/App.jsx
+
+import { useState, useEffect, useRef } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import Loader from './Loader';
+import products from './data/products';
+
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.5;
+  const empty = 5 - full - (half ? 1 : 0);
+
+
+
+  return (
+    <>
+      {[...Array(full)].map((_, i) => (
+        <i key={`f-${i}`} className="bi bi-star-fill text-warning me-1"></i>
+      ))}
+      {half && <i className="bi bi-star-half text-warning me-1"></i>}
+      {[...Array(empty)].map((_, i) => (
+        <i key={`e-${i}`} className="bi bi-star text-warning me-1"></i>
+      ))}
+    </>
+  );
+}
+
+function App() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('cartItems'));
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
+  });
+  
+  const [likedProducts, setLikedProducts] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('likedProducts'));
+      return new Set(Array.isArray(stored) ? stored : []);
+    } catch {
+      return new Set();
+    }
+  });
+
+  // Scroll-related refs and state
+  const headerRef = useRef(null);
+  const lastScrollY = useRef(window.scrollY);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const header = headerRef.current;
+
+      if (!header) return;
+
+      if (currentY > lastScrollY.current && currentY > 80) {
+        header.classList.add('header-hidden');
+      } else {
+        header.classList.remove('header-hidden');
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  
+  useEffect(() => {
+    localStorage.setItem('likedProducts', JSON.stringify(Array.from(likedProducts)));
+  }, [likedProducts]);
+
+  const toggleLike = (productId) => {
+    setLikedProducts((prev) => {
+      const newSet = new Set(prev);
+      newSet.has(productId) ? newSet.delete(productId) : newSet.add(productId);
+      return newSet;
+    });
+  };
+
+  const addToCart = (product) => {
+    setCartItems((prev) => [...prev, product]);
+  };
+
+  const openProductModal = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedProduct(null);
+  };
+
+
+
+
+
+  return (
+  <div className="min-vh-100 bg-light text-dark font-sans">
+    {/* Header */}
+    <header
+      ref={headerRef}
+      className="bg-white shadow-sm sticky-top z-3 transition-header"
+    >
+      <nav className="container d-flex justify-content-between align-items-center py-3">
+        <h1 className="h4 m-0 fw-bold" style={{ color: '#8B6F52' }}>Shoppe Lane</h1>
+        <div className="position-relative w-50">
+          <input
+            type="text"
+            className="form-control ps-5 rounded-pill"
+            placeholder="Search cozy things..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <i
+            className="bi bi-search position-absolute"
+            style={{
+              left: '16px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: '#bda993',
+            }}
+          ></i>
+        </div>
+        <div className="d-flex align-items-center gap-3 fs-5">
+          <div className="position-relative" title="Wishlist">
+            <i className="bi bi-heart" style={{ color: '#cc5c5c', cursor: 'pointer' }}></i>
+            {likedProducts.size > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.6rem' }}>
+                {likedProducts.size}
+              </span>
+            )}
+          </div>
+          <div className="position-relative" title="Cart">
+            <i className="bi bi-bag" style={{ color: '#8B6F52', cursor: 'pointer' }}></i>
+            {cartItems.length > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style={{ fontSize: '0.6rem' }}>
+                {cartItems.length}
+              </span>
+            )}
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    {selectedProduct ? (
+      // === PRODUCT DETAIL PAGE ===
+      <main className="container py-5">
+        <button
+          className="btn btn-outline-secondary mb-4 rounded-pill"
+          onClick={() => setSelectedProduct(null)}
+        >
+          ← Back to Home
+        </button>
+
+        <div className="row g-5 align-items-start">
+        <div className="col-md-5 position-relative">
+            <img
+              src={selectedProduct.image}
+              alt={selectedProduct.name}
+              className="img-fluid rounded"
+              style={{
+                width: '100%',
+                maxHeight: '360px',
+                objectFit: 'contain',
+                backgroundColor: '#f9f9f9',
+                padding: '1rem',
+              }}
+            />
+            <small
+              className="text-muted position-absolute"
+              style={{
+                bottom: '10px',
+                right: '15px',
+                fontSize: '0.85rem',
+              }}
+            >
+              {selectedProduct.sold}
+            </small>
+          </div>
+
+
+
+          <div className="col-md-7">
+            <h2 className="fw-bold mb-3">{selectedProduct.name}</h2>
+            <div className="d-flex align-items-center mb-3">
+              <div className="text-warning me-2">{renderStars(selectedProduct.rating)}</div>
+              <small className="text-muted">({selectedProduct.rating})</small>
+            </div>
+            <p className="text-muted mb-3">{selectedProduct.description}</p>
+            <h4 style={{ color: '#8B6F52' }}>{selectedProduct.price}</h4>
+
+            <h6 className="fw-semibold mb-3 text-uppercase">Quick Info</h6>
+            <ul className="list-unstyled small mb-4">
+              <li className="mb-2"><strong>Delivery:</strong> {selectedProduct.delivery}</li>
+              <li className="mb-2"><strong>Shipping:</strong> {selectedProduct.shipping}</li>
+              <li className="mb-2"><strong>Courier:</strong> {selectedProduct.courier}</li>
+              <li className="mb-2"><strong>Guarantee:</strong> {selectedProduct.guarantee.join(', ')}</li>
+            </ul>
+
+
+              <hr className="my-4" />
+
+              <h6 className="fw-semibold mb-3 text-uppercase">Specifications</h6>
+              <ul className="list-unstyled small mb-0">
+                {Object.entries(selectedProduct.specs).map(([key, value]) => (
+                  <li key={key} className="mb-2">
+                    <span className="label">
+                      {key.charAt(0).toUpperCase() + key.slice(1)}:
+                    </span>{' '}
+                    {Array.isArray(value) ? value.join(', ') : value}
+                  </li>
+                ))}
+              </ul>
+
+
+
+            <div className="mt-4 d-flex gap-3">
+              <button
+                className={`btn ${likedProducts.has(selectedProduct.id) ? 'btn-danger' : 'btn-outline-danger'} rounded-pill`}
+                onClick={() => toggleLike(selectedProduct.id)}
+              >
+                <i className={`bi ${likedProducts.has(selectedProduct.id) ? 'bi-heart-fill' : 'bi-heart'}`}></i>
+              </button>
+              <button
+                className="btn btn-primary rounded-pill px-4"
+                onClick={() => addToCart(selectedProduct)}
+              >
+                <i className="bi bi-cart-plus me-2"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* --- Recommendations --- */}
+        <hr className="my-5" />
+        <h4 className="mb-4">You might also like</h4>
+        <div className="row g-4">
+          {products
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 3)
+            .map((product) => (
+              <div className="col-sm-6 col-lg-4" key={product.id}>
+                <div
+                  className="card h-100 shadow-sm border-0"
+                  role="button"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="card-img-top"
+                    style={{
+                      height: '280px',
+                      objectFit: 'contain',
+                      padding: '1rem',
+                      backgroundColor: '#f9f9f9',
+                    }}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{product.name}</h5>
+                    <div className="d-flex align-items-center mb-2">
+                      <div className="text-warning me-2">{renderStars(product.rating)}</div>
+                      <small className="text-muted">({product.rating})</small>
+                    </div>
+                    <p className="fw-medium text-dark">{product.price}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+      </main>
+    ) : (
+      // === HOME PAGE ===
+      <main className="container pb-5 mt-4">
+        <h2 className="fw-semibold fs-4 mb-4">Featured Products</h2>
+        <div className="row g-4">
+          {products
+            .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+            .map((product) => (
+              <div className="col-sm-6 col-lg-4" key={product.id}>
+                <div
+                  className="card h-100 shadow-sm border-0"
+                  role="button"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="card-img-top"
+                    style={{
+                      height: '320px',
+                      objectFit: 'contain',
+                      padding: '1rem',
+                      backgroundColor: '#f9f9f9',
+                    }}
+                  />
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title fw-bold mb-2">{product.name}</h5>
+                    <div className="d-flex align-items-center mb-2">
+                      <div className="text-warning me-2">{renderStars(product.rating)}</div>
+                      <small className="text-muted">({product.rating})</small>
+                    </div>
+                    <small className="text-muted mb-3 d-block">{product.sold}</small>
+                    <div className="mt-auto pt-3 d-flex justify-content-between align-items-center">
+                      <span className="fw-medium text-dark">{product.price}</span>
+                      <div className="d-flex align-items-center gap-2">
+                        <i
+                          role="button"
+                          aria-label={likedProducts.has(product.id) ? 'Unlike' : 'Like'}
+                          className={`bi ${likedProducts.has(product.id) ? 'bi-heart-fill text-danger' : 'bi-heart'}`}
+                          style={{ cursor: 'pointer', fontSize: '1.2rem' }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleLike(product.id);
+                          }}
+                        ></i>
+                        <button
+                          className="btn btn-primary btn-sm px-3 rounded-pill"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToCart(product);
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+      </main>
+    )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <footer className="bg-footer text-light pt-5 pb-4 px-3 mt-5">
+        <div className="container">
+          <div className="row gy-4">
+            <div className="col-sm-6 col-lg-3">
+              <h6 className="fw-bold mb-3">Shoppe Lane</h6>
+              <ul className="list-unstyled small">
+                <li><a href="#" className="footer-link">About Us</a></li>
+                <li><a href="#" className="footer-link">Contact</a></li>
+                <li><a href="#" className="footer-link">Shipping Info</a></li>
+                <li><a href="#" className="footer-link">Returns & Refunds</a></li>
+              </ul>
+            </div>
+            <div className="col-sm-6 col-lg-3">
+              <h6 className="fw-bold mb-3">Help</h6>
+              <ul className="list-unstyled small">
+                <li><a href="#" className="footer-link">FAQ</a></li>
+                <li><a href="#" className="footer-link">Support Center</a></li>
+                <li><a href="#" className="footer-link">Track Order</a></li>
+                <li><a href="#" className="footer-link">Purchase Protection</a></li>
+              </ul>
+            </div>
+            <div className="col-sm-6 col-lg-3">
+              <h6 className="fw-bold mb-3">Perks</h6>
+              <ul className="list-unstyled small">
+                <li><a href="#" className="footer-link">Exclusive Offers</a></li>
+                <li><a href="#" className="footer-link">Coupons & Alerts</a></li>
+                <li><a href="#" className="footer-link">Affiliate Program</a></li>
+              </ul>
+            </div>
+            <div className="col-sm-6 col-lg-3">
+              <h6 className="fw-bold mb-3">Connect</h6>
+              <div className="d-flex gap-3">
+                <a href="#" className="footer-icon"><i className="bi bi-instagram"></i></a>
+                <a href="#" className="footer-icon"><i className="bi bi-facebook"></i></a>
+                <a href="#" className="footer-icon"><i className="bi bi-twitter-x"></i></a>
+                <a href="#" className="footer-icon"><i className="bi bi-tiktok"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-5 small text-light opacity-75">
+            &copy; 2025 Shoppe Lane · All rights reserved · <a href="#" className="footer-link">Terms</a> · <a href="#" className="footer-link">Privacy</a>
+          </div>
+        </div>
+      </footer>
+
+
+
+
+    </div>
+  );
+}
+
+export default App; -->
