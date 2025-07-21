@@ -132,3 +132,222 @@
     },
   
 ]
+
+
+
+
+
+
+
+
+ {
+      id: 7,
+      name: "Top-Lock Shoulder Bag – Pink & Green",
+      price: "₱495",
+      image: "/images/products/Lock-Bag/Lock-Bag.jpg",
+      images: [
+        "/images/products/Lock-Bag/Lock-Bag-Pink.jpg",
+        "/images/products/Lock-Bag/Lock-Bag-Green.jpg",
+        "/images/products/Lock-Bag/Lock-Bag-Green-Side.jpg",
+        "/images/products/Lock-Bag/Lock-Bag-Pink-Green.jpg"
+      ],
+      variants: [
+        {
+          name: "Blush Pink",
+          image: "/images/products/Lock-Bag/Lock-Bag-Pink.jpg"
+        },
+        {
+          name: "Forest Green",
+          image: "/images/products/Lock-Bag/Lock-Bag-Green.jpg"
+        }
+      ],
+      categories: ["Home", "Essentials", "Bestsellers"],
+      description:
+        "A structured hanging-style bag available in soft pink and rich green tones. Made from smooth synthetic leather, it features a secure top-lock closure and a roomy interior that keeps your essentials within easy reach. Includes both a short handle and an adjustable crossbody strap for flexible styling.",
+      seller: "Luxe Carry Studio",
+      rating: 4.8,
+      sold: "1.2k+ sold",
+      reviews: "390",
+      delivery: "Delivery in 3–5 days",
+      shipping: "Free shipping",
+      courier: "J&T Express",
+      guarantee: ["Cash on Delivery", "Safe Packaging", "7-Day Return"],
+      specs: {
+        material: "Smooth Synthetic Leather",
+        dimensions: "10\" W × 8\" H",
+        shortStrap: "6\" fixed hand strap",
+        longStrap: "Adjustable shoulder strap",
+        closure: "Top Lock Clasp",
+        style: "Casual, Minimalist",
+        colorOptions: "Blush Pink, Forest Green",
+        lining: "Unlined / Partial fabric",
+        shape: "Structured rectangle",
+        care: "Wipe clean with a damp cloth",
+        origin: "Locally sourced",
+      },
+    },
+
+    {
+      id: 8,
+      name: "Eco Cotton Mesh Shopping Bag",
+      price: "₱170",
+      image: "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Flowers.jpg",
+      images: [
+        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Fruits.jpg",
+        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Lady.jpg",
+        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Fruits1.jpg",
+        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Fruits2.jpg"
+      ],
+      categories: ["Essentials", "Lifestyle", "Accessories"],
+      description:
+        "A reusable, breathable cotton mesh bag designed for everyday shopping and food storage. Ideal for carrying groceries, produce, or essentials, this natural-fiber bag helps keep contents fresh and supports a plastic-free lifestyle. Neutral white and beige colors blend with any minimal, modern space.",
+      seller: "Everyday Goods Project",
+      rating: 4.7,
+      sold: "500+ sold",
+      reviews: "90",
+      delivery: "Delivery in 3–6 days",
+      shipping: "Free shipping",
+      courier: "J&T Express",
+      guarantee: [
+        "Cash on Delivery",
+        "Machine Washable",
+        "Eco-Friendly",
+        "Plastic-Free Packaging"
+      ],
+      specs: {
+        material: "100% Cotton",
+        dimensions: "17 × 15.5 inches (laid flat, approximate)",
+        care:
+          "Machine wash warm, durable-press cycle; do not bleach or tumble dry; iron low; do not dry clean",
+        features: [
+          "Breathable mesh design",
+          "Reusable & sustainable",
+          "Ideal for fruits, veggies, or everyday carry",
+          "Supports food freshness",
+          "Recommended for indoor storage"
+        ],
+        packaging: "Individually packed",
+        weight: "0.10 kg",
+        use: "Shopping, Storage",
+        origin: "Locally sourced materials",
+        safety: "Tested for food contact"
+      }
+    },
+    {
+      id: 9,
+      name: "Bamboo Makeup Pads",
+      price: "₱249",
+      image: "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads.jpg",
+      images: [
+        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-1.jpg",
+        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-2.jpg",
+        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-3.jpg",
+        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-4.jpg"
+      ],
+      categories: ["Essentials", "Beauty", "Eco-Friendly"],
+      description:
+        "Soft and skin-friendly pads made from bamboo cotton blend, ideal for daily makeup removal and skincare. Washable and reusable — an effortless way to care for your face while reducing waste.",
+      seller: "BareBliss Naturals",
+      rating: 4.9,
+      sold: "2.7k+ sold",
+      reviews: "1.1k",
+      delivery: "Delivery in 3–6 days",
+      shipping: "Free shipping",
+      courier: "J&T Express",
+      guarantee: ["Cash on Delivery", "Eco-Friendly", "Machine Washable", "Plastic-Free"],
+      specs: {
+        Material: "80% Bamboo Fiber, 20% Cotton",
+        Size: "8 cm diameter",
+        Layers: "3-layer ultra-soft fabric",
+        Brand: "EcoPanda",
+        Features: [
+          "Reusable & Washable",
+          "Gentle on Sensitive Skin",
+          "Zero-Waste Alternative"
+        ],
+        Care: "Machine wash cold in mesh bag, air dry",
+        Use: "Makeup Removal, Toner Application, Daily Skincare",
+        Origin: "Made from eco-sourced materials",
+      }
+    },    
+    {
+      id: 10,
+      name: "Women's Wedge Sandal",
+      price: "₱1,199",
+      image: "/images/products/Wedge-Sandal/Wedge-Sandal.jpg",
+      images: [
+        "/images/products/Wedge-Sandal/Wedge-Sandal-1.jpg",
+        "/images/products/Wedge-Sandal/Wedge-Sandal-2.jpg",
+        "/images/products/Wedge-Sandal/Wedge-Sandal-3.jpg"
+      ],
+      categories: ["Women", "Lifestyle", "Bestsellers"],
+      description:
+        "We all love a platform, and this style especially. Dress up or dress down — the Chance Heel will be your new summer favorite. Featuring a minimal, clean silhouette that adds height and elegance without compromising on comfort.",
+      seller: "Sole & Stitch",
+      rating: 4.7,
+      sold: "3.1k+ sold",
+      reviews: "840",
+      delivery: "Delivery in 3–6 days",
+      shipping: "Free shipping",
+      courier: "J&T Express",
+      guarantee: ["Cash on Delivery", "Genuine Leather", "7-Day Return"],
+      specs: {
+        Type: "Women's Wedge Sandal",
+        Color: "Pink Beige",
+        Fit: "True to size. If you're in between sizes, size up.",
+        Material: "Quality Leather Upper",
+        Lining: "Leather Lining",
+        Outsole: "Non-slip Rubber Sole",
+        Comfort: "Cushioned Insole for All-Day Wear",
+        Style: "Minimalist, Summer Casual",
+        Heel: "Approx. 3 inches",
+        Size: "EU 35–41",
+        Closure: "Slip-On",
+        Brand: "Boutique Imported",
+        Use: "Casual, Office, Summer Events",
+        Origin: "Made in China",
+      }
+    },    
+    
+    
+
+
+
+
+
+    {
+      id: 11,
+      name: "S-Shaped Ceramic Flower Vase",
+      price: "₱245",
+      image: "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase.jpg",
+      images: [
+        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-1.jpg",
+        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-2.jpg",
+        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-3.jpg",
+        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-4.jpg",
+        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-5.jpg"
+      ],
+      categories: ["Home", "Essentials", "Bestsellers"],
+      description:
+        "A beautifully curved, S-shaped ceramic vase crafted for minimalist interiors. Its soft beige tone and textured surface make it a perfect piece for modern, neutral, or boho home decor.",
+      seller: "Sangfor Studio",
+      rating: 4.7,
+      sold: "890+ sold",
+      reviews: "160",
+      delivery: "Delivery in 3–5 days",
+      shipping: "Free shipping",
+      courier: "J&T Express",
+      guarantee: ["Cash on Delivery", "Free returns", "Secure packaging"],
+      specs: {
+        material: "Ceramic",
+        color: "Beige",
+        brand: "SANGFOR",
+        shape: "S-shaped, Modern",
+        style: "Elegant, Minimalist",
+        features: ["Water-Holding", "Handmade"],
+        pattern: "Solid",
+        theme: "Floral, Neutral",
+        use: "Decor",
+        room: "Living Room",
+      },
+    },
