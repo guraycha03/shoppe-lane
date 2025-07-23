@@ -2,7 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
+
+import useFollowState from '../hooks/useFollowState';
+
 import SellerInfoBox from '../components/SellerInfoBox';
+
+import {
+  getFollowState,
+  setFollowState,
+  getFollowersCount,
+  setFollowersCount,
+
+} from '../utils/followStorage';
+
 
 function StorePage({
     isLoggedIn,
@@ -15,6 +27,21 @@ function StorePage({
     triggerFlyToCartAnimation,
     showNotification
   }) {
+
+    const [hasFollowed, setHasFollowed] = useState(false);
+    const [followers, setFollowers] = useState(0);
+
+    // const isFollowing = getFollowState(currentUser, product.seller);
+    const [isFollowing, setIsFollowing] = useState(false);
+
+    
+    
+    const toggleFollow = () => {
+      const newState = !isFollowing;
+      setIsFollowing(newState);
+      setFollowState(currentUser, sellerName, newState);
+    };
+
   
   const { sellerId } = useParams();
   const navigate = useNavigate();
@@ -23,9 +50,41 @@ function StorePage({
   const [sellerData, setSellerData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const slugify = (str) =>
     str?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+  
+
+  useEffect(() => {
+    if (sellerData && currentUser) {
+      const follow = getFollowState(currentUser, sellerData.name);
+      setIsFollowing(follow);
+    }
+  }, [sellerData, currentUser]);
+
+
+  useEffect(() => {
+    if (!sellerData || !currentUser) return;
+  
+    const updateFollowState = () => {
+      const followed = getFollowState(currentUser, sellerData.id);
+      const count = getFollowersCount(sellerData.id);
+      setHasFollowed(followed);
+      setFollowers(count);
+    };
+  
+    updateFollowState(); // initial
+  
+    const onStorageChange = (e) => {
+      if (e.key === 'user_follow_map' || e.key === 'followers_count_map') {
+        updateFollowState();
+      }
+    };
+  
+    window.addEventListener('storage', onStorageChange);
+    return () => window.removeEventListener('storage', onStorageChange);
+  }, [sellerData, currentUser]);
+  
+
   
 
   useEffect(() => {

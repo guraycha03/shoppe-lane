@@ -1,8 +1,8 @@
 // src/data/sellers.js
 
 const sellers = {
-    'Timid Kitten': {
-      name: 'Timid Kitten',
+    'Serenity Supplies': {
+      name: 'Serenity Supplies',
       followers: 1240,
     },
     'Honeyrose Finds': {

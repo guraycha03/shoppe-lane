@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import useFollowState from '../hooks/useFollowState';
 import '../App.css';
+import {
+  getFollowState,
+  setFollowState,
+  getFollowersCount,
+  setFollowersCount,
+} from '../utils/followStorage';
 
 function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
-  const storageKey = `follow_seller_${seller?.id}_${currentUser || 'guest'}`;
-  const storageFollowersKey = `followers_seller_${seller?.id}`;
-
+  // const storageKey = `follow_seller_${seller?.id}_${currentUser || 'guest'}`;
+  // const storageFollowersKey = `followers_seller_${seller?.id}`;
+  
+  const isFollowing = useFollowState(currentUser, seller.id);
   const navigate = useNavigate();
-
   const slugify = (str) =>
     str?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-  
 
   const getInitials = (name) => {
     if (!name) return '?';
@@ -28,45 +34,61 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
     return num.toString();
   };
 
+  // const getInitialFollowState = () => {
+  //   return localStorage.getItem(storageKey) === 'true';
+  // };
+
+  // const getInitialFollowers = () => {
+  //   const saved = localStorage.getItem(storageFollowersKey);
+  //   return saved ? parseInt(saved) : seller?.followers ?? 0;
+  // };
+
   const getInitialFollowState = () => {
-    return localStorage.getItem(storageKey) === 'true';
+    return getFollowState(currentUser, seller?.id);
   };
-
+  
   const getInitialFollowers = () => {
-    const saved = localStorage.getItem(storageFollowersKey);
-    return saved ? parseInt(saved) : seller?.followers ?? 0;
+    return getFollowersCount(seller?.id) || seller?.followers || 0;
   };
 
-  const [hasFollowed, setHasFollowed] = useState(() => {
-    if (!isLoggedIn) return false;
-    return getInitialFollowState();
-  });
+  // const [hasFollowed, setHasFollowed] = useState(false);
 
-  const [followers, setFollowers] = useState(getInitialFollowers());
+  const [followers, setFollowers] = useState(0);
 
   useEffect(() => {
-    if (isLoggedIn && currentUser) {
-      localStorage.setItem(storageKey, hasFollowed.toString());
-    }
-    localStorage.setItem(storageFollowersKey, followers.toString());
-  }, [hasFollowed, followers, isLoggedIn, currentUser, storageKey]);
+    if (!currentUser || !seller?.id) return;
+  
+    const updateFollowState = () => {
+      const followed = getFollowState(currentUser, seller.id);
+      const count = getFollowersCount(seller.id) || seller.followers || 0;
+  
+      setHasFollowed(followed);
+      setFollowers(count);
+    };
+  
+    updateFollowState();
+  
+    const onStorageChange = (e) => {
+      if (e.key === 'user_follow_map' || e.key === 'followers_count_map') {
+        updateFollowState();
+      }
+    };
+  
+    window.addEventListener('storage', onStorageChange);
+    return () => window.removeEventListener('storage', onStorageChange);
+  }, [currentUser, seller?.id]);
 
   const handleFollow = (e) => {
-    e.stopPropagation(); // ⛔ prevent click from bubbling to container
-
+    e.stopPropagation();
+  
     if (!isLoggedIn) {
       toast.warn('Please log in to follow sellers.');
       return;
     }
-
-    if (hasFollowed) {
-      setFollowers((prev) => Math.max(prev - 1, 0));
-      setHasFollowed(false);
-    } else {
-      setFollowers((prev) => prev + 1);
-      setHasFollowed(true);
-    }
+  
+    toggleFollow(); 
   };
+  
 
   return (
     <div
@@ -107,16 +129,14 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
 
         <button
           onClick={handleFollow}
-          className={`btn btn-sm px-3 ${hasFollowed ? 'btn-secondary' : 'btn-outline-secondary'}`}
-  
+          className={`btn btn-sm px-3 ${isFollowing ? 'btn-secondary' : 'btn-outline-secondary'}`}
           style={{
             whiteSpace: 'nowrap',
             cursor: isLoggedIn ? 'pointer' : 'not-allowed',
             opacity: isLoggedIn ? 1 : 0.6,
           }}
-          
         >
-          {isLoggedIn ? (hasFollowed ? 'Following' : 'Follow') : 'Log in to Follow'}
+          {isLoggedIn ? (isFollowing ? 'Following' : 'Follow') : 'Log in to Follow'}
         </button>
 
       </div>

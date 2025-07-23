@@ -60,7 +60,8 @@ function Home({
       </section>
 
       {/* Product Section */}
-      <section className="container my-5">
+      <section className="container mt-0 mb-5">
+
         <h2 className="text-center mb-4">Featured Products</h2>
 
         <ProductGrid

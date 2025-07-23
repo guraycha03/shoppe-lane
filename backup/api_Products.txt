@@ -15,6 +15,7 @@
       "Essentials"
     ],
     "description": "Elevate your workspace with this comfortable Abstract Flower Style Mouse Pad. Featuring high-definition floral print on a silky-smooth fabric surface for precise mouse control. Its non-slip rubber base keeps it firmly in place during fast-paced movements. Compact, lightweight, and beautifully designed—perfect for daily use or gifting.",
+    "sellerId": "serenity_supplies",
     "seller": "Serenity Supplies",
     "rating": 4.7,
     "sold": "2.1k+ sold",
@@ -58,6 +59,7 @@
       "Essentials"
     ],
     "description": "Elevate your workspace with this comfortable Abstract Flower Style Mouse Pad. Featuring high-definition floral print on a silky-smooth fabric surface for precise mouse control. Its non-slip rubber base keeps it firmly in place during fast-paced movements. Compact, lightweight, and beautifully designed—perfect for daily use or gifting.",
+    "sellerId": "serenity_supplies",
     "seller": "Serenity Supplies",
     "rating": 4.7,
     "sold": "2.1k+ sold",
@@ -85,269 +87,569 @@
       "care": "Wipe clean with a cloth"
     }
   },
-  
-  
-   {
-      id: 12,
-      name: "Satin Straw Wedge Sandals",
-      price: "₱899",
-      image: "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996855/Satin-Straw-Wedge-Sandals_s1hqaa.jpg",
-      images: [
-        "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996973/Satin-Straw-Wedge-Sandals-Brown_u68ifo.jpg",
-        "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997009/Satin-Straw-Wedge-Sandals-Black_sp1gyl.jpg"
-      ],
-      variants: [
-        {
-          name: "Brown",
-          image: "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996973/Satin-Straw-Wedge-Sandals-Brown_u68ifo.jpg"
-        },
-        {
-          name: "Black",
-          image: "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997009/Satin-Straw-Wedge-Sandals-Black_sp1gyl.jpg"
-        }
-      ],      
-      categories: ["Shoes", "Summer", "Boho Chic"],
-      description:
-        "Breezy and flattering, these open-toe wedge sandals feature soft satin, a straw heel, and a comfy memory foam sole—perfect for warm days and stylish strolls.",
-      seller: "Shoppe Lane Finds",
-      rating: 4.6,
-      sold: "620+ sold",
-      reviews: "78",
-      delivery: "Delivery in 3–5 days",
-      shipping: "Free shipping",
-      courier: "J&T Express",
-      guarantee: ["Cash on Delivery", "Free returns", "Secure packaging"],
-      specs: {
-        material: "Satin upper, faux leather lining",
-        color: "Brown and Black",
-        brand: "SHOPPE LANE",
-        heel: "3.5\" straw wedge, 1.2\" platform",
-        fit: "True to size (Size up if in between)",
-        style: "Boho, Casual",
-        features: ["Adjustable buckle", "Memory foam insole", "Lightweight"],
-        toe: "Open toe",
-        occasion: "Summer, Beach, Everyday",
-        closure: "Buckle strap",
+  {
+    "id": 3,
+    "name": "Artistic Touch Mouse Pad – Abstract Edition",
+    "price": "₱123",
+    "image": "/images/products/MousePads/MousePad-Abstract-1.jpg",
+    "images": [
+      "/images/products/MousePads/MousePad-Abstract-1.jpg",
+      "/images/products/MousePads/MousePad-Abstract-2.jpg",
+      "/images/products/MousePads/MousePad-Abstract-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Abstract Style 1",
+        "image": "/images/products/MousePads/MousePad-Abstract-1.jpg"
       },
-    },
-  
+      {
+        "name": "Abstract Style 2",
+        "image": "/images/products/MousePads/MousePad-Abstract-2.jpg"
+      },
+      {
+        "name": "Abstract Style 3",
+        "image": "/images/products/MousePads/MousePad-Abstract-3.jpg"
+      }
+    ],
+    "categories": [
+      "Computer Accessories",
+      "Office Supplies",
+      "Gaming"
+    ],
+    "description": "Add a touch of art to your workspace! These mouse pads feature unique abstract designs and a smooth surface for precise mouse control.",
+    "sellerId": "serenity_supplies",
+    "seller": "Serenity Supplies",
+    "rating": 4.8,
+    "sold": "1.5k+ sold",
+    "reviews": "250",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Secure Packaging",
+      "7-Day Return"
+    ],
+    "specs": {
+      "material": "Rubber Base with Smooth Surface",
+      "size": "240mm x 200mm x 3mm",
+      "thickness": "3mm",
+      "surface": "Smooth for precise mouse control",
+      "design": "Abstract prints",
+      "origin": "Imported"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Blooming Thoughts Notebook – Minimalist Flower Edition",
+    "price": "₱49",
+    "image": "/images/products/Notebooks/Notebook-Flower-1.jpg",
+    "images": [
+      "/images/products/Notebooks/Notebook-Flower-1.jpg",
+      "/images/products/Notebooks/Notebook-Flower-2.jpg",
+      "/images/products/Notebooks/Notebook-Flower-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Simple Blooms",
+        "image": "/images/products/Notebooks/Notebook-Flower-1.jpg"
+      },
+      {
+        "name": "Floral Whimsy",
+        "image": "/images/products/Notebooks/Notebook-Flower-2.jpg"
+      },
+      {
+        "name": "Minimal Petals",
+        "image": "/images/products/Notebooks/Notebook-Flower-3.jpg"
+      }
+    ],
+    "categories": [
+      "Stationery",
+      "Back to School",
+      "Essentials"
+    ],
+    "description": "Find inspiration in the simple things! These A5 notebooks feature beautiful minimalist flower designs and high-quality pages perfect for journaling, sketching, or note-taking.",
+    "sellerId": "serenity_supplies",
+    "seller": "Serenity Supplies",
+    "rating": 4.9,
+    "sold": "2.5k+ sold",
+    "reviews": "400",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Secure Packaging",
+      "7-Day Return"
+    ],
+    "specs": {
+      "paperType": "90 GSM Natural Shade Paper",
+      "pages": "160 pages",
+      "layout": "Plain (unruled)",
+      "binding": "Glue Bound",
+      "size": "A5 (14.8cm x 21cm)",
+      "cover": "Soft Cover with Minimalist Flower Design",
+      "ergonomics": "Flat-lay for comfortable writing",
+      "corners": "Rounded edges",
+      "origin": "Locally printed"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Royal Dreams Notebook – Princess Edition",
+    "price": "₱50",
+    "image": "/images/products/Notebooks/Notebook-Princess-1.jpg",
+    "images": [
+      "/images/products/Notebooks/Notebook-Princess-1.jpg",
+      "/images/products/Notebooks/Notebook-Princess-2.jpg",
+      "/images/products/Notebooks/Notebook-Princess-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Disney Princess",
+        "image": "/images/products/Notebooks/Notebook-Princess-1.jpg"
+      },
+      {
+        "name": "Princess Elsa",
+        "image": "/images/products/Notebooks/Notebook-Princess-2.jpg"
+      },
+      {
+        "name": "Princess Sofia",
+        "image": "/images/products/Notebooks/Notebook-Princess-3.jpg"
+      }
+    ],
+    "categories": [
+      "Stationery",
+      "Kids",
+      "Back to School"
+    ],
+    "description": "Let your little princess's imagination shine! These notebooks feature beautiful princess cartoon characters and high-quality pages perfect for writing, drawing, and daydreaming.",
+    "sellerId": "serenity_supplies",
+    "seller": "Serenity Supplies",
+    "rating": 4.8,
+    "sold": "2.1k+ sold",
+    "reviews": "350",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Secure Packaging",
+      "7-Day Return"
+    ],
+    "specs": {
+      "paperType": "80 GSM Ruled Paper",
+      "pages": "96 pages",
+      "layout": "Ruled",
+      "binding": "Glue Bound",
+      "size": "A5 (14.8cm x 21cm)",
+      "cover": "Soft Cover with Princess Cartoon Characters",
+      "ergonomics": "Flat-lay for comfortable writing",
+      "corners": "Rounded edges",
+      "origin": "Locally printed"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Fun Filled Notebook – Cartoon Characters Edition",
+    "price": "₱99",
+    "image": "/images/products/Notebooks/Notebook-Cartoon-1.jpg",
+    "images": [
+      "/images/products/Notebooks/Notebook-Cartoon-1.jpg",
+      "/images/products/Notebooks/Notebook-Cartoon-2.jpg",
+      "/images/products/Notebooks/Notebook-Cartoon-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "SpongeBob SquarePants",
+        "image": "/images/products/Notebooks/Notebook-Cartoon-1.jpg"
+      },
+      {
+        "name": "Tom & Jerry",
+        "image": "/images/products/Notebooks/Notebook-Cartoon-2.jpg"
+      },
+      {
+        "name": "Paw Patrol",
+        "image": "/images/products/Notebooks/Notebook-Cartoon-3.jpg"
+      }
+    ],
+    "categories": [
+      "Stationery",
+      "Kids",
+      "Back to School"
+    ],
+    "description": "Make learning fun with our cartoon characters notebooks! Perfect for kids to jot down notes, draw, and be creative.",
+    "seller": "Serenity Supplies",
+    "sellerId": "serenity_supplies",
+    "rating": 4.9,
+    "sold": "1.2k+ sold",
+    "reviews": "200",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Secure Packaging",
+      "7-Day Return"
+    ],
+    "specs": {
+      "paperType": "80 GSM Ruled Paper",
+      "pages": "96 pages",
+      "layout": "Ruled",
+      "binding": "Stapled",
+      "size": "A5 (14.8cm x 21cm)",
+      "cover": "Soft Cover with Cartoon Characters",
+      "ergonomics": "Flat-lay for comfortable writing",
+      "corners": "Rounded edges",
+      "origin": "Locally printed"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Creative Adventures Coloring Book",
+    "price": "₱99",
+    "image": "/images/products/Coloring-Books/Coloring-Book-1.jpg",
+    "images": [
+      "/images/products/Coloring-Books/Coloring-Book-1.jpg",
+      "/images/products/Coloring-Books/Coloring-Book-2.jpg",
+      "/images/products/Coloring-Books/Coloring-Book-3.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Animals",
+        "image": "/images/products/Coloring-Books/Coloring-Book-1.jpg"
+      },
+      {
+        "name": "Cartoons",
+        "image": "/images/products/Coloring-Books/Coloring-Book-2.jpg"
+      },
+      {
+        "name": "Fantasy Land",
+        "image": "/images/products/Coloring-Books/Coloring-Book-3.jpg"
+      }
+    ],
+    "categories": [
+      "Art Supplies",
+      "Kids' Products",
+      "Coloring Books"
+    ],
+    "description": "Let your child's imagination run wild with our fun coloring book! Perfect for kids to express their creativity and learn while having fun.",
+    "sellerId": "serenity_supplies",
+    "seller": "Serenity Supplies",
+    "rating": 4.9,
+    "sold": "1k+ sold",
+    "reviews": "200",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Secure Packaging",
+      "7-Day Return"
+    ],
+    "specs": {
+      "pages": "64 pages",
+      "paperType": "80 GSM Paper",
+      "size": "A4 (21cm x 29.7cm)",
+      "binding": "Stapled",
+      "cover": "Illustrated Cover Art",
+      "age": "Suitable for kids aged 4-12"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Satin Straw Wedge Sandals",
+    "price": "₱899",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996855/Satin-Straw-Wedge-Sandals_s1hqaa.jpg",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996973/Satin-Straw-Wedge-Sandals-Brown_u68ifo.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997009/Satin-Straw-Wedge-Sandals-Black_sp1gyl.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Brown",
+        "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752996973/Satin-Straw-Wedge-Sandals-Brown_u68ifo.jpg"
+      },
+      {
+        "name": "Black",
+        "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997009/Satin-Straw-Wedge-Sandals-Black_sp1gyl.jpg"
+      }
+    ],
+    "categories": [
+      "Shoes",
+      "Summer",
+      "Boho Chic"
+    ],
+    "description": "Breezy and flattering, these open-toe wedge sandals feature soft satin, a straw heel, and a comfy memory foam sole—perfect for warm days and stylish strolls.",
+    "sellerId": "serenity_supplies",
+    "seller": "Shoppe Lane Finds",
+    "rating": 4.6,
+    "sold": "620+ sold",
+    "reviews": "78",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Free returns",
+      "Secure packaging"
+    ],
+    "specs": {
+      "material": "Satin upper, faux leather lining",
+      "color": "Brown and Black",
+      "brand": "SHOPPE LANE",
+      "heel": "3.5\" straw wedge, 1.2\" platform",
+      "fit": "True to size (Size up if in between)",
+      "style": "Boho, Casual",
+      "features": [
+        "Adjustable buckle",
+        "Memory foam insole",
+        "Lightweight"
+      ],
+      "toe": "Open toe",
+      "occasion": "Summer, Beach, Everyday",
+      "closure": "Buckle strap"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Top-Lock Shoulder Bag – Pink & Green",
+    "price": "₱495",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752999989/Lock-Bag_zwzn3m.jpg",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753078090/Lock-Bag-Pink_yipgrk.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753000021/Lock-Bag-Green_lodvkk.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753000047/Lock-Bag-Green-Side_ciwsmp.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753000052/Lock-Bag-Pink-Green_gjudze.jpg"
+    ],
+    "variants": [
+      {
+        "name": "Blush Pink",
+        "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753078090/Lock-Bag-Pink_yipgrk.jpg"
+      },
+      {
+        "name": "Forest Green",
+        "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753000021/Lock-Bag-Green_lodvkk.jpg"
+      }
+    ],
+    "categories": [
+      "Home",
+      "Essentials",
+      "Bestsellers"
+    ],
+    "description": "A structured hanging-style bag available in soft pink and rich green tones. Made from smooth synthetic leather, it features a secure top-lock closure and a roomy interior that keeps your essentials within easy reach. Includes both a short handle and an adjustable crossbody strap for flexible styling.",
+    "sellerId": "serenity_supplies",
+    "seller": "Serenity Supplies",
+    "rating": 4.8,
+    "sold": "1.2k+ sold",
+    "reviews": "390",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Safe Packaging",
+      "7-Day Return"
+    ],
+    "specs": {
+      "material": "Smooth Synthetic Leather",
+      "dimensions": "10\" W × 8\" H",
+      "shortStrap": "6\" fixed hand strap",
+      "longStrap": "Adjustable shoulder strap",
+      "closure": "Top Lock Clasp",
+      "style": "Casual, Minimalist",
+      "colorOptions": "Blush Pink, Forest Green",
+      "lining": "Unlined / Partial fabric",
+      "shape": "Structured rectangle",
+      "care": "Wipe clean with a damp cloth",
+      "origin": "Locally sourced"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Eco Cotton Mesh Shopping Bag",
+    "price": "₱170",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753075100/Eco-Mesh-Bag-Beige-Lady_sngwsb.jpg",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753074871/Eco-Mesh-Bag-Beige-Fruits1_r4g0qi.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753074892/Eco-Mesh-Bag-Beige-Fruits_uqxem6.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753074835/Eco-Mesh-Bag-Beige-Fruits2_daxxi5.jpg"
+    ],
+    "categories": [
+      "Essentials",
+      "Lifestyle",
+      "Accessories"
+    ],
+    "description": "A reusable, breathable cotton mesh bag designed for everyday shopping and food storage. Ideal for carrying groceries, produce, or essentials, this natural-fiber bag helps keep contents fresh and supports a plastic-free lifestyle. Neutral white and beige colors blend with any minimal, modern space.",
+    "sellerId": "serenity_supplies",
+    "seller": "Serenity Supplies",
+    "rating": 4.7,
+    "sold": "500+ sold",
+    "reviews": "90",
+    "delivery": "Delivery in 3–6 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Machine Washable",
+      "Eco-Friendly",
+      "Plastic-Free Packaging"
+    ],
+    "specs": {
+      "material": "100% Cotton",
+      "dimensions": "17 × 15.5 inches (laid flat, approximate)",
+      "care": "Machine wash warm, durable-press cycle; do not bleach or tumble dry; iron low; do not dry clean",
+      "features": [
+        "Breathable mesh design",
+        "Reusable & sustainable",
+        "Ideal for fruits, veggies, or everyday carry",
+        "Supports food freshness",
+        "Recommended for indoor storage"
+      ],
+      "packaging": "Individually packed",
+      "weight": "0.10 kg",
+      "use": "Shopping, Storage",
+      "origin": "Locally sourced materials",
+      "safety": "Tested for food contact"
+    }
+  },
+  {
+    "id": 11,
+    "name": "Bamboo Makeup Pads",
+    "price": "₱249",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753078903/ecoPanda3_rs5ayj.jpg",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753078878/pexels-ecopanda-2814628-4354699_nk64nt.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753078886/ecoPanda1_mtarlc.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753078905/pexels-ecopanda-2814628-4354693_ukqrrl.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753078902/ecoPanda2_mllc5w.jpg"
+    ],
+    "categories": [
+      "Essentials",
+      "Beauty",
+      "Eco-Friendly"
+    ],
+    "description": "Soft and skin-friendly pads made from bamboo cotton blend, ideal for daily makeup removal and skincare. Washable and reusable — an effortless way to care for your face while reducing waste.",
+    "seller": "Serenity Supplies",
+    "sellerId": "serenity_supplies",
+    "rating": 4.9,
+    "sold": "2.7k+ sold",
+    "reviews": "1.1k",
+    "delivery": "Delivery in 3–6 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Eco-Friendly",
+      "Machine Washable",
+      "Plastic-Free"
+    ],
+    "specs": {
+      "Material": "80% Bamboo Fiber, 20% Cotton",
+      "Size": "8 cm diameter",
+      "Layers": "3-layer ultra-soft fabric",
+      "Brand": "EcoPanda",
+      "Features": [
+        "Reusable & Washable",
+        "Gentle on Sensitive Skin",
+        "Zero-Waste Alternative"
+      ],
+      "Care": "Machine wash cold in mesh bag, air dry",
+      "Use": "Makeup Removal, Toner Application, Daily Skincare",
+      "Origin": "Made from eco-sourced materials"
+    }
+  },
+  {
+    "id": 12,
+    "name": "Women's Wedge Sandal",
+    "price": "₱1,199",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753074776/Wedge-Sandal_yvuhj9.jpg",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753074774/Wedge-Sandal-1_wodptz.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753074779/Wedge-Sandal-2_ynvtkv.jpg",
+      "/images/products/Wedge-Sandal/Wedge-Sandal-3.jpg"
+    ],
+    "categories": [
+      "Women",
+      "Lifestyle",
+      "Bestsellers"
+    ],
+    "description": "We all love a platform, and this style especially. Dress up or dress down — the Chance Heel will be your new summer favorite. Featuring a minimal, clean silhouette that adds height and elegance without compromising on comfort.",
+    "sellerId": "serenity_supplies",
+    "seller": "Serenity Supplies",
+    "rating": 4.7,
+    "sold": "3.1k+ sold",
+    "reviews": "840",
+    "delivery": "Delivery in 3–6 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Genuine Leather",
+      "7-Day Return"
+    ],
+    "specs": {
+      "Type": "Women's Wedge Sandal",
+      "Color": "Pink Beige",
+      "Fit": "True to size. If you're in between sizes, size up.",
+      "Material": "Quality Leather Upper",
+      "Lining": "Leather Lining",
+      "Outsole": "Non-slip Rubber Sole",
+      "Comfort": "Cushioned Insole for All-Day Wear",
+      "Style": "Minimalist, Summer Casual",
+      "Heel": "Approx. 3 inches",
+      "Size": "EU 35–41",
+      "Closure": "Slip-On",
+      "Brand": "Boutique Imported",
+      "Use": "Casual, Office, Summer Events",
+      "Origin": "Made in China"
+    }
+  },
+  {
+    "id": 13,
+    "name": "S-Shaped Ceramic Flower Vase",
+    "price": "₱245",
+    "image": "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997416/S-Shaped-Ceramic-Vase_c0xyfw.jpg",
+    "images": [
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997488/S-Shaped-Ceramic-Vase-1_vwdm3i.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997409/S-Shaped-Ceramic-Vase-2_mycyel.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753074699/S-Shaped-Ceramic-Vase_hc37df.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997310/S-Shaped-Ceramic-Vase-5_vfrw4w.jpg",
+      "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1752997582/S-Shaped-Ceramic-Vase-4_izwjh0.jpg"
+    ],
+    "categories": [
+      "Home",
+      "Essentials",
+      "Bestsellers"
+    ],
+    "description": "A beautifully curved, S-shaped ceramic vase crafted for minimalist interiors. Its soft beige tone and textured surface make it a perfect piece for modern, neutral, or boho home decor.",
+    "seller": "Serenity Supplies",
+    "sellerId": "serenity_supplies",
+    "rating": 4.7,
+    "sold": "890+ sold",
+    "reviews": "160",
+    "delivery": "Delivery in 3–5 days",
+    "shipping": "Free shipping",
+    "courier": "J&T Express",
+    "guarantee": [
+      "Cash on Delivery",
+      "Free returns",
+      "Secure packaging"
+    ],
+    "specs": {
+      "material": "Ceramic",
+      "color": "Beige",
+      "brand": "SANGFOR",
+      "shape": "S-shaped, Modern",
+      "style": "Elegant, Minimalist",
+      "features": [
+        "Water-Holding",
+        "Handmade"
+      ],
+      "pattern": "Solid",
+      "theme": "Floral, Neutral",
+      "use": "Decor",
+      "room": "Living Room"
+    }
+  }
 ]
-
-
-
-
-
-
-
-
- {
-      id: 7,
-      name: "Top-Lock Shoulder Bag – Pink & Green",
-      price: "₱495",
-      image: "/images/products/Lock-Bag/Lock-Bag.jpg",
-      images: [
-        "/images/products/Lock-Bag/Lock-Bag-Pink.jpg",
-        "/images/products/Lock-Bag/Lock-Bag-Green.jpg",
-        "/images/products/Lock-Bag/Lock-Bag-Green-Side.jpg",
-        "/images/products/Lock-Bag/Lock-Bag-Pink-Green.jpg"
-      ],
-      variants: [
-        {
-          name: "Blush Pink",
-          image: "/images/products/Lock-Bag/Lock-Bag-Pink.jpg"
-        },
-        {
-          name: "Forest Green",
-          image: "/images/products/Lock-Bag/Lock-Bag-Green.jpg"
-        }
-      ],
-      categories: ["Home", "Essentials", "Bestsellers"],
-      description:
-        "A structured hanging-style bag available in soft pink and rich green tones. Made from smooth synthetic leather, it features a secure top-lock closure and a roomy interior that keeps your essentials within easy reach. Includes both a short handle and an adjustable crossbody strap for flexible styling.",
-      seller: "Luxe Carry Studio",
-      rating: 4.8,
-      sold: "1.2k+ sold",
-      reviews: "390",
-      delivery: "Delivery in 3–5 days",
-      shipping: "Free shipping",
-      courier: "J&T Express",
-      guarantee: ["Cash on Delivery", "Safe Packaging", "7-Day Return"],
-      specs: {
-        material: "Smooth Synthetic Leather",
-        dimensions: "10\" W × 8\" H",
-        shortStrap: "6\" fixed hand strap",
-        longStrap: "Adjustable shoulder strap",
-        closure: "Top Lock Clasp",
-        style: "Casual, Minimalist",
-        colorOptions: "Blush Pink, Forest Green",
-        lining: "Unlined / Partial fabric",
-        shape: "Structured rectangle",
-        care: "Wipe clean with a damp cloth",
-        origin: "Locally sourced",
-      },
-    },
-
-    {
-      id: 8,
-      name: "Eco Cotton Mesh Shopping Bag",
-      price: "₱170",
-      image: "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Flowers.jpg",
-      images: [
-        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Fruits.jpg",
-        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Lady.jpg",
-        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Fruits1.jpg",
-        "/images/products/Eco-Mesh-Bag-White-Beige/Eco-Mesh-Bag-Beige-Fruits2.jpg"
-      ],
-      categories: ["Essentials", "Lifestyle", "Accessories"],
-      description:
-        "A reusable, breathable cotton mesh bag designed for everyday shopping and food storage. Ideal for carrying groceries, produce, or essentials, this natural-fiber bag helps keep contents fresh and supports a plastic-free lifestyle. Neutral white and beige colors blend with any minimal, modern space.",
-      seller: "Everyday Goods Project",
-      rating: 4.7,
-      sold: "500+ sold",
-      reviews: "90",
-      delivery: "Delivery in 3–6 days",
-      shipping: "Free shipping",
-      courier: "J&T Express",
-      guarantee: [
-        "Cash on Delivery",
-        "Machine Washable",
-        "Eco-Friendly",
-        "Plastic-Free Packaging"
-      ],
-      specs: {
-        material: "100% Cotton",
-        dimensions: "17 × 15.5 inches (laid flat, approximate)",
-        care:
-          "Machine wash warm, durable-press cycle; do not bleach or tumble dry; iron low; do not dry clean",
-        features: [
-          "Breathable mesh design",
-          "Reusable & sustainable",
-          "Ideal for fruits, veggies, or everyday carry",
-          "Supports food freshness",
-          "Recommended for indoor storage"
-        ],
-        packaging: "Individually packed",
-        weight: "0.10 kg",
-        use: "Shopping, Storage",
-        origin: "Locally sourced materials",
-        safety: "Tested for food contact"
-      }
-    },
-    {
-      id: 9,
-      name: "Bamboo Makeup Pads",
-      price: "₱249",
-      image: "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads.jpg",
-      images: [
-        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-1.jpg",
-        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-2.jpg",
-        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-3.jpg",
-        "/images/products/Bamboo-Makeup-Pads/Bamboo-Makeup-Pads-4.jpg"
-      ],
-      categories: ["Essentials", "Beauty", "Eco-Friendly"],
-      description:
-        "Soft and skin-friendly pads made from bamboo cotton blend, ideal for daily makeup removal and skincare. Washable and reusable — an effortless way to care for your face while reducing waste.",
-      seller: "BareBliss Naturals",
-      rating: 4.9,
-      sold: "2.7k+ sold",
-      reviews: "1.1k",
-      delivery: "Delivery in 3–6 days",
-      shipping: "Free shipping",
-      courier: "J&T Express",
-      guarantee: ["Cash on Delivery", "Eco-Friendly", "Machine Washable", "Plastic-Free"],
-      specs: {
-        Material: "80% Bamboo Fiber, 20% Cotton",
-        Size: "8 cm diameter",
-        Layers: "3-layer ultra-soft fabric",
-        Brand: "EcoPanda",
-        Features: [
-          "Reusable & Washable",
-          "Gentle on Sensitive Skin",
-          "Zero-Waste Alternative"
-        ],
-        Care: "Machine wash cold in mesh bag, air dry",
-        Use: "Makeup Removal, Toner Application, Daily Skincare",
-        Origin: "Made from eco-sourced materials",
-      }
-    },    
-    {
-      id: 10,
-      name: "Women's Wedge Sandal",
-      price: "₱1,199",
-      image: "/images/products/Wedge-Sandal/Wedge-Sandal.jpg",
-      images: [
-        "/images/products/Wedge-Sandal/Wedge-Sandal-1.jpg",
-        "/images/products/Wedge-Sandal/Wedge-Sandal-2.jpg",
-        "/images/products/Wedge-Sandal/Wedge-Sandal-3.jpg"
-      ],
-      categories: ["Women", "Lifestyle", "Bestsellers"],
-      description:
-        "We all love a platform, and this style especially. Dress up or dress down — the Chance Heel will be your new summer favorite. Featuring a minimal, clean silhouette that adds height and elegance without compromising on comfort.",
-      seller: "Sole & Stitch",
-      rating: 4.7,
-      sold: "3.1k+ sold",
-      reviews: "840",
-      delivery: "Delivery in 3–6 days",
-      shipping: "Free shipping",
-      courier: "J&T Express",
-      guarantee: ["Cash on Delivery", "Genuine Leather", "7-Day Return"],
-      specs: {
-        Type: "Women's Wedge Sandal",
-        Color: "Pink Beige",
-        Fit: "True to size. If you're in between sizes, size up.",
-        Material: "Quality Leather Upper",
-        Lining: "Leather Lining",
-        Outsole: "Non-slip Rubber Sole",
-        Comfort: "Cushioned Insole for All-Day Wear",
-        Style: "Minimalist, Summer Casual",
-        Heel: "Approx. 3 inches",
-        Size: "EU 35–41",
-        Closure: "Slip-On",
-        Brand: "Boutique Imported",
-        Use: "Casual, Office, Summer Events",
-        Origin: "Made in China",
-      }
-    },    
-    
-    
-
-
-
-
-
-    {
-      id: 11,
-      name: "S-Shaped Ceramic Flower Vase",
-      price: "₱245",
-      image: "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase.jpg",
-      images: [
-        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-1.jpg",
-        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-2.jpg",
-        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-3.jpg",
-        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-4.jpg",
-        "/images/products/S-Shaped-Ceramic-Vase/S-Shaped-Ceramic-Vase-5.jpg"
-      ],
-      categories: ["Home", "Essentials", "Bestsellers"],
-      description:
-        "A beautifully curved, S-shaped ceramic vase crafted for minimalist interiors. Its soft beige tone and textured surface make it a perfect piece for modern, neutral, or boho home decor.",
-      seller: "Sangfor Studio",
-      rating: 4.7,
-      sold: "890+ sold",
-      reviews: "160",
-      delivery: "Delivery in 3–5 days",
-      shipping: "Free shipping",
-      courier: "J&T Express",
-      guarantee: ["Cash on Delivery", "Free returns", "Secure packaging"],
-      specs: {
-        material: "Ceramic",
-        color: "Beige",
-        brand: "SANGFOR",
-        shape: "S-shaped, Modern",
-        style: "Elegant, Minimalist",
-        features: ["Water-Holding", "Handmade"],
-        pattern: "Solid",
-        theme: "Floral, Neutral",
-        use: "Decor",
-        room: "Living Room",
-      },
-    },

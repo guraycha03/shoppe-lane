@@ -222,12 +222,11 @@ function deduplicateCart(items) {
     });
   };
   
-
   const [addingToCartId, setAddingToCartId] = useState(null);
   const addingLockRef = useRef(false); 
   const handleAddToCart = async (product, event, qty = 1) => {
     if (addingLockRef.current || addingToCartId === product.id) return;
-  
+
     addingLockRef.current = true;
     setAddingToCartId(product.id);
   
@@ -246,7 +245,6 @@ function deduplicateCart(items) {
 
     setQuantity(1);
   
-    // Animate cart icon
     if (cartIconRef.current) {
       const el = cartIconRef.current;
       el.classList.remove('pump');
@@ -259,8 +257,6 @@ function deduplicateCart(items) {
     addingLockRef.current = false;
   };
   
-
-  
   useEffect(() => {
     if (isLoggedIn && username) {
       const deduped = deduplicateCart(cartItems);
@@ -269,17 +265,48 @@ function deduplicateCart(items) {
   }, [cartItems, isLoggedIn, username]);
   
 
-  useEffect(() => {
-    const headerHeight = headerRef.current?.offsetHeight || 0;
-    const subHeaderHeight = document.querySelector('.sub-header')?.offsetHeight || 0;
-    const main = document.querySelector('main');
   
-    if (main) {
-      const totalHeight = headerHeight + subHeaderHeight;
-      const clampedHeight = Math.min(totalHeight, 120); // Adjust max padding as needed
-      main.style.paddingTop = `${clampedHeight}px`;
-    }
+
+  useEffect(() => {
+    const main = document.querySelector('main');
+    const headerEl = headerRef.current;
+  
+    if (!main || !headerEl) return;
+  
+    const subHeaderEl = document.querySelector('.sub-header');
+  
+    const updatePadding = () => {
+      const headerHeight = headerEl.getBoundingClientRect().height || 0;
+      const subHeaderHeight = subHeaderEl?.getBoundingClientRect().height || 0;
+  
+      const extraOffset = 5; 
+      const total = headerHeight + subHeaderHeight + extraOffset;
+  
+      main.style.paddingTop = `${total}px`;
+    };
+  
+    const observer = new ResizeObserver(updatePadding);
+    observer.observe(headerEl);
+    if (subHeaderEl) observer.observe(subHeaderEl);
+  
+    updatePadding();
+  
+    window.addEventListener('resize', updatePadding);
+  
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updatePadding);
+    };
   }, []);
+  
+  
+
+// useStickyHeaderPadding(headerRef); // ← Add this
+
+
+  
+  
+  
   
   
 
@@ -358,9 +385,7 @@ function deduplicateCart(items) {
   return (
     <div>
       <ScrollToTop />
-
       <ToastContainer />
-
       <NotificationBanner message={notification} />
   
       <Header
@@ -375,8 +400,7 @@ function deduplicateCart(items) {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         cartIconMobileRef={cartIconMobileRef}
-        cartIconDesktopRef={cartIconDesktopRef}
-        
+        cartIconDesktopRef={cartIconDesktopRef}     
       />
   
       <main className="container-fluid">
@@ -399,9 +423,7 @@ function deduplicateCart(items) {
           removeFromCart={removeFromCart}
           renderStars={renderStars}
           addingToCartId={addingToCartId}
-          triggerFlyToCartAnimation={triggerFlyToCartAnimation}
-         
-
+          triggerFlyToCartAnimation={triggerFlyToCartAnimation}  
         />
       </main>
     </div>
