@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShoppeRoutes from './ShoppeRoutes';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
-// import products from './data/products';
 import Header from './components/Header'; 
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './pages/Profile';
