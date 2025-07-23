@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+<BrowserRouter basename="/shoppe-lane">
   <ScrollToTop />
   <App />
 </BrowserRouter>
