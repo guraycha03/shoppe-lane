@@ -263,9 +263,6 @@ function deduplicateCart(items) {
       localStorage.setItem(`cart-${username}`, JSON.stringify(deduped));
     }
   }, [cartItems, isLoggedIn, username]);
-  
-
-  
 
   useEffect(() => {
     const main = document.querySelector('main');
@@ -278,10 +275,9 @@ function deduplicateCart(items) {
     const updatePadding = () => {
       const headerHeight = headerEl.getBoundingClientRect().height || 0;
       const subHeaderHeight = subHeaderEl?.getBoundingClientRect().height || 0;
-  
       const extraOffset = 5; 
       const total = headerHeight + subHeaderHeight + extraOffset;
-  
+
       main.style.paddingTop = `${total}px`;
     };
   
@@ -298,18 +294,6 @@ function deduplicateCart(items) {
       window.removeEventListener('resize', updatePadding);
     };
   }, []);
-  
-  
-
-// useStickyHeaderPadding(headerRef); // ← Add this
-
-
-  
-  
-  
-  
-  
-
 
   const addToCart = (product, qty = 1) => {
     setCartItems((prev) => {
@@ -324,7 +308,6 @@ function deduplicateCart(items) {
   };
 
   const heartIconRef = useRef(null);
-
   const getVisibleCartIcon = () => {
     if (window.innerWidth < 576) {
       return cartIconMobileRef.current;
@@ -368,8 +351,6 @@ function deduplicateCart(items) {
     });
   };
   
-  
-
   const updateCartQuantity = (id, qty) => {
     setCartItems((prev) =>
       prev.map((item) =>
