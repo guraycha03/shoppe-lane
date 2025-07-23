@@ -53,6 +53,8 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
 
   // const [hasFollowed, setHasFollowed] = useState(false);
 
+  const [hasFollowed, setHasFollowed] = useState(getInitialFollowState());
+
   const [followers, setFollowers] = useState(0);
 
   useEffect(() => {
@@ -77,6 +79,14 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
     window.addEventListener('storage', onStorageChange);
     return () => window.removeEventListener('storage', onStorageChange);
   }, [currentUser, seller?.id]);
+
+  const toggleFollow = () => {
+    const updatedFollowState = !hasFollowed;
+    setFollowState(currentUser, seller.id, updatedFollowState);
+    setHasFollowed(updatedFollowState);
+  };
+  
+  
 
   const handleFollow = (e) => {
     e.stopPropagation();
@@ -129,15 +139,16 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
 
         <button
           onClick={handleFollow}
-          className={`btn btn-sm px-3 ${isFollowing ? 'btn-secondary' : 'btn-outline-secondary'}`}
+          className={`btn btn-sm px-3 ${hasFollowed ? 'btn-secondary' : 'btn-outline-secondary'}`}
           style={{
             whiteSpace: 'nowrap',
             cursor: isLoggedIn ? 'pointer' : 'not-allowed',
             opacity: isLoggedIn ? 1 : 0.6,
           }}
         >
-          {isLoggedIn ? (isFollowing ? 'Following' : 'Follow') : 'Log in to Follow'}
+          {isLoggedIn ? (hasFollowed ? 'Following' : 'Follow') : 'Log in to Follow'}
         </button>
+
 
       </div>
     </div>
