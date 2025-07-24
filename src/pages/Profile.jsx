@@ -108,7 +108,7 @@ function Profile({ user }) {
         <div className="d-flex flex-column align-items-center mb-4">
           <div className="position-relative">
             <img
-              src="/shoppe-lane/images/default-avatar.png"
+              src="/shoppe-lane/images/default-avatar.PNG"
               alt="Profile"
               className="rounded-circle shadow"
               style={{
