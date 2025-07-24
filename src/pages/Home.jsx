@@ -1,27 +1,9 @@
 // src/pages/Home.jsx
 
-
-
 import React, { useState, useEffect } from 'react';
-
 import ProductGrid from '../components/ProductGrid';
 import CategorySection from '../components/CategorySection';
 import axios from 'axios';
-
-
-// function Home({
-//   products,
-//   searchTerm,
-//   likedProducts,
-//   toggleLike,
-//   handleAddToCart,
-//   renderStars,
-//   addingToCartId,
-//   triggerFlyToCartAnimation,
-//   isLoggedIn,           
-//   showNotification   
-// }) {
-
 
 function Home({
   searchTerm,
@@ -47,8 +29,6 @@ function Home({
       });
   }, []);
 
-
-
   return (
     <>
       {/* Hero Section */}
@@ -61,7 +41,6 @@ function Home({
 
       {/* Product Section */}
       <section className="container mt-0 mb-5">
-
         <h2 className="text-center mb-4">Featured Products</h2>
 
         <ProductGrid
@@ -80,8 +59,6 @@ function Home({
 
       {/* Category Section */}
       <CategorySection />
-
-
     
     </>
   );

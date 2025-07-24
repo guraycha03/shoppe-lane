@@ -49,13 +49,13 @@ function Recommendations({
   <span
     style={{
       position: 'absolute',
-      top: '55%', // slightly lower than center
+      top: '55%', 
       left: '50%',
       transform: 'translate(-50%, -50%)',
     }}
   >
     <img
-        src="/images/gift-bow.svg"
+        src={`${import.meta.env.BASE_URL}images/gift-bow.svg`}
         alt="Ribbon"
         className="gift-divider-icon"
         style={{
@@ -73,9 +73,6 @@ function Recommendations({
   You might also like
 </h4>
 
-
-
-
       <div className="container">
 
         <div className="row gx-4 gy-4">
@@ -88,7 +85,6 @@ function Recommendations({
                         className="card h-100 border-0 shadow-sm mx-auto"
                         role="button"
                         onClick={() => navigate(`/product/${product.id}`)}
-
 
                         style={{
                         backgroundColor: '#FBF7F4',
@@ -108,7 +104,7 @@ function Recommendations({
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            padding: '1rem', // Equal spacing on all sides
+                            padding: '1rem', 
                             boxSizing: 'border-box',
                         }}
                         >

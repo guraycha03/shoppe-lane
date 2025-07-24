@@ -5,19 +5,19 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
-const basePath = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL;
 
 const categories = [
-  { name: 'Beauty', image: `${basePath}images/categories/beauty.jpg`, path: '/category/beauty' },
-  { name: 'Women', image: `${basePath}images/categories/women.jpg`, path: '/category/women' },
-  { name: 'Men', image: `${basePath}images/categories/men.jpg`, path: '/category/men' },
-  { name: 'Kids', image: `${basePath}images/categories/kids.jpg`, path: '/category/kids' },
-  { name: 'Accessories', image: `${basePath}images/categories/accessories.jpg`, path: '/category/accessories' },
-  { name: 'Home', image: `${basePath}images/categories/home.jpg`, path: '/category/home' },
-  { name: 'Lifestyle', image: `${basePath}images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
-  { name: 'Essentials', image: `${basePath}images/categories/essentials.jpg`, path: '/essentials' },
-  { name: 'On Sale', image: `${basePath}images/categories/sale.jpg`, path: '/sale' },
-  { name: 'Bestsellers', image: `${basePath}images/categories/bestsellers.jpg`, path: '/bestsellers' },
+  { name: 'Beauty', image: `${base}images/categories/beauty.jpg`, path: '/category/beauty' },
+  { name: 'Women', image: `${base}images/categories/women.jpg`, path: '/category/women' },
+  { name: 'Men', image: `${base}images/categories/men.jpg`, path: '/category/men' },
+  { name: 'Kids', image: `${base}images/categories/kids.jpg`, path: '/category/kids' },
+  { name: 'Accessories', image: `${base}images/categories/accessories.jpg`, path: '/category/accessories' },
+  { name: 'Home', image: `${base}images/categories/home.jpg`, path: '/category/home' },
+  { name: 'Lifestyle', image: `${base}images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
+  { name: 'Essentials', image: `${base}images/categories/essentials.jpg`, path: '/essentials' },
+  { name: 'On Sale', image: `${base}images/categories/sale.jpg`, path: '/sale' },
+  { name: 'Bestsellers', image: `${base}images/categories/bestsellers.jpg`, path: '/bestsellers' },
 ];
 
 function CategorySection() {

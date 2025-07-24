@@ -108,7 +108,7 @@ function Profile({ user }) {
         <div className="d-flex flex-column align-items-center mb-4">
           <div className="position-relative">
             <img
-              src={image || '/images/default-avatar.png'}
+              src={image || `${import.meta.env.BASE_URL}images/default-avatar.png`}
               alt="Profile"
               className="rounded-circle shadow"
               style={{
