@@ -8,16 +8,16 @@ import '../App.css';
 const base = import.meta.env.BASE_URL;
 
 const categories = [
-  { name: 'Beauty', image: `${base}images/categories/beauty.jpg`, path: '/category/beauty' },
-  { name: 'Women', image: `${base}images/categories/women.jpg`, path: '/category/women' },
-  { name: 'Men', image: `${base}images/categories/men.jpg`, path: '/category/men' },
-  { name: 'Kids', image: `${base}images/categories/kids.jpg`, path: '/category/kids' },
-  { name: 'Accessories', image: `${base}images/categories/accessories.jpg`, path: '/category/accessories' },
-  { name: 'Home', image: `${base}images/categories/home.jpg`, path: '/category/home' },
-  { name: 'Lifestyle', image: `${base}images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
-  { name: 'Essentials', image: `${base}images/categories/essentials.jpg`, path: '/essentials' },
-  { name: 'On Sale', image: `${base}images/categories/sale.jpg`, path: '/sale' },
-  { name: 'Bestsellers', image: `${base}images/categories/bestsellers.jpg`, path: '/bestsellers' },
+  { name: 'Beauty', image: `/shoppe-lane/images/categories/beauty.jpg`, path: '/category/beauty' },
+  { name: 'Women', image: `/shoppe-lane/images/categories/women.jpg`, path: '/category/women' },
+  { name: 'Men', image: `/shoppe-lane/images/categories/men.jpg`, path: '/category/men' },
+  { name: 'Kids', image: `/shoppe-lane/images/categories/kids.jpg`, path: '/category/kids' },
+  { name: 'Accessories', image: `/shoppe-lane/images/categories/accessories.jpg`, path: '/category/accessories' },
+  { name: 'Home', image: `/shoppe-lane/images/categories/home.jpg`, path: '/category/home' },
+  { name: 'Lifestyle', image: `/shoppe-lane/images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
+  { name: 'Essentials', image: `/shoppe-lane/images/categories/essentials.jpg`, path: '/essentials' },
+  { name: 'On Sale', image: `/shoppe-lane/images/categories/sale.jpg`, path: '/sale' },
+  { name: 'Bestsellers', image: `/shoppe-lane/images/categories/bestsellers.jpg`, path: '/bestsellers' },
 ];
 
 function CategorySection() {

@@ -55,7 +55,7 @@ function Recommendations({
     }}
   >
     <img
-        src={`${import.meta.env.BASE_URL}images/gift-bow.svg`}
+        src="/shoppe-lane/images/gift-bow.svg" 
         alt="Ribbon"
         className="gift-divider-icon"
         style={{
@@ -64,7 +64,7 @@ function Recommendations({
             objectFit: 'contain',
             background: 'transparent',
         }}
-        />
+    />
 
   </span>
 </div>
