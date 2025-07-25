@@ -102,7 +102,10 @@ function ProductPage({
 
   const THUMBNAILS_TO_SHOW = 4;
   const reviews = productReviews[product?.id] || [];
-  const allImages = [product.image, ...(product.images || [])];
+  const allImages = [product.image, ...(product.images || [])].filter(
+    (img, index, self) => self.indexOf(img) === index
+  );
+  
   const visibleImages = allImages.slice(scrollIndex, scrollIndex + THUMBNAILS_TO_SHOW);
   const scrollThumbnails = (direction) => {
     const newIndex = scrollIndex + direction;

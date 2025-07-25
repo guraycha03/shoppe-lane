@@ -24,7 +24,6 @@ function Recommendations({
 
 
   const navigate = useNavigate();
-
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -32,6 +31,20 @@ function Recommendations({
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error fetching recommended products:', error));
   }, []);
+
+  const recommended = React.useMemo(() => {
+    if (!products || products.length === 0 || !selectedProduct) return [];
+  
+    const sameSeller = products.filter(
+      (p) => p.id !== selectedProduct.id && p.seller === selectedProduct.seller
+    );
+  
+    const otherSellers = products
+      .filter((p) => p.id !== selectedProduct.id && p.seller !== selectedProduct.seller)
+      .sort(() => 0.5 - Math.random());
+  
+    return [...sameSeller, ...otherSellers];
+  }, [products, selectedProduct]);  
 
 
   return (
@@ -76,24 +89,20 @@ function Recommendations({
       <div className="container">
 
         <div className="row gx-4 gy-4">
-        {products
-            .filter((p) => p.id !== selectedProduct.id)
-            .slice(0, 4)
-            .map((product) => (
-                <div className="col-6 col-md-4 col-lg-3" key={product.id}>
-                    <div
-                        className="card h-100 border-0 shadow-sm mx-auto"
-                        role="button"
-                        onClick={() => navigate(`/product/${product.id}`)}
-
-                        style={{
-                        backgroundColor: '#FBF7F4',
-                        borderRadius: '0.75rem',
-                        transition: 'transform 0.2s ease',
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.015)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                    >
+        {recommended.map((product) => (
+          <div className="col-6 col-md-4 col-lg-3" key={product.id}>
+            <div
+              className="card h-100 border-0 shadow-sm mx-auto"
+              role="button"
+              onClick={() => navigate(`/product/${product.id}`)}
+              style={{
+                backgroundColor: '#FBF7F4',
+                borderRadius: '0.75rem',
+                transition: 'transform 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.015)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            >
                     <div
                         style={{
                             width: '100%',

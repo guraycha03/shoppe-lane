@@ -23,7 +23,9 @@ function VariantSelector({ product, selectedVariant, setSelectedVariant, setMain
               src={variant.image}
               alt={variant.name}
               className="img-fluid rounded"
-              style={{ width: '100%', height: '60px', objectFit: 'cover' }}
+              style={{ width: '100%', height: '90px', objectFit: 'cover' }}
+
+
             />
             <small className="d-block text-center mt-1" style={{ fontSize: '0.75rem' }}>
               {variant.name}

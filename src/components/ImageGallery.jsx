@@ -1,7 +1,10 @@
 // src/components/ImageGallery.jsx
 
 const THUMBNAILS_TO_SHOW = 4;
-const allImages = [product.image, ...(product.images || [])];
+const allImages = [product.image, ...(product.images || [])].filter(
+  (img, index, self) => self.indexOf(img) === index
+);
+
 const visibleImages = allImages.slice(scrollIndex, scrollIndex + THUMBNAILS_TO_SHOW);
 
 const scrollThumbnails = (direction) => {
