@@ -1,38 +1,54 @@
-// hooks/useFollowState.js
-import { useEffect, useState } from 'react';
-import { getFollowState, setFollowState } from '../utils/followStorage';
+import { useState, useEffect } from 'react';
+import {
+  getFollowState,
+  getFollowersCount,
+  toggleFollow as toggleFollowUtil
+} from '../utils/followStorage';
 
-export default function useFollowState(currentUser, sellerId) {
-  const [isFollowing, setIsFollowing] = useState(() => getFollowState(currentUser, sellerId));
+function useFollowState(currentUser, sellerId) {
+  const [hasFollowed, setHasFollowed] = useState(false);
+  const [followers, setFollowers] = useState(0);
+
+  const sync = () => {
+    const followState = getFollowState(currentUser, sellerId);
+    const followerCount = getFollowersCount(sellerId);
+    setHasFollowed(followState);
+    setFollowers(followerCount);
+  };
 
   useEffect(() => {
-    const onStorageChange = (e) => {
-      if (e.key === 'user_follow_map') {
-        const latest = getFollowState(currentUser, sellerId);
-        setIsFollowing(latest);
+    if (!currentUser || !sellerId) return;
+    sync();
+
+    const handleFollowUpdated = (e) => {
+      const { sellerId: updatedId } = e.detail;
+      if (updatedId === sellerId) sync();
+    };
+
+    const handleStorageEvent = (e) => {
+      if (
+        e.key === 'user_follow_map' ||
+        e.key === 'followers_count_map'
+      ) {
+        sync();
       }
     };
 
-    const manualSync = () => {
-      const latest = getFollowState(currentUser, sellerId);
-      setIsFollowing(latest);
-    };
-
-    window.addEventListener('storage', onStorageChange);
-    window.addEventListener('user_follow_map', manualSync);
+    window.addEventListener('followUpdated', handleFollowUpdated);
+    window.addEventListener('storage', handleStorageEvent);
 
     return () => {
-      window.removeEventListener('storage', onStorageChange);
-      window.removeEventListener('user_follow_map', manualSync);
+      window.removeEventListener('followUpdated', handleFollowUpdated);
+      window.removeEventListener('storage', handleStorageEvent);
     };
   }, [currentUser, sellerId]);
 
   const toggleFollow = () => {
-    const newState = !isFollowing;
-    setFollowState(currentUser, sellerId, newState);
-    setIsFollowing(newState);
-    window.dispatchEvent(new Event('user_follow_map')); // sync in same tab
+    toggleFollowUtil(currentUser, sellerId);
+    sync(); // Immediate state update
   };
 
-  return [isFollowing, toggleFollow];
+  return { hasFollowed, followers, toggleFollow };
 }
+
+export default useFollowState;

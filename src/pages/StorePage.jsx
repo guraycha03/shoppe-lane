@@ -7,15 +7,6 @@ import useFollowState from '../hooks/useFollowState';
 
 import SellerInfoBox from '../components/SellerInfoBox';
 
-import {
-  getFollowState,
-  setFollowState,
-  getFollowersCount,
-  setFollowersCount,
-
-} from '../utils/followStorage';
-
-
 function StorePage({
     isLoggedIn,
     currentUser,
@@ -28,19 +19,19 @@ function StorePage({
     showNotification
   }) {
 
-    const [hasFollowed, setHasFollowed] = useState(false);
-    const [followers, setFollowers] = useState(0);
+    // const [hasFollowed, setHasFollowed] = useState(false);
+    // const [followers, setFollowers] = useState(0);
 
     // const isFollowing = getFollowState(currentUser, product.seller);
     const [isFollowing, setIsFollowing] = useState(false);
 
     
     
-    const toggleFollow = () => {
-      const newState = !isFollowing;
-      setIsFollowing(newState);
-      setFollowState(currentUser, sellerName, newState);
-    };
+    // const toggleFollow = () => {
+    //   const newState = !isFollowing;
+    //   setIsFollowing(newState);
+    //   setFollowState(currentUser, sellerName, newState);
+    // };
 
   
   const { sellerId } = useParams();
@@ -52,38 +43,6 @@ function StorePage({
   const [error, setError] = useState(null);
   const slugify = (str) =>
     str?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-  
-
-  useEffect(() => {
-    if (sellerData && currentUser) {
-      const follow = getFollowState(currentUser, sellerData.name);
-      setIsFollowing(follow);
-    }
-  }, [sellerData, currentUser]);
-
-
-  useEffect(() => {
-    if (!sellerData || !currentUser) return;
-  
-    const updateFollowState = () => {
-      const followed = getFollowState(currentUser, sellerData.id);
-      const count = getFollowersCount(sellerData.id);
-      setHasFollowed(followed);
-      setFollowers(count);
-    };
-  
-    updateFollowState(); // initial
-  
-    const onStorageChange = (e) => {
-      if (e.key === 'user_follow_map' || e.key === 'followers_count_map') {
-        updateFollowState();
-      }
-    };
-  
-    window.addEventListener('storage', onStorageChange);
-    return () => window.removeEventListener('storage', onStorageChange);
-  }, [sellerData, currentUser]);
-  
 
   
 
@@ -101,12 +60,13 @@ function StorePage({
         setProducts(sellerProducts);
 
         if (sellerProducts.length > 0) {
-            setSellerData({
-                name: sellerProducts[0].seller,
-                followers: Math.floor(Math.random() * 5000),
-                totalProducts: sellerProducts.length,
-                id: slugify(sellerProducts[0].seller), 
-              });              
+          setSellerData({
+            name: sellerProducts[0].seller,
+            id: sellerProducts[0].sellerId, // ✅ use sellerId from API
+            totalProducts: sellerProducts.length
+          });
+          
+                       
         } else {
           setSellerData(null);
         }
@@ -176,11 +136,8 @@ function StorePage({
                 forceShowCartButton
                 />
 
-
             </div>
-          ))
-          
-          
+          ))       
           
         ) : !loading && !error ? (
           <p>No products found for this seller.</p>

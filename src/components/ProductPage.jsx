@@ -199,15 +199,14 @@ function ProductPage({
             </div>
 
             <div className="row g-3">
-              <SellerInfoBox
-                seller={{
-                  id: slugify(product.seller), // same way as in StorePage
-                  name: product.seller,
-                  followers: 1000
-                }}
-                isLoggedIn={isLoggedIn}
-                currentUser={username}
-              />
+            <SellerInfoBox
+              seller={{
+                id: product.sellerId, 
+                name: product.seller,
+              }}
+              isLoggedIn={isLoggedIn}
+              currentUser={username}
+            />
 
                 <div className="col-12">
                 <ProductDetailsBox

@@ -1,53 +1,78 @@
 export const userFollowMapKey = 'user_follow_map';
+export const followersCountKey = 'followers_count_map';
 
-// Get follow state of a seller for a specific user
-export function getFollowState(username, sellerName) {
-  const map = JSON.parse(localStorage.getItem(userFollowMapKey) || '{}');
-  return map?.[username]?.includes(sellerName);
-}
+// Get whether the user follows this seller
+export const getFollowState = (username, sellerId) => {
+  try {
+    const map = JSON.parse(localStorage.getItem(userFollowMapKey) || '{}');
+    return Array.isArray(map[username]) && map[username].includes(sellerId);
+  } catch {
+    return false;
+  }
+};
 
-// Set follow state (true = follow, false = unfollow)
-export function setFollowState(username, sellerName, shouldFollow) {
+// Set whether the user follows this seller
+export const setFollowState = (username, sellerId, shouldFollow) => {
   let map = {};
   try {
-    const raw = localStorage.getItem(userFollowMapKey);
-    map = JSON.parse(raw || '{}');
-    if (typeof map !== 'object' || map === null || Array.isArray(map)) {
-      throw new Error('Invalid follow map');
-    }
+    map = JSON.parse(localStorage.getItem(userFollowMapKey) || '{}');
   } catch {
     console.warn('Corrupted follow map, resetting...');
-    map = {};
   }
 
-  if (!Array.isArray(map[username])) {
-    map[username] = [];
-  }
+  if (!Array.isArray(map[username])) map[username] = [];
 
   if (shouldFollow) {
-    if (!map[username].includes(sellerName)) {
-      map[username].push(sellerName);
+    if (!map[username].includes(sellerId)) {
+      map[username].push(sellerId);
     }
   } else {
-    map[username] = map[username].filter(name => name !== sellerName);
+    map[username] = map[username].filter(id => id !== sellerId);
   }
 
   localStorage.setItem(userFollowMapKey, JSON.stringify(map));
-}
+};
 
+// Get followers count
+export const getFollowersCount = (sellerId) => {
+  try {
+    const map = JSON.parse(localStorage.getItem(followersCountKey) || '{}');
+    return Number.isInteger(map[sellerId]) ? map[sellerId] : 0;
+  } catch {
+    return 0;
+  }
+};
 
-const followersCountKey = 'followers_count_map';
+// Set followers count
+export const setFollowersCount = (sellerId, count) => {
+  let map = {};
+  try {
+    map = JSON.parse(localStorage.getItem(followersCountKey) || '{}');
+  } catch {
+    console.warn('Corrupted followers map, resetting...');
+  }
 
-// Get the number of followers for a seller
-export function getFollowersCount(sellerName) {
-  const map = JSON.parse(localStorage.getItem(followersCountKey) || '{}');
-  return map[sellerName] || 0;
-}
-
-// Set the number of followers for a seller
-export function setFollowersCount(sellerName, count) {
-  const map = JSON.parse(localStorage.getItem(followersCountKey) || '{}');
-  map[sellerName] = count;
+  map[sellerId] = Math.max(0, count);
   localStorage.setItem(followersCountKey, JSON.stringify(map));
-}
+};
 
+// Toggle follow state and sync
+export const toggleFollow = (username, sellerId) => {
+  const isFollowing = getFollowState(username, sellerId);
+  const newFollowState = !isFollowing;
+
+  setFollowState(username, sellerId, newFollowState);
+
+  const currentCount = getFollowersCount(sellerId);
+  const newCount = Math.max(0, currentCount + (newFollowState ? 1 : -1));
+  setFollowersCount(sellerId, newCount);
+
+  // Broadcast update
+  window.dispatchEvent(new CustomEvent('followUpdated', {
+    detail: {
+      sellerId,
+      isFollowing: newFollowState,
+      followers: newCount,
+    }
+  }));
+};
