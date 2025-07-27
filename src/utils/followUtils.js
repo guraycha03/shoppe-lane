@@ -1,17 +1,34 @@
-const userFollowMapKey = 'user_follow_map'; // global
+const FOLLOW_MAP_DATA_KEY = 'user_follow_map_data'; // 💡 distinct key for follow data
 
 export const getFollowState = (user, sellerId) => {
-  const data = JSON.parse(localStorage.getItem(userFollowMapKey) || '{}');
-  return data?.[user]?.includes(sellerId);
+  try {
+    const data = JSON.parse(localStorage.getItem(FOLLOW_MAP_DATA_KEY) || '{}');
+    return Array.isArray(data[user]) && data[user].includes(sellerId);
+  } catch (err) {
+    console.error("getFollowState failed:", err);
+    return false;
+  }
 };
 
 export const setFollowState = (user, sellerId, followed) => {
-  const data = JSON.parse(localStorage.getItem(userFollowMapKey) || '{}');
-  if (!data[user]) data[user] = [];
-  if (followed) {
-    if (!data[user].includes(sellerId)) data[user].push(sellerId);
-  } else {
-    data[user] = data[user].filter((id) => id !== sellerId);
+  try {
+    const raw = localStorage.getItem(FOLLOW_MAP_DATA_KEY);
+    const data = JSON.parse(raw || '{}');
+
+    if (!Array.isArray(data[user])) {
+      data[user] = [];
+    }
+
+    if (followed) {
+      if (!data[user].includes(sellerId)) {
+        data[user].push(sellerId);
+      }
+    } else {
+      data[user] = data[user].filter((id) => id !== sellerId);
+    }
+
+    localStorage.setItem(FOLLOW_MAP_DATA_KEY, JSON.stringify(data));
+  } catch (err) {
+    console.error("setFollowState failed:", err);
   }
-  localStorage.setItem(userFollowMapKey, JSON.stringify(data));
 };

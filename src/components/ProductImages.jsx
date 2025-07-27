@@ -11,6 +11,9 @@ function ProductImages({ product, selectedImage, setSelectedImage }) {
   const thumbnails = product.images || [];
   const visibleThumbnails = thumbnails.slice(visibleIndex, visibleIndex + 3);
 
+  const isLeftDisabled = visibleIndex === 0;
+  const isRightDisabled = visibleIndex >= thumbnails.length - 3;
+
   const scroll = (direction) => {
     if (direction === "left" && visibleIndex > 0) {
       setVisibleIndex(visibleIndex - 1);
@@ -23,10 +26,14 @@ function ProductImages({ product, selectedImage, setSelectedImage }) {
     <div className="product-images-wrapper">
       {/* Thumbnails with arrows */}
       <div className="thumbnail-scroll-wrapper">
-        <button className="arrow-btn left" onClick={() => scroll("left")}>
+        <button
+          className={`arrow-btn left ${isLeftDisabled ? "disabled-arrow" : ""}`}
+          onClick={() => scroll("left")}
+          disabled={isLeftDisabled}
+        >
           <ChevronLeft />
         </button>
-
+  
         <div className="thumbnail-scroll-container">
           {visibleThumbnails.map((img, idx) => (
             <img
@@ -38,12 +45,16 @@ function ProductImages({ product, selectedImage, setSelectedImage }) {
             />
           ))}
         </div>
-
-        <button className="arrow-btn right" onClick={() => scroll("right")}>
+  
+        <button
+          className={`arrow-btn right ${isRightDisabled ? "disabled-arrow" : ""}`}
+          onClick={() => scroll("right")}
+          disabled={isRightDisabled}
+        >
           <ChevronRight />
         </button>
-      </div>
-
+      </div> {/* ✅ FIXED: this was missing */}
+  
       {/* Main Product Image */}
       <div className="main-image-container">
         <img
@@ -54,6 +65,7 @@ function ProductImages({ product, selectedImage, setSelectedImage }) {
       </div>
     </div>
   );
+  
 }
 
 export default ProductImages;

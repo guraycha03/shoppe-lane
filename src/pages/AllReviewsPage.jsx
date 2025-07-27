@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // ✅ Added useNavigate
 import productReviews from '../data/productReviews';
 
 function AllReviewsPage({ showNotification, isLoggedIn }) {
   const { id } = useParams();
+  const navigate = useNavigate(); // ✅ Initialize navigate
   const reviews = productReviews[id] || [];
   const [likedIndices, setLikedIndices] = useState([]);
 
-  // Sync like states only when logged in
   useEffect(() => {
     if (isLoggedIn) {
       const storedLikes = localStorage.getItem(`likes-${id}`);
@@ -15,7 +15,7 @@ function AllReviewsPage({ showNotification, isLoggedIn }) {
         setLikedIndices(JSON.parse(storedLikes));
       }
     } else {
-      setLikedIndices([]); // Hide all likes when logged out
+      setLikedIndices([]);
     }
   }, [id, isLoggedIn]);
 
@@ -38,7 +38,23 @@ function AllReviewsPage({ showNotification, isLoggedIn }) {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container pt-3 pb-4">
+
+      {/* Back Button */}
+      <button
+        className="btn btn-outline-secondary d-inline-flex align-items-center gap-2 mb-4 px-3 py-2"
+        style={{ fontWeight: '500', fontSize: '1rem', borderRadius: '0.5rem' }}
+        onClick={() => {
+          window.scrollTo(0, 0); // Scroll to top
+          navigate(`/product/${id}`);
+        }}
+        
+      >
+        <i className="bi bi-arrow-left-short" style={{ fontSize: '1.2rem' }}></i>
+        Back
+      </button>
+
+
       <h2 className="mb-4">All Reviews</h2>
 
       {reviews.length === 0 ? (
@@ -54,7 +70,6 @@ function AllReviewsPage({ showNotification, isLoggedIn }) {
           return (
             <div key={i} className="card mb-3 position-relative shadow-sm">
               <div className="card-body position-relative" style={{ paddingTop: '2.5rem' }}>
-
                 {/* Like Icon */}
                 <div
                   className="position-absolute d-flex align-items-center"
@@ -64,8 +79,8 @@ function AllReviewsPage({ showNotification, isLoggedIn }) {
                     cursor: 'pointer',
                     fontSize: '0.95rem',
                     gap: '4px',
-                    transition: 'opacity 0.2s ease',
                     opacity: isLiked ? 1 : 0.7,
+                    transition: 'opacity 0.2s ease',
                   }}
                   onClick={() => toggleLike(i)}
                 >

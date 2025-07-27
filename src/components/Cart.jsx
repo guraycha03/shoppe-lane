@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BackButton from '../components/common/BackButton'; 
 
 const Cart = ({ cartItems, updateCartQuantity, removeFromCart }) => {
   const navigate = useNavigate();
@@ -65,28 +66,18 @@ const Cart = ({ cartItems, updateCartQuantity, removeFromCart }) => {
     <main className="container pt-2 pb-5" style={{ position: 'relative', paddingBottom: '120px' }}>
 
       {/* Back Button */}
-      <div className="mb-3" style={{ marginTop: '1.2rem' }}>
-        <button
-          className="btn btn-outline-secondary rounded-pill px-4 py-2"
-          style={{ fontWeight: 500 }}
-          onClick={() => navigate(-1)}
-        >
-          ← Back
-        </button>
+      <div className="mb-1" style={{ marginTop: '0rem' }}>
+        <BackButton className="mb-1" />
       </div>
 
-      {/* Title */}
       <h2
-        className="fw-bold text-center mb-4"
-        style={{
-          fontFamily: 'inherit',
-          fontSize: '2rem',
-          color: '#888',
-          marginTop: '2rem',
-        }}
+        className="fw-bold text-center mb-3"
+        style={{ fontSize: '1.9rem', color: '#888', marginTop: '-0.3rem' }}
       >
-        Your Cart
+        My Cart
       </h2>
+
+
 
       {cartItems.length === 0 ? (
         <p className="text-center text-muted fs-5">Your cart is empty.</p>

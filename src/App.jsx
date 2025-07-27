@@ -1,22 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import ShoppeRoutes from './ShoppeRoutes';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Header from './components/Header'; 
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './pages/Profile';
-
+import Wishlist from './pages/Wishlist';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getCartFromLocalStorage } from './utils/localCart';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AllReviewsPage from './pages/AllReviewsPage';
 import ScrollToTop from './components/ScrollToTop';
 import NotificationBanner from './components/NotificationBanner';
-
-
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const navigate = useNavigate();
@@ -31,8 +30,6 @@ function App() {
 
   const cartIconMobileRef = useRef(null);
   const cartIconDesktopRef = useRef(null);
-
-
 
 
 function renderStars(rating) {
@@ -56,6 +53,7 @@ function renderStars(rating) {
       ))}
     </div>
   );
+
 }
 
 function deduplicateCart(items) {
@@ -96,15 +94,14 @@ function deduplicateCart(items) {
 
   const [likedProducts, setLikedProducts] = useState(new Set());
 
-
   // Save cart and likes to localStorage
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  useEffect(() => {
-    localStorage.setItem('likedProducts', JSON.stringify([...likedProducts]));
-  }, [likedProducts]);
+  // useEffect(() => {
+  //   localStorage.setItem('likedProducts', JSON.stringify([...likedProducts]));
+  // }, [likedProducts]);
 
 
 
@@ -173,6 +170,20 @@ function deduplicateCart(items) {
     }
   }, [isLoggedIn, username]);
 
+
+
+
+
+
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Only store lastProductPage if it's an actual product route
+    if (location.pathname.startsWith("/product/")) {
+      localStorage.setItem("lastProductPage", location.pathname);
+    }
+  }, [location]);
 
   
   
@@ -395,6 +406,7 @@ function deduplicateCart(items) {
           cartItems={cartItems}
           addToCart={addToCart}
           handleAddToCart={handleAddToCart}
+          allProducts={products}
           likedProducts={likedProducts}
           toggleLike={toggleLike}
           searchTerm={searchTerm}

@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import SubHeader from './SubHeader';
 import Sidebar from './Sidebar';
 
-
-
-
 function Header({
   isLoggedIn,
   username,
@@ -33,9 +30,6 @@ function Header({
 
   const cartIconRefMobile = useRef(null);
   const cartIconRefDesktop = useRef(null);
-  // const cartIconRef = useRef(null);
-
-  
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
 
@@ -45,9 +39,6 @@ function Header({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
-
-  // Navigate when clicking the profile icon
   const handleProfileClick = () => {
     if (isLoggedIn) {
       navigate('/profile');
@@ -68,7 +59,6 @@ function Header({
 
   // === Effects ===
 
-  // ESC key to close sidebar
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setSidebarOpen(false);

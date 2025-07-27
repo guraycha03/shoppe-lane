@@ -6,14 +6,16 @@ import { AnimatePresence } from 'framer-motion';
 
 import Home from './pages/Home';
 import ProductPage from './components/ProductPage';
-import Cart from './components/Cart';
+
 import Footer from './components/Footer';
 import ProductResultsPage from './components/ProductResultsPage';
 import AllReviewsPage from './pages/AllReviewsPage';
-import Profile from './pages/Profile';
-import LoginPage from './pages/LoginPage';
+import Wishlist from './pages/Wishlist';
 import SignUpPage from './pages/SignUpPage';
 import StorePage from './pages/StorePage';
+import LoginPage from './pages/LoginPage';
+import Profile from './pages/Profile';
+import Cart from './components/Cart';
 
 
 
@@ -27,7 +29,7 @@ function PageWrapper({ children }) {
   );
 }
 
-function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, ...props }) {
+function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, products, ...props }) {
 
   const location = useLocation();
 
@@ -149,6 +151,23 @@ function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, ...props })
         />
 
         <Route
+          path="/wishlist"
+          element={
+            <Wishlist
+              wishlistItems={products.filter((p) => props.likedProducts?.has(p.id))}
+              likedProductIds={[...(props.likedProducts || [])]}
+              onToggleLike={props.toggleLike}
+            />
+          }
+        />
+
+
+
+
+
+
+
+        <Route
           path="/store/:sellerId"
           element={
             <PageWrapper>
@@ -171,6 +190,8 @@ function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, ...props })
 
 
         <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<Navigate to="/" />} />
+
 
       </Routes>
     </AnimatePresence>

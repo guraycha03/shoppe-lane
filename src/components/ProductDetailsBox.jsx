@@ -3,26 +3,23 @@
 import React from 'react';
 
 function ProductDetailsBox({ delivery, shipping, courier, guarantee }) {
+  const detailRow = (icon, labelText, value, isLast = false) => (
+    <div className={`d-flex align-items-start ${isLast ? '' : 'mb-2'}`}>
+      <i className={`bi ${icon} me-2 text-soft-sold`} style={{ width: '1.25rem', marginTop: '2px' }}></i>
+      <span className="label">{labelText}</span>
+      <span className="flex-grow-1">{value}</span>
+    </div>
+  );
+
   return (
     <div className="card shadow-sm p-3 product-details-box">
-      <p className="mb-1">
-        <i className="bi bi-truck me-2 text-accent"></i>
-        <span className="label">Delivery:</span> {delivery}
-      </p>
-      <p className="mb-1">
-        <i className="bi bi-box2-heart me-2 text-accent"></i>
-        <span className="label">Shipping:</span> {shipping}
-      </p>
-      <p className="mb-1">
-        <i className="bi bi-send-check me-2 text-accent"></i>
-        <span className="label">Courier:</span> {courier}
-      </p>
-      <p className="mb-0">
-        <i className="bi bi-shield-check me-2 text-accent"></i>
-        <span className="label">Guarantees:</span> {guarantee?.join(', ')}
-      </p>
+      {detailRow("bi-truck", "Delivery:", delivery)}
+      {detailRow("bi-box2-heart", "Shipping:", shipping)}
+      {detailRow("bi-send-check", "Courier:", courier)}
+      {detailRow("bi-shield-check", "Guarantees:", guarantee?.join(', '), true)}
     </div>
   );
 }
 
 export default ProductDetailsBox;
+

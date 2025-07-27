@@ -2,6 +2,8 @@ import React from "react";
 import VariantSelector from "./VariantSelector";
 import QuantitySelector from "./QuantitySelector";
 import AddToCartButton from "./AddToCartButton";
+import BuyNowButton from "./BuyNowButton";
+
 
 function ProductInfo({
   product,
@@ -21,17 +23,40 @@ function ProductInfo({
 }) {
   return (
     <>
-      <h2 style={{ color: "var(--theme-soft-dark)" }}>{product.name}</h2>
-      <p className="text-muted mb-1">
-        <i className="bi bi-bag-fill me-2 text-soft-sold"></i>
-        <span className="fw-semibold" style={{ color: "var(--theme-accent)" }}>
-          {product.sold}
-        </span>
-      </p>
-      <div className="d-flex align-items-center gap-2 flex-wrap justify-content-end">
-        {product.renderStars?.(product.rating)}
-        <small className="rating-text">({product.reviews} reviews)</small>
+      <div className="d-flex justify-content-between align-items-start mb-1">
+        <h2 style={{ color: "var(--theme-soft-dark)", marginBottom: 0 }}>{product.name}</h2>
+        <i
+          role="button"
+          aria-label={likedProducts.has(product.id) ? "Unlike" : "Like"}
+          className={`bi ${
+            likedProducts.has(product.id) ? "bi-heart-fill text-danger" : "bi-heart"
+          }`}
+          onClick={() => toggleLike(product.id)}
+          style={{
+            cursor: "pointer",
+            fontSize: "1.5rem",
+          }}
+        ></i>
       </div>
+
+      <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
+
+        {/* Sold Info */}
+        <div className="text-muted d-flex align-items-center">
+          <i className="bi bi-bag-fill me-2 text-soft-sold"></i>
+          <span className="fw-semibold" style={{ color: "var(--theme-accent)" }}>
+            {product.sold}
+          </span>
+        </div>
+
+        {/* Reviews Info */}
+        <div className="text-muted d-flex align-items-center gap-2">
+          <i className="bi bi-chat-left-text text-secondary"></i>
+          {product.renderStars?.(product.rating)}
+          <small className="rating-text">({product.reviews} reviews)</small>
+        </div>
+      </div>
+
       <p className="text-muted mt-2">{product.description}</p>
       <h4 style={{ color: "var(--theme-accent)" }}>{product.price}</h4>
 
@@ -52,24 +77,9 @@ function ProductInfo({
         </div>
       )}
 
+      <div className="d-flex align-items-center gap-3 flex-wrap mb-4 mt-3">
       <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
-
-      <div className="d-flex gap-3 mb-4">
-        <i
-          role="button"
-          aria-label={likedProducts.has(product.id) ? "Unlike" : "Like"}
-          className={`bi ${
-            likedProducts.has(product.id)
-              ? "bi-heart-fill text-danger"
-              : "bi-heart"
-          }`}
-          onClick={() => toggleLike(product.id)}
-          style={{
-            cursor: "pointer",
-            fontSize: "1.4rem",
-          }}
-        ></i>
-
+         {/* Add To Cart Button */}
         <AddToCartButton
           onClick={(e) => {
             e.stopPropagation();
@@ -95,6 +105,27 @@ function ProductInfo({
           loading={addingToCartId === product.id}
           disabled={product.variants?.length > 0 && !selectedVariant}
         />
+
+        {/* Buy Now Button */}
+        <BuyNowButton
+          onClick={() => {
+            if (!isLoggedIn) {
+              setNotification("Please log in to purchase.");
+              setTimeout(() => setNotification(""), 3000);
+              return;
+            }
+
+            if (product.variants?.length > 0 && !selectedVariant) {
+              setNotification("Please select a color before purchasing.");
+              setTimeout(() => setNotification(""), 3000);
+              return;
+            }
+
+            // Simulate checkout
+            alert("Redirecting to checkout...");
+          }}
+        />
+        
       </div>
     </>
   );

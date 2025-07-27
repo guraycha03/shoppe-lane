@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import BackButton from '../components/common/BackButton'; // adjust path if needed
 
 import { Pencil } from 'react-bootstrap-icons';
 
@@ -101,7 +101,13 @@ function Profile({ user }) {
   if (!currentUser) return <p className="text-center my-5">Loading profile...</p>;
 
   return (
-    <div className="container py-5">
+    <div className="container pt-2 pb-4">
+
+      {/* Back Button */}
+      <div className="mb-1" style={{ marginTop: '0rem' }}>
+        <BackButton className="mb-1" />
+      </div>
+
       <h2 className="mb-4 fw-bold">My Account</h2>
       <div className="card p-4 shadow-sm border-0">
         {/* Profile Picture */}

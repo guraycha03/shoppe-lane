@@ -1,25 +1,26 @@
 /* src/components/ AddToCartButton.css */
 
+
 .shoppe-minimal-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #f8f6f4;
-  border: 1px solid #dad3cd;
+  background: #f7eee7; /* ✨ updated */
+  border: 1px solid #dbc7b8; /* ✨ updated */
   border-radius: 2rem;
-  color: #5a4b3b;
+  color: #6a4e3a; /* ✨ updated */
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.03);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.03);
 }
 
 .shoppe-minimal-btn:hover {
-  background: #f2efec;
-  border-color: #cbbfb7;
+  background: #f2e6df; /* ✨ updated hover */
+  border-color: #cfb7a6;
 }
 
 .shoppe-minimal-btn:disabled {
@@ -39,8 +40,9 @@
 }
 
 .cart-icon-wrapper i {
-  font-size: 1rem;
-  color: #7b6d5b;
+  font-size: 1.1rem;
+  color: #7b5d45;
+  text-shadow: 0 0 1px #7b5d45;
 }
 
 /* jello animation */

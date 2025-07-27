@@ -92,6 +92,8 @@ function ProductPage({
     setQuantity(1);
   }, [id]);
 
+  
+
   if (loading) {
     return <p className="text-center mt-5">Loading product details…</p>;
   }
@@ -133,7 +135,7 @@ function ProductPage({
           }}
         >
           <i className="bi bi-arrow-left-short" style={{ fontSize: '1.2rem' }}></i>
-          Back to Shop
+          Back
         </button>
 
         <div className="row g-4">

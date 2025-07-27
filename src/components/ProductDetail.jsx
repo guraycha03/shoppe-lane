@@ -160,19 +160,6 @@ function ProductDetail({
                     <i className={`bi ${likedProducts.has(selectedProduct.id) ? 'bi-heart-fill' : 'bi-heart'}`}></i>
                     </button>
 
-                    {/* <button
-                    className="btn btn-sm px-3 rounded-pill"
-                    style={{ backgroundColor: '#8B6F52', color: '#fff', border: 'none', transition: 'background-color 0.2s ease' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#735740')}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#8B6F52')}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleAddToCart({ ...selectedProduct, quantity: 1 }, e);
-                    }}
-                    >
-                    <i className="bi bi-cart-plus me-2"></i> Add
-                    </button> */}
-
                 </div>
                 </div>
             </div>

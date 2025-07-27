@@ -8,9 +8,19 @@ export function getFollowState(username, sellerName) {
 
 // Set follow state (true = follow, false = unfollow)
 export function setFollowState(username, sellerName, shouldFollow) {
-  const map = JSON.parse(localStorage.getItem(userFollowMapKey) || '{}');
+  let map = {};
+  try {
+    const raw = localStorage.getItem(userFollowMapKey);
+    map = JSON.parse(raw || '{}');
+    if (typeof map !== 'object' || map === null || Array.isArray(map)) {
+      throw new Error('Invalid follow map');
+    }
+  } catch {
+    console.warn('Corrupted follow map, resetting...');
+    map = {};
+  }
 
-  if (!map[username]) {
+  if (!Array.isArray(map[username])) {
     map[username] = [];
   }
 
@@ -24,6 +34,7 @@ export function setFollowState(username, sellerName, shouldFollow) {
 
   localStorage.setItem(userFollowMapKey, JSON.stringify(map));
 }
+
 
 const followersCountKey = 'followers_count_map';
 

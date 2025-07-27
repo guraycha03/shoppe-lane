@@ -1,0 +1,34 @@
+.back-button {
+    border-width: 2px !important;
+    border-color: #d3d3d3 !important; /* light gray, you can adjust */
+    transition: border-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    border-color: #b0b0b0 !important; /* slightly darker on hover */
+  }
+  
+  /* Animation remains the same */
+  .back-button .arrow-icon {
+    transition: transform 0.2s linear;
+  }
+  
+  .back-button:hover .arrow-icon {
+    animation: wiggleLeft 1.5s infinite linear;
+  }
+  
+  @keyframes wiggleLeft {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-4px);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    75% {
+      transform: translateX(-4px);
+    }
+  }
+  

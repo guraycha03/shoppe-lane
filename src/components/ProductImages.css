@@ -4,9 +4,11 @@
     flex-direction: row;
     gap: 1rem;
     width: 100%;
+    align-items: center; /* center thumbnail column vertically */
+    flex-wrap: wrap;
   }
   
-  /* Main product image styles */
+  /* Main product image container */
   .main-image-container {
     flex: 1;
     display: flex;
@@ -14,6 +16,7 @@
     align-items: center;
   }
   
+  /* Main product image */
   .main-product-image {
     width: 100%;
     max-width: 500px;
@@ -22,37 +25,45 @@
     border-radius: 12px;
   }
   
-  /* Thumbnail column on wide screens */
+  /* Thumbnail column */
   .thumbnail-scroll-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100px;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
   
+  /* Thumbnail scroll area */
   .thumbnail-scroll-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
   
-  /* Thumbnail image style */
+  /* Thumbnail image - slightly bigger */
   .thumbnail-img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     cursor: pointer;
     border: 2px solid transparent;
-    border-radius: 8px;
-    transition: border 0.3s;
+    border-radius: 10px;
+    transition: border 0.3s ease, transform 0.3s ease;
   }
   
-  .thumbnail-img:hover,
-  .selected-thumbnail {
-    border-color: #555;
+  /* Hover: light gray-blue */
+  .thumbnail-img:hover {
+    border-color: #afc0c9;
+    transform: scale(1.05);
   }
+
+  /* Selected: stronger accent color */
+  .selected-thumbnail {
+    border-color: #7f8d94;
+    transform: scale(1.05);
+  }
+
   
   /* Arrow buttons */
   .arrow-btn {
@@ -60,16 +71,23 @@
     border: none;
     cursor: pointer;
     padding: 4px;
-    margin-top: 4px;
-    color: #333;
-    transition: color 0.3s;
+    color: #60686b;
+    transition: color 0.3s, opacity 0.3s;
+    font-size: 1.2rem;
   }
   
   .arrow-btn:hover {
-    color: #000;
+    color: #3d4549;
   }
   
-  /* On small screens: adjust layout */
+  .arrow-btn.disabled-arrow {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+  }
+  
+  
+  /* Responsive: stack on small screens */
   @media (max-width: 768px) {
     .product-images-wrapper {
       flex-direction: column;
@@ -94,8 +112,8 @@
     }
   
     .thumbnail-img {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
     }
   
     .arrow-btn.left {
