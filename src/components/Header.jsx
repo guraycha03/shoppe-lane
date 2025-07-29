@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SubHeader from './SubHeader';
 import Sidebar from './Sidebar';
+import { getStoredProfileImage } from '../utils/userHelpers';
+
 
 function Header({
   isLoggedIn,
@@ -30,6 +32,7 @@ function Header({
 
   const cartIconRefMobile = useRef(null);
   const cartIconRefDesktop = useRef(null);
+  const profileImage = isLoggedIn ? getStoredProfileImage() : null;
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
 
@@ -89,16 +92,6 @@ function Header({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showMobileDropdown]);
 
-  // Close sidebar when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (sidebarOpen && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        setSidebarOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [sidebarOpen]);
 
 
   const toggleSection = (sectionKey) => {
@@ -271,12 +264,34 @@ function Header({
             style={{ cursor: 'pointer' }}
           >
             {isLoggedIn ? (
-              <div className="avatar-circle">
-                {username?.charAt(0).toUpperCase()}
-              </div>
+              profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  style={{
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    border: '2px solid #cce6ff',
+                  }}
+                />
+              ) : (
+                <div className="avatar-circle">
+                  {username && typeof username === 'string'
+                    ? username.charAt(0).toUpperCase()
+                    : '?'}
+                </div>
+              )
             ) : (
-              <i className="bi bi-person-circle fs-4"></i>
+              <i className="bi bi-person-circle icon-static-profile"></i>
+
             )}
+
+
+
+
+
           </div>
   
           {/* Burger Menu */}
