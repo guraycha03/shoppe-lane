@@ -39,8 +39,6 @@ function SubHeader({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname, lastScrollY]);
   
-
-
   const hideSubHeader =
     pathname.startsWith('/product/') ||
     pathname.startsWith('/store/') ||
@@ -51,7 +49,6 @@ function SubHeader({
     pathname === '/search' ||
     pathname === '/login'||
     pathname.includes('/reviews');
-
 
   if (hideSubHeader) return null;
 

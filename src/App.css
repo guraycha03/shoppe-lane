@@ -3,6 +3,7 @@
 ----------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 :root {
   /* Theme Colors */
@@ -21,6 +22,9 @@
   --text-dark: var(--theme-dark);
   --input-bg: var(--theme-muted);
   --badge-bg: var(--theme-warm-gray);
+  --footer-bg: #2F2C2A; 
+  --footer-text: #F3EFEA;
+  --footer-font: 'Poppins', sans-serif;
 
 
   /* Utility Colors */
@@ -46,7 +50,6 @@ body {
   padding: 0;
 }
 
-
 body::-webkit-scrollbar {
   display: none;
 }
@@ -54,28 +57,6 @@ body::-webkit-scrollbar {
 main {
   transition: padding-top 0.2s ease;
 }
-
-/* #main-content {
-  background: rgba(224, 224, 147, 0.596);
-  transition: padding-top 0.3s ease;
-} */
-
-
-/* main {
-  border: 2px solid red;
-} */
-
-
-/* main {
-  margin-top: 0;
-  padding-top: 0;
-} */
-/* main {
-  padding-top: calc(var(--header-height, 80px) + var(--sub-header-height, 40px));
-} */
-
-
-
 
 /* --------------------------------------
   COMPONENT BACKGROUNDS
@@ -218,7 +199,7 @@ header {
 }
 
 .icon-hover-global:hover {
-  color: #cf785d;
+  color: #99a4bb;
   animation: jello-vertical 0.9s both;
   transform-origin: bottom;
 }
@@ -251,8 +232,10 @@ body.sidebar-open {
   box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  padding: 1.6rem 1.4rem;
-  font-family: 'Playfair Display', serif;
+  padding: 2rem 1.6rem;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  font-family: 'DM Sans', sans-serif;
   animation: slideIn 0.35s ease forwards;
   overflow-y: auto;
   z-index: 1050;
@@ -274,14 +257,15 @@ body.sidebar-open {
   align-items: center;
   margin-bottom: 2rem;
   font-size: 1.5rem;
-  font-weight: 700;  /* stronger */
-  color: #3d2f24;
+  font-weight: 700; 
+  color: var(--theme-accent); 
+
 }
 
 .sidebar-panel .sidebar-header span {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #3d2f24;
+  color: var(--theme-accent); 
   white-space: nowrap;
 }
 
@@ -365,7 +349,7 @@ body.sidebar-open {
 .dropdown-section .fw-bold {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #3d2f24;
+  color: #5a4a3f;
   letter-spacing: 0.2px;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid #e4dcd4;
@@ -394,12 +378,13 @@ body.sidebar-open {
 }
 
 .dropdown-section ul li {
+  font-family: inherit;
   padding: 0.4rem 0;
-  font-size: 0.88rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   color: #4b3b2f;
   cursor: pointer;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.3px;
   white-space: nowrap;
   transition: color 0.2s ease;
 }
@@ -464,24 +449,6 @@ body.sidebar-open {
 .sub-header .arrow.rotate {
   transform: rotate(180deg);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* --------------------------------------
@@ -1111,50 +1078,85 @@ body.sidebar-open {
   border: 2px solid #8B6F52;
 } */
 
-
-
 /* --------------------------------------
   FOOTER
 ----------------------------------------- */
-.bg-footer,
+
 .footer-wrapper {
-  background-color: #3D3B3C;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: var(--footer-font);
 }
 
-footer {
-  z-index: 1;
-  position: relative;
-}
-
-footer a:hover {
-  color: #8B6F52;
-  text-decoration: underline;
-}
-
-footer h6 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
+.footer-inner {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  width: 100%;
+  line-height: 1.8;
+  letter-spacing: 0.4px;
 }
 
 .footer-link {
-  color: #f5f2ee;
+  color: var(--footer-text);
   text-decoration: none;
-  transition: all 0.3s;
+  padding: 2px 0;
+  display: inline-block;
+  font-weight: 500;
+  position: relative; /* Needed for the pseudo-element */
+}
+
+/* Prevent the link from moving, add hover effect without shifting layout */
+.footer-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
 }
 
 .footer-link:hover {
   color: #ffffff;
-  text-decoration: underline;
+  text-decoration: none; /* Remove underline effect on hover */
 }
 
 .footer-icon {
-  color: #f5f2ee;
-  font-size: 1.25rem;
-  transition: color 0.3s;
+  font-size: 1.3rem;
+  color: var(--footer-text);
+  transition: color 0.3s ease;
 }
 
 .footer-icon:hover {
-  color: #fff;
+  color: #ddd;
+}
+
+.footer-form input::placeholder {
+  color: #ccc;
+  font-family: inherit;
+}
+
+.footer-form input,
+.footer-form button {
+  min-width: 120px;
+  font-family: inherit;
+}
+
+.footer-form input:focus {
+  border-color: var(--theme-accent); /* Or any custom color */
+  box-shadow: 0 0 0 0.2rem rgba(255, 200, 150, 0.25); /* optional soft glow */
+  outline: none;
+}
+
+.payment-icons i {
+  font-size: 1.3rem;
+  color: var(--footer-text);
 }
 
 

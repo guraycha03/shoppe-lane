@@ -395,7 +395,8 @@ function deduplicateCart(items) {
         cartIconDesktopRef={cartIconDesktopRef}     
       />
   
-      <main className="container-fluid">
+      <main className="container-fluid px-0">
+
         <ShoppeRoutes
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}

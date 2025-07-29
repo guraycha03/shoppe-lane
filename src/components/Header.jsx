@@ -108,7 +108,7 @@ function Header({
           color: '#5a4a3f',
           cursor: 'pointer',
           letterSpacing: '0.8px',
-          fontFamily: "'Cormorant Garamond', serif",
+          fontFamily: "'DM Sans', sans-serif",
           borderBottom: '1px solid #eae2da',
           paddingBottom: '0.5rem',
         }}
@@ -135,7 +135,7 @@ function Header({
                 fontSize: '1rem',
                 color: '#6f5846',
                 transition: 'color 0.2s ease',
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 letterSpacing: '0.5px',
               }}
               onClick={() => {
@@ -164,7 +164,7 @@ function Header({
               <h1
                 className="m-0 fw-bold d-flex align-items-center gap-2"
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   color: '#8B6F52',
                   fontSize: '1.4rem',
                   letterSpacing: '0.5px',
@@ -273,7 +273,7 @@ function Header({
                     height: '38px',
                     borderRadius: '50%',
                     objectFit: 'cover',
-                    border: '2px solid #cce6ff',
+                    border: '2px solid #dee2e6',
                   }}
                 />
               ) : (

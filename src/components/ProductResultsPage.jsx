@@ -25,6 +25,7 @@ function ProductResultsPage({
 
   let filteredProducts = [];
 
+if (Array.isArray(products)) {
   if (name) {
     filteredProducts = products.filter((product) =>
       product.categories?.some((cat) => cat.toLowerCase() === name.toLowerCase())
@@ -37,6 +38,8 @@ function ProductResultsPage({
         product.description.toLowerCase().includes(term)
     );
   }
+}
+
 
   const label = name
     ? `Category: ${name}`

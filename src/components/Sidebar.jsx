@@ -46,7 +46,7 @@ function Sidebar({
           color: '#5a4a3f',
           cursor: 'pointer',
           letterSpacing: '0.8px',
-          fontFamily: "'Cormorant Garamond', serif",
+          fontFamily: "'DM Sans', sans-serif",
           borderBottom: '1px solid #eae2da',
           paddingBottom: '0.5rem',
         }}
@@ -64,29 +64,34 @@ function Sidebar({
 
       {expandedSection === sectionKey && (
         <ul className="list-unstyled ps-2 fade-in" style={{ paddingLeft: '1rem' }}>
-          {items.map(({ label, path }) => (
-            <li
-              key={label}
-              className="mb-3"
-              style={{
-                cursor: 'pointer',
-                fontSize: '1rem',
-                color: '#6f5846',
-                transition: 'color 0.2s ease',
-                fontFamily: "'Cormorant Garamond', serif",
-                letterSpacing: '0.5px',
-              }}
-              onClick={() => {
-                navigate(path);
+        {items.map((item) => (
+          <li
+            key={item.label}
+            className="mb-3"
+            style={{
+              cursor: 'pointer',
+              fontSize: '1rem',
+              color: '#6f5846',
+              transition: 'color 0.2s ease',
+              fontFamily: "'DM Sans', sans-serif",
+              letterSpacing: '0.5px',
+            }}
+            onClick={() => {
+              if (item.onClick) {
+                item.onClick();
+              } else {
+                navigate(item.path);
                 setSidebarOpen(false);
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#a07f64')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#6f5846')}
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
+              }
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#a07f64')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#6f5846')}
+          >
+            {item.label}
+          </li>
+        ))}
+      </ul>
+      
       )}
     </div>
   );
@@ -103,7 +108,15 @@ function Sidebar({
         {renderDropdown('Account & Support', 'bi-person-circle', 'account', [
           {
             label: isLoggedIn ? 'My Account' : 'Login',
-            path: isLoggedIn ? '/account' : '/login',
+            path: null,
+            onClick: () => {
+              if (isLoggedIn) {
+                navigate('/profile');
+              } else {
+                navigate('/login');
+              }
+              setSidebarOpen(false);
+            }
           },
           ...(isLoggedIn
             ? [
