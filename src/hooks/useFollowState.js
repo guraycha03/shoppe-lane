@@ -1,3 +1,5 @@
+// src/hooks/useFollowState.js
+
 import { useState, useEffect } from 'react';
 import {
   getFollowState,

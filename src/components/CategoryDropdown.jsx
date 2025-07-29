@@ -29,7 +29,7 @@ function CategoryDropdown({ categories = [] }) {
               className="dropdown-item"
               onClick={() => handleSelect(cat)}
               type="button"
-              data-bs-toggle="dropdown" // ensure dropdown auto closes
+              data-bs-toggle="dropdown" 
             >
               {cat}
             </button>

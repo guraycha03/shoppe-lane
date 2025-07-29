@@ -1,3 +1,6 @@
+// src/utils/followStorage.js
+
+
 export const userFollowMapKey = 'user_follow_map';
 export const followersCountKey = 'followers_count_map';
 

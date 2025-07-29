@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useFollowState from '../hooks/useFollowState';
+import { getFakeFollowers } from '../utils/fakeFollowers'; // ADD THIS
+
 import '../App.css';
 
 function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
@@ -11,8 +13,8 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
     seller?.id || ''
   );
   
-  const initialFollowers = seller.followers || 1000; // fallback to 1000 if not passed
-  
+  const initialFollowers = seller.followers ?? getFakeFollowers(seller.id);
+
 
   if (!seller) return null;
 

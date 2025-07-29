@@ -113,17 +113,18 @@ function Profile({ user }) {
         {/* Profile Picture */}
         <div className="d-flex flex-column align-items-center mb-4">
           <div className="position-relative">
-            <img
-              src="/shoppe-lane/images/default-avatar.PNG"
-              alt="Profile"
-              className="rounded-circle shadow"
-              style={{
-                width: '130px',
-                height: '130px',
-                objectFit: 'cover',
-                border: '4px solid #dee2e6',
-              }}
-            />
+          <img
+            src={image || "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753782519/default-avatar_c38cq7.png"}
+            alt="Profile"
+            className="rounded-circle shadow"
+            style={{
+              width: '130px',
+              height: '130px',
+              objectFit: 'cover',
+              border: '4px solid #dee2e6',
+            }}
+          />
+
             <button
               onClick={() => fileInputRef.current.click()}
               className="btn btn-light rounded-circle p-2 position-absolute"

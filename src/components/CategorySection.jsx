@@ -8,17 +8,18 @@ import '../App.css';
 const base = import.meta.env.BASE_URL;
 
 const categories = [
-  { name: 'Beauty', image: `/shoppe-lane/images/categories/beauty.jpg`, path: '/category/beauty' },
-  { name: 'Women', image: `/shoppe-lane/images/categories/women.jpg`, path: '/category/women' },
-  { name: 'Men', image: `/shoppe-lane/images/categories/men.jpg`, path: '/category/men' },
-  { name: 'Kids', image: `/shoppe-lane/images/categories/kids.jpg`, path: '/category/kids' },
-  { name: 'Accessories', image: `/shoppe-lane/images/categories/accessories.jpg`, path: '/category/accessories' },
-  { name: 'Home', image: `/shoppe-lane/images/categories/home.jpg`, path: '/category/home' },
-  { name: 'Lifestyle', image: `/shoppe-lane/images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
-  { name: 'Essentials', image: `/shoppe-lane/images/categories/essentials.jpg`, path: '/essentials' },
-  { name: 'On Sale', image: `/shoppe-lane/images/categories/sale.jpg`, path: '/sale' },
-  { name: 'Bestsellers', image: `/shoppe-lane/images/categories/bestsellers.jpg`, path: '/bestsellers' },
+  { name: 'Accessories', image: `${import.meta.env.BASE_URL}images/categories/accessories.jpg`, path: '/category/accessories' },
+  { name: 'Beauty', image: `${import.meta.env.BASE_URL}images/categories/beauty.jpg`, path: '/category/beauty' },
+  { name: 'Bestsellers', image: `${import.meta.env.BASE_URL}images/categories/bestsellers.jpg`, path: '/bestsellers' },
+  { name: 'Essentials', image: `${import.meta.env.BASE_URL}images/categories/essentials.jpg`, path: '/essentials' },
+  { name: 'Home', image: `${import.meta.env.BASE_URL}images/categories/home.jpg`, path: '/category/home' },
+  { name: 'Kids', image: `${import.meta.env.BASE_URL}images/categories/kids.jpg`, path: '/category/kids' },
+  { name: 'Lifestyle', image: `${import.meta.env.BASE_URL}images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
+  { name: 'Men', image: `${import.meta.env.BASE_URL}images/categories/men.jpg`, path: '/category/men' },
+  { name: 'On Sale', image: `${import.meta.env.BASE_URL}images/categories/sale.jpg`, path: '/sale' },
+  { name: 'Women', image: `${import.meta.env.BASE_URL}images/categories/women.jpg`, path: '/category/women' },
 ];
+
 
 function CategorySection() {
   const navigate = useNavigate();

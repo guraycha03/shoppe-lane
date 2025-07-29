@@ -54,7 +54,7 @@ function Header({
   };
 
   const categories = [
-    'Beauty', 'Women', 'Men', 'Kids', 'Accessories', 'Home', 'Lifestyle', 'Essentials', 'Sale', 'Bestsellers',
+    'Home', 'Women', 'Men', 'Kids', 'Accessories', 'Beauty', 'Lifestyle', 'Essentials', 'Stationery', 'Office Supplies', 'Gift Ideas',
   ];
 
   // === Effects ===
@@ -67,7 +67,6 @@ function Header({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Hide subheader on scroll down
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY;
@@ -78,7 +77,6 @@ function Header({
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target)) {

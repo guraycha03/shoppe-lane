@@ -117,16 +117,17 @@ function Sidebar({
 
         {renderDropdown('Shop', 'bi-bag', 'shop', [
           { label: 'Shop All Products', path: '/shop' },
-          { label: 'Beauty', path: '/category/beauty' },
+          { label: 'Home', path: '/category/home' },
           { label: 'Women', path: '/category/women' },
           { label: 'Men', path: '/category/men' },
           { label: 'Kids', path: '/category/kids' },
           { label: 'Accessories', path: '/category/accessories' },
-          { label: 'Home', path: '/category/home' },
+          { label: 'Beauty', path: '/category/beauty' },
           { label: 'Lifestyle', path: '/category/lifestyle' },
-          { label: 'Essentials', path: '/essentials' },
-          { label: 'On Sale', path: '/sale' },
-          { label: 'Bestsellers', path: '/bestsellers' },
+          { label: 'Essentials', path: '/category/essentials' },
+          { label: 'Stationery', path: '/category/stationery' },
+          { label: 'Office Supplies', path: '/category/office_supplies' },
+          { label: 'Gift Ideas', path: '/category/gift_ideas' },
         ])}
 
         {renderDropdown('Customer Resources', 'bi-receipt', 'resources', [

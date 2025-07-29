@@ -16,7 +16,7 @@ import ProductImages from "../components/ProductImages";
 import { getFollowState, setFollowState } from '../utils/followStorage';
 import slugify from 'slugify';
 import { toast } from 'react-toastify';
-import sellers from '../data/sellers';
+
 import axios from 'axios';
 
 function ProductPage({
