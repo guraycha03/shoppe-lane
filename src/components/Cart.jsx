@@ -106,18 +106,24 @@ const Cart = ({ cartItems, updateCartQuantity, removeFromCart }) => {
                   className="d-flex flex-column justify-content-between"
                   style={{ marginBottom: '1rem' }}
                 >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    style={{
-                      width: '100px',
-                      height: '100px',
-                      objectFit: 'contain',
-                      borderRadius: '0.75rem',
-                      background: '#f8f8f8',
-                      padding: '0.5rem',
-                    }}
-                  />
+                  <div
+                    onClick={() => navigate(`/product/${item.id}`)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      style={{
+                        width: '100px',
+                        height: '100px',
+                        objectFit: 'contain',
+                        borderRadius: '0.75rem',
+                        background: '#f8f8f8',
+                        padding: '0.5rem',
+                      }}
+                    />
+                  </div>
+
 
                   <div
                     className="fw-semibold text-muted mt-3"
