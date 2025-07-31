@@ -1,21 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
 import ShoppeRoutes from './ShoppeRoutes';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Header from './components/Header'; 
-import PrivateRoute from './components/PrivateRoute';
-import Profile from './pages/Profile';
-import Wishlist from './pages/Wishlist';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getCartFromLocalStorage } from './utils/localCart';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import AllReviewsPage from './pages/AllReviewsPage';
-import ScrollToTop from './components/ScrollToTop';
+import { getCartFromLocalStorage } from './utils/localCart';
 import NotificationBanner from './components/NotificationBanner';
-import { useLocation } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
+import Header from './components/Header';
+import PrivateRoute from './components/PrivateRoute';
+import AllReviewsPage from './pages/AllReviewsPage';
+import Profile from './pages/Profile';
+import Wishlist from './pages/Wishlist';
 
 function App() {
   const navigate = useNavigate();
@@ -31,51 +30,46 @@ function App() {
   const cartIconMobileRef = useRef(null);
   const cartIconDesktopRef = useRef(null);
 
-
-function renderStars(rating) {
-  const starStyle = (i) => {
-    const percentage = Math.min(Math.max(rating - i, 0), 1) * 100;
-    return {
-      background: `linear-gradient(90deg, #fadb14 ${percentage}%, #e4e5e9 ${percentage}%)`,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
+  function renderStars(rating) {
+    const starStyle = (i) => {
+      const percentage = Math.min(Math.max(rating - i, 0), 1) * 100;
+      return {
+        background: `linear-gradient(90deg, #fadb14 ${percentage}%, #e4e5e9 ${percentage}%)`,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+      };
     };
-  };
 
-  return (
-    <div className="d-flex align-items-center gap-1">
-      {[0, 1, 2, 3, 4].map((i) => (
-        <i
-          key={i}
-          className="bi bi-star-fill"
-          style={{ ...starStyle(i), fontSize: '1.1rem' }}
-        ></i>
-      ))}
-    </div>
-  );
+    return (
+      <div className="d-flex align-items-center gap-1">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <i
+            key={i}
+            className="bi bi-star-fill"
+            style={{ ...starStyle(i), fontSize: '1.1rem' }}
+          ></i>
+        ))}
+      </div>
+    );
+  }
 
-}
-
-function deduplicateCart(items) {
-  const map = new Map();
-  items.forEach((item) => {
-    if (map.has(item.id)) {
-      const existing = map.get(item.id);
-      existing.quantity += item.quantity || 1;
-      map.set(item.id, existing);
-    } else {
-      map.set(item.id, { ...item, quantity: item.quantity || 1 });
-    }
-  });
-  return Array.from(map.values());
-}
-
-
+  function deduplicateCart(items) {
+    const map = new Map();
+    items.forEach((item) => {
+      if (map.has(item.id)) {
+        const existing = map.get(item.id);
+        existing.quantity += item.quantity || 1;
+        map.set(item.id, existing);
+      } else {
+        map.set(item.id, { ...item, quantity: item.quantity || 1 });
+      }
+    });
+    return Array.from(map.values());
+  }
 
   const [searchTerm, setSearchTerm] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
-
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -94,23 +88,15 @@ function deduplicateCart(items) {
 
   const [likedProducts, setLikedProducts] = useState(new Set());
 
-  // Save cart and likes to localStorage
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('likedProducts', JSON.stringify([...likedProducts]));
-  // }, [likedProducts]);
-
-
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem('isLoggedIn') === 'true';
   });
 
   const [user, setUser] = useState(null);
-
   const [username, setUsername] = useState(() => {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     return storedUser?.username || '';
@@ -118,13 +104,10 @@ function deduplicateCart(items) {
 
   useEffect(() => {
     const storedLogin = localStorage.getItem('isLoggedIn') === 'true';
-    
-
     console.log('isLoggedIn from localStorage:', storedLogin);
     const storedUser = localStorage.getItem('currentUser');
     console.log('user from localStorage:', storedUser);
 
-  
     setIsLoggedIn(storedLogin);
   
     try {
@@ -136,7 +119,6 @@ function deduplicateCart(items) {
       console.error('Failed to parse user JSON from localStorage:', error);
     }
   }, []);
-
 
   useEffect(() => {
     const syncLoginState = () => {
@@ -170,27 +152,15 @@ function deduplicateCart(items) {
     }
   }, [isLoggedIn, username]);
 
-
-
-
-
-
-
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
-    // Only store lastProductPage if it's an actual product route
     if (location.pathname.startsWith("/product/")) {
       localStorage.setItem("lastProductPage", location.pathname);
     }
   }, [location]);
 
-  
-  
-  
-
-
-  // Hide header on scroll down
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY;
@@ -283,29 +253,36 @@ function deduplicateCart(items) {
   
     const subHeaderEl = document.querySelector('.sub-header');
   
+    let timeoutId;
+  
     const updatePadding = () => {
-      const headerHeight = headerEl.getBoundingClientRect().height || 0;
-      const subHeaderHeight = subHeaderEl?.getBoundingClientRect().height || 0;
-      const extraOffset = 5; 
-      const total = headerHeight + subHeaderHeight + extraOffset;
-
-      main.style.paddingTop = `${total}px`;
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const headerHeight = headerEl.getBoundingClientRect().height || 0;
+        const subHeaderHeight = subHeaderEl?.classList.contains('hide')
+          ? 0
+          : subHeaderEl?.getBoundingClientRect().height || 0;
+        const extraOffset = 5;
+        const total = headerHeight + subHeaderHeight + extraOffset;
+  
+        main.style.paddingTop = `${total}px`;
+      }, 300); 
     };
   
     const observer = new ResizeObserver(updatePadding);
     observer.observe(headerEl);
     if (subHeaderEl) observer.observe(subHeaderEl);
-  
     updatePadding();
   
     window.addEventListener('resize', updatePadding);
   
     return () => {
       observer.disconnect();
+      clearTimeout(timeoutId);
       window.removeEventListener('resize', updatePadding);
     };
   }, []);
-
+  
   const addToCart = (product, qty = 1) => {
     setCartItems((prev) => {
       const index = prev.findIndex((item) => item.id === product.id);
@@ -379,7 +356,7 @@ function deduplicateCart(items) {
       <ScrollToTop />
       <ToastContainer />
       <NotificationBanner message={notification} />
-  
+
       <Header
         headerRef={headerRef}
         isLoggedIn={isLoggedIn}

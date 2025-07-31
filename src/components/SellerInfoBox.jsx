@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useFollowState from '../hooks/useFollowState';
-import { getFakeFollowers } from '../utils/fakeFollowers'; // ADD THIS
-
+import { getFakeFollowers } from '../utils/fakeFollowers'; 
 import '../App.css';
 
 function SellerInfoBox({ seller, isLoggedIn, currentUser }) {

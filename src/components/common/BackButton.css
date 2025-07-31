@@ -1,14 +1,13 @@
 .back-button {
     border-width: 2px !important;
-    border-color: #d3d3d3 !important; /* light gray, you can adjust */
+    border-color: #d3d3d3 !important; 
     transition: border-color 0.3s ease;
   }
   
   .back-button:hover {
-    border-color: #b0b0b0 !important; /* slightly darker on hover */
+    border-color: #b0b0b0 !important;
   }
   
-  /* Animation remains the same */
   .back-button .arrow-icon {
     transition: transform 0.2s linear;
   }

@@ -8,16 +8,18 @@ import '../App.css';
 const base = import.meta.env.BASE_URL;
 
 const categories = [
-  { name: 'Accessories', image: `${import.meta.env.BASE_URL}images/categories/accessories.jpg`, path: '/category/accessories' },
-  { name: 'Beauty', image: `${import.meta.env.BASE_URL}images/categories/beauty.jpg`, path: '/category/beauty' },
-  { name: 'Bestsellers', image: `${import.meta.env.BASE_URL}images/categories/bestsellers.jpg`, path: '/bestsellers' },
+  
+  { name: 'Home', image: `https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753797552/home_ktmdlm.jpg`, path: '/bestsellers' },
+  { name: 'Women', image: `https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753797610/women_gmvg1o.jpg`, path: '/category/home' },
+  { name: 'Men', image: `${import.meta.env.BASE_URL}images/categories/kids.jpg`, path: '/category/kids' },
+  { name: 'Kids', image: `${import.meta.env.BASE_URL}images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
   { name: 'Essentials', image: `${import.meta.env.BASE_URL}images/categories/essentials.jpg`, path: '/essentials' },
-  { name: 'Home', image: `${import.meta.env.BASE_URL}images/categories/home.jpg`, path: '/category/home' },
-  { name: 'Kids', image: `${import.meta.env.BASE_URL}images/categories/kids.jpg`, path: '/category/kids' },
-  { name: 'Lifestyle', image: `${import.meta.env.BASE_URL}images/categories/lifestyle.jpg`, path: '/category/lifestyle' },
-  { name: 'Men', image: `${import.meta.env.BASE_URL}images/categories/men.jpg`, path: '/category/men' },
-  { name: 'On Sale', image: `${import.meta.env.BASE_URL}images/categories/sale.jpg`, path: '/sale' },
-  { name: 'Women', image: `${import.meta.env.BASE_URL}images/categories/women.jpg`, path: '/category/women' },
+  { name: 'Beauty', image: `${import.meta.env.BASE_URL}images/categories/men.jpg`, path: '/category/men' },
+  { name: 'Accessories', image: `https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753797345/accessories_xsezct.jpg`, path: '/category/accessories' },
+  { name: 'Lifestyle', image: `${import.meta.env.BASE_URL}images/categories/sale.jpg`, path: '/sale' },
+  { name: 'Stationery', image: `${import.meta.env.BASE_URL}images/categories/women.jpg`, path: '/category/women' },
+  { name: 'Gift Ideas', image: `${import.meta.env.BASE_URL}images/categories/sale.jpg`, path: '/sale' },
+  { name: 'Office Supplies', image: `${import.meta.env.BASE_URL}images/categories/women.jpg`, path: '/category/women' },
 ];
 
 

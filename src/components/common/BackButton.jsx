@@ -14,7 +14,7 @@ function BackButton({ label = "Back", className = "", scrollTop = true }) {
 
     const lastProductPage = localStorage.getItem('lastProductPage');
     const currentPath = location.pathname;
-
+    
     const shouldRedirect =
         ["/cart", "/profile", "/wishlist"].includes(currentPath) &&
         lastProductPage &&
@@ -24,10 +24,9 @@ function BackButton({ label = "Back", className = "", scrollTop = true }) {
         !lastProductPage.includes("/wishlist");
 
     if (shouldRedirect) {
-      // 🚫 Use `navigate(..., { replace: true })` causes loop — DO NOT USE
       navigate(lastProductPage);
     } else {
-      navigate(-1); // fallback: normal browser back
+      navigate(-1);
     }
   };
 

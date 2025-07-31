@@ -33,11 +33,14 @@ function Home({
     <>
       {/* Hero Section */}
       <section className="hero-section text-white d-flex align-items-center justify-content-center text-center">
-        <div className="hero-content">
+        <div className="hero-content container-sm">
           <h1 className="display-4 fw-bold">Welcome to Shoppe Lane</h1>
           <p className="lead">Discover timeless pieces curated for cozy, elegant living.</p>
         </div>
       </section>
+
+
+
 
       {/* Product Section */}
       <section className="container mt-0 mb-5">

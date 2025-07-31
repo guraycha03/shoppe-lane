@@ -1,16 +1,15 @@
 /* src/components/ AddToCartButton.css */
 
-
 .shoppe-minimal-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #f7eee7; /* ✨ updated */
-  border: 1px solid #dbc7b8; /* ✨ updated */
+  background: #f7eee7; 
+  border: 1px solid #dbc7b8; 
   border-radius: 2rem;
-  color: #6a4e3a; /* ✨ updated */
+  color: #6a4e3a; 
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
@@ -19,7 +18,7 @@
 }
 
 .shoppe-minimal-btn:hover {
-  background: #f2e6df; /* ✨ updated hover */
+  background: #f2e6df; 
   border-color: #cfb7a6;
 }
 

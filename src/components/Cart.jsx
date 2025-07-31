@@ -5,7 +5,6 @@ import BackButton from '../components/common/BackButton';
 const Cart = ({ cartItems, updateCartQuantity, removeFromCart }) => {
   const navigate = useNavigate();
   const [selectedItems, setSelectedItems] = useState([]);
-
   const checkoutRef = useRef(null);
   const checkoutStopRef = useRef(null);
   const [isFloating, setIsFloating] = useState(true);
@@ -76,7 +75,6 @@ const Cart = ({ cartItems, updateCartQuantity, removeFromCart }) => {
       >
         My Cart
       </h2>
-
 
 
       {cartItems.length === 0 ? (
@@ -174,7 +172,6 @@ const Cart = ({ cartItems, updateCartQuantity, removeFromCart }) => {
                 </div>
 
                 {/* Action Buttons */}
-                {/* Action Buttons in bottom-right corner */}
                 <div
                   className="cart-action-buttons"
                 >

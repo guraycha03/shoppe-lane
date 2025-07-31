@@ -1,26 +1,23 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import Recommendations from './Recommendations';
 import { useEffect, useState, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
-import RatingSection from './RatingSection';
-import SellerInfoBox from './SellerInfoBox';
-
-import AddToCartButton from './AddToCartButton';
-import VariantSelector from './VariantSelector';
-import QuantitySelector from './QuantitySelector';
+import ProductImages from "../components/ProductImages";
 import ProductInfo from "../components/ProductInfo";
 import productReviews from '../data/productReviews';
 import ProductDetailsBox from './ProductDetailsBox';
 import SpecificationsBox from './SpecificationsBox';
-import ProductImages from "../components/ProductImages";
-import { getFollowState, setFollowState } from '../utils/followStorage';
-import slugify from 'slugify';
+import RatingSection from './RatingSection';
+import SellerInfoBox from './SellerInfoBox';
 import { toast } from 'react-toastify';
-
 import axios from 'axios';
+import { getFollowState, setFollowState } from '../utils/followStorage';
+import { CSSTransition } from 'react-transition-group';
+import AddToCartButton from './AddToCartButton';
+import VariantSelector from './VariantSelector';
+import QuantitySelector from './QuantitySelector';
+import slugify from 'slugify';
 
 function ProductPage({
-  // products,
   likedProducts,
   toggleLike,
   handleAddToCart,
@@ -52,14 +49,6 @@ function ProductPage({
   const [notification, setNotification] = useState('');
   const username = localStorage.getItem('username') || 'guest';
   const product = products.find((p) => String(p.id) === id);
-  // const [isFollowing, setIsFollowing] = useState(() =>
-  //   getFollowState(username, product?.seller)
-  // );  
-  // const toggleFollow = () => {
-  //   const newState = !isFollowing;
-  //   setIsFollowing(newState);
-  //   setFollowState(username, product?.seller, newState);
-  // };
 
   useEffect(() => {
     axios.get('https://687c9936918b6422432ebfe8.mockapi.io/api/products')
@@ -92,8 +81,6 @@ function ProductPage({
     setQuantity(1);
   }, [id]);
 
-  
-
   if (loading) {
     return <p className="text-center mt-5">Loading product details…</p>;
   }
@@ -119,10 +106,7 @@ function ProductPage({
 
   return (
     <main id="main-content" className="container-fluid">
-
-
         <div className="container pt-4 pb-4">
-
         <button
           className="btn btn-outline-secondary d-inline-flex align-items-center gap-2 mb-4 px-3 py-2"
           style={{ fontWeight: '500', fontSize: '1rem', borderRadius: '0.5rem' }}

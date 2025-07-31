@@ -1,7 +1,7 @@
 // src/components/BuyNowButton.jsx
 import React from "react";
 import classNames from "classnames";
-import "./AddToCartButton.css"; // using same shared styles
+import "./AddToCartButton.css"; 
 
 function BuyNowButton({ onClick, isLoading = false }) {
   const buttonClass = classNames("shoppe-minimal-btn", "shoppe-buy-now-btn", {

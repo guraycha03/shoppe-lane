@@ -22,20 +22,23 @@ function CategoryDropdown({ categories = [] }) {
         {selectedCategory}
       </button>
 
-      <ul className="dropdown-menu" aria-labelledby="categoryDropdown">
+      <ul
+        className="dropdown-menu max-h-60 overflow-y-auto custom-scrollbar"
+        aria-labelledby="categoryDropdown"
+      >
         {categories.map((cat) => (
           <li key={cat}>
             <button
               className="dropdown-item"
               onClick={() => handleSelect(cat)}
               type="button"
-              data-bs-toggle="dropdown" 
             >
               {cat}
             </button>
           </li>
         ))}
       </ul>
+
     </div>
   );
 }

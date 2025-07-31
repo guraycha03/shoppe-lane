@@ -1,6 +1,6 @@
 import { useParams, useLocation } from 'react-router-dom';
 import Footer from './Footer';
-import ProductGrid from './ProductGrid'; // use the same grid layout as homepage
+import ProductGrid from './ProductGrid'; 
 import React from 'react';
 
 function ProductResultsPage({
@@ -15,31 +15,27 @@ function ProductResultsPage({
   showNotification,    
 }) {
 
-
-
   const { name } = useParams(); 
   const location = useLocation(); 
-
   const searchParams = new URLSearchParams(location.search);
   const searchTerm = searchParams.get('q');
 
   let filteredProducts = [];
 
-if (Array.isArray(products)) {
-  if (name) {
-    filteredProducts = products.filter((product) =>
-      product.categories?.some((cat) => cat.toLowerCase() === name.toLowerCase())
-    );
-  } else if (searchTerm) {
-    const term = searchTerm.toLowerCase();
-    filteredProducts = products.filter(
-      (product) =>
-        product.name.toLowerCase().includes(term) ||
-        product.description.toLowerCase().includes(term)
-    );
+  if (Array.isArray(products)) {
+    if (name) {
+      filteredProducts = products.filter((product) =>
+        product.categories?.some((cat) => cat.toLowerCase() === name.toLowerCase())
+      );
+    } else if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      filteredProducts = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(term) ||
+          product.description.toLowerCase().includes(term)
+      );
+    }
   }
-}
-
 
   const label = name
     ? `Category: ${name}`
@@ -62,7 +58,6 @@ if (Array.isArray(products)) {
           isLoggedIn={isLoggedIn}                
           showNotification={showNotification}
         />
-
         
       ) : (
         <div className="text-center mt-5">
@@ -71,8 +66,6 @@ if (Array.isArray(products)) {
           </p>
         </div>
       )}
-
-      <Footer />
     </div>
   );
 }
