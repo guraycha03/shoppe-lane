@@ -1,7 +1,5 @@
 // src/components/ProductDetail.jsx ---
 
-// REMOVE useParams and useNavigate
-// import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 function ProductDetail({
@@ -15,11 +13,6 @@ function ProductDetail({
     onClose,
     addingToCartId 
   }) {
-  
-
-    
-//   const { productId } = useParams();
-//   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,13 +20,9 @@ function ProductDetail({
 
   if (!product) return <p>Product not found.</p>;
 
-
   const selectedProduct = product;
 
-
   return (
-
-
     <div
         className="product-modal"
         style={{
@@ -135,7 +124,7 @@ function ProductDetail({
                 <h6 className="fw-semibold mb-3 text-uppercase">Specifications</h6>
                 <ul className="list-unstyled small mb-0">
                 {Object.entries(selectedProduct.specs).map(([key, value]) => {
-                    // Convert camelCase to "Title Case With Spaces"
+                   
                     const formattedKey = key
                         .replace(/([A-Z])/g, ' $1')               // Insert space before capital letters
                         .replace(/^./, str => str.toUpperCase()); // Capitalize first letter

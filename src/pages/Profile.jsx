@@ -1,30 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackButton from '../components/common/BackButton'; // adjust path if needed
+import BackButton from '../components/common/BackButton';
+import ProfileInfo from '../components/profile/ProfileInfo';
+import LocationPicker from '../components/profile/LocationPicker';
+import { getFollowedSellerIdsForUser } from '../utils/followStorage';
+import StoresModal from '../components/profile/StoresModal'; // adjust the path
 
-import { Pencil } from 'react-bootstrap-icons';
+import axios from 'axios';
 
-function Profile({ user }) {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [image, setImage] = useState('');
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedUsername, setEditedUsername] = useState('');
-    const [editedEmail, setEditedEmail] = useState('');
-    const fileInputRef = useRef(null);
-    const navigate = useNavigate();
+function Profile() {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [image, setImage] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedUsername, setEditedUsername] = useState('');
+  const [editedEmail, setEditedEmail] = useState('');
+  const fileInputRef = useRef(null);
+  const navigate = useNavigate();
+  const [address, setAddress] = useState('');
+  const [position, setPosition] = useState(null);
+  const [followedStores, setFollowedStores] = useState([]);
+  const [showStoresModal, setShowStoresModal] = useState(false);
 
-    const handleLogout = () => {
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('currentUser');
-        navigate('/login');
-        window.location.reload(); 
-      };
-      
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const stored = localStorage.getItem('currentUser');
 
-    // If not logged in, redirect to login
     if (!isLoggedIn || !stored) {
       navigate('/login');
       return;
@@ -32,176 +32,128 @@ function Profile({ user }) {
 
     try {
       const storedUser = JSON.parse(stored);
-      if (storedUser && typeof storedUser === 'object') {
-        setCurrentUser(storedUser);
-        setImage(storedUser.profileImage || '');
-        setEditedUsername(storedUser.username || '');
-        setEditedEmail(storedUser.email || '');
-      }
+      setCurrentUser(storedUser);
+      setImage(storedUser.profileImage || '');
+      setEditedUsername(storedUser.username || '');
+      setEditedEmail(storedUser.email || '');
     } catch (err) {
       console.error("Failed to load user:", err);
-      navigate('/login'); // fallback to login on error
+      navigate('/login');
     }
   }, []);
-  
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-  
-    reader.onloadend = () => {
-      const base64Image = reader.result;
-      setImage(base64Image);
-  
-      const updatedUser = { ...currentUser, profileImage: base64Image };
+  useEffect(() => {
+    if (!currentUser) return;
 
-      localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-      setCurrentUser(updatedUser);
+    const fetchFollowedStores = async () => {
+      const sellerIds = getFollowedSellerIdsForUser(currentUser.username);
+      console.log("🛒 Followed Seller IDs:", sellerIds); // <-- LOG HERE
+    
+      if (!sellerIds.length) {
+        setFollowedStores([]);
+        return;
+      }
+    
+      try {
+        const { data } = await axios.get('https://687c9936918b6422432ebfe8.mockapi.io/api/products');
 
-      const users = JSON.parse(localStorage.getItem('users')) || [];
-      const updatedUsers = users.map((user) =>
-        user.username === currentUser.username || user.email === currentUser.email
-          ? updatedUser
-          : user
-      );
-      localStorage.setItem('users', JSON.stringify(updatedUsers));
+        console.log("📦 Products Fetched:", data.length);
+    
+        const uniqueStores = sellerIds.map(sellerId => {
+          const product = data.find(p => String(p.sellerId) === String(sellerId));
+          console.log("🔍 Matching product for sellerId:", sellerId, "→", product);
+          return product ? { sellerId: product.sellerId, seller: product.seller } : null;
+        }).filter(Boolean);
+        
+    
+        setFollowedStores(uniqueStores);
+      } catch (error) {
+        console.error('Failed to fetch followed stores:', error);
+      }
     };
-  
-    if (file) reader.readAsDataURL(file);
-  };
-  
+    
 
-  const handleEditToggle = () => {
-    setIsEditing((prev) => !prev);
-  };
+    fetchFollowedStores();
+  }, [currentUser]);
 
-  const handleSave = () => {
-    const updatedUser = {
-      ...currentUser,
-      username: editedUsername,
-      email: editedEmail,
-    };
+  useEffect(() => {
+    if (showStoresModal) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => (document.body.style.overflow = '');
+  }, [showStoresModal]);
 
-    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+  useEffect(() => {
+    const handleEsc = (e) => e.key === 'Escape' && setShowStoresModal(false);
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, []);
   
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const updatedUsers = users.map((user) =>
-      user.username === currentUser.username || user.email === currentUser.email
-        ? updatedUser
-        : user
-    );
-  
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-  
-    setCurrentUser(updatedUser);
-    setIsEditing(false);
-  };
   
 
   if (!currentUser) return <p className="text-center my-5">Loading profile...</p>;
 
   return (
     <div className="container pt-2 pb-4">
-
-      {/* Back Button */}
-      <div className="mb-1" style={{ marginTop: '0rem' }}>
-        <BackButton className="mb-1" />
+      <div className="mb-2">
+        <BackButton />
       </div>
 
-      <h2 className="mb-4 fw-bold">My Account</h2>
-      <div className="card p-4 shadow-sm border-0">
-        {/* Profile Picture */}
-        <div className="d-flex flex-column align-items-center mb-4">
-          <div className="position-relative">
-          <img
-            src={image || "https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753782519/default-avatar_c38cq7.png"}
-            alt="Profile"
-            className="rounded-circle shadow"
-            style={{
-              width: '130px',
-              height: '130px',
-              objectFit: 'cover',
-              border: '4px solid #dee2e6',
-            }}
-          />
+      <h2 className="text-center text-muted">My Account</h2>
 
-            <button
-              onClick={() => fileInputRef.current.click()}
-              className="btn btn-light rounded-circle p-2 position-absolute"
-              style={{
-                bottom: 0,
-                right: 0,
-                boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-              }}
-              title="Change profile picture"
-            >
-              <Pencil size={18} />
-            </button>
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              onChange={handleImageChange}
-              style={{ display: 'none' }}
-            />
-          </div>
-        </div>
+      {/* Personal Info Section */}
+      <ProfileInfo currentUser={currentUser} setCurrentUser={setCurrentUser} />
 
-        {/* Info Section */}
-        <div className="mb-3">
-          <h5 className="text-muted">Account Details</h5>
-          <hr />
-          <div className="mb-3">
-            <strong className="d-block text-secondary small">Username</strong>
-            {isEditing ? (
-              <input
-                type="text"
-                className="form-control"
-                value={editedUsername}
-                onChange={(e) => setEditedUsername(e.target.value)}
-              />
-            ) : (
-              <div className="fs-5">{currentUser.username}</div>
-            )}
-          </div>
-          <div>
-            <strong className="d-block text-secondary small">Email</strong>
-            {isEditing ? (
-              <input
-                type="email"
-                className="form-control"
-                value={editedEmail}
-                onChange={(e) => setEditedEmail(e.target.value)}
-              />
-            ) : (
-              <div className="fs-5">{currentUser.email}</div>
-            )}
-          </div>
-        </div>
 
-        {/* Buttons */}
-        <div className="mt-4 d-flex justify-content-between align-items-center">
-            <div className="d-flex gap-2">
-                {isEditing ? (
-                <>
-                    <button className="btn btn-success" onClick={handleSave}>
-                    Save
-                    </button>
-                    <button className="btn btn-secondary" onClick={() => setIsEditing(false)}>
-                    Cancel
-                    </button>
-                </>
-                ) : (
-                <button className="btn btn-outline-primary" onClick={handleEditToggle}>
-                    Edit Info
-                </button>
-                )}
-            </div>
-            <button className="btn btn-outline-danger" onClick={handleLogout}> Log Out </button>
-        </div>
+      {/* Buttons */}
+      <div className="d-flex justify-content-between align-items-center mt-4 mb-4 flex-wrap gap-3">
+      <button
+        className="btn btn-light border shadow-sm px-4 py-2 fs-6 d-flex align-items-center gap-2 fw-semibold custom-hover"
+        onClick={() => setShowStoresModal(true)}
+      >
+        <i className="bi bi-shop text-secondary fs-5"></i>
+        <span className="text-secondary">Stores You Follow</span>
+      </button>
+
+        <button
+          className="btn btn-outline-secondary border shadow-sm px-4 py-2 fs-6 d-flex align-items-center gap-2 fw-semibold custom-hover"
+          onClick={() => alert('Start Selling functionality coming soon!')}
+        >
+          <i className="bi bi-bag-plus text-secondary fs-5"></i> 
+          <span className="text-secondary">Start Selling</span>
+        </button>
 
       </div>
+
+      {/* SECTION 2: Order History (placeholder) */}
+      <section className="card p-4 shadow-sm border-0 mb-4">
+        <h5 className="text-muted mb-3">Order History</h5>
+        <p className="text-muted">No orders yet.</p>
+      </section>
+
+      {/* Address Field Section */}
+      <section className="card p-4 shadow-sm border-0 mb-4">
+        <h5 className="text-muted mb-3">Delivery Address</h5>
+
+        <LocationPicker setAddress={setAddress} setPosition={setPosition} />
+
+        {address && (
+          <div className="alert alert-light border mt-3">
+            <strong>Selected Address:</strong>
+            <br />
+            {address}
+          </div>
+        )}
+      </section>
+
+      {/* Followed Sotres Modal */}
+      {showStoresModal && (
+        <StoresModal
+          onClose={() => setShowStoresModal(false)}
+          followedStores={followedStores}
+        />
+      )}
     </div>
+    
   );
 }
 

@@ -36,6 +36,12 @@ export const setFollowState = (username, sellerId, shouldFollow) => {
   localStorage.setItem(userFollowMapKey, JSON.stringify(map));
 };
 
+export const getFollowedSellerIdsForUser = (username) => {
+  const data = JSON.parse(localStorage.getItem(userFollowMapKey) || '{}');
+  return Array.isArray(data[username]) ? data[username] : [];
+};
+
+
 // Get followers count
 export const getFollowersCount = (sellerId) => {
   try {

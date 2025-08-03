@@ -1071,18 +1071,47 @@ body.sidebar-open {
   color: #63686d;
 }
 
+.checkout-bar {
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1.5rem;
+  background-color: #fff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
 
-/* Minimal spacing for floating version */
 .checkout-bar.position-fixed {
-  margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  margin: 0;
 }
 
-/* Slight spacing for static (scrolled) version */
-.static-checkout {
-  position: static;
-  margin-top: 1.2rem;
-  margin-bottom: 1.5rem;
+/* Floating version */
+.checkout-bar.floating-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--theme-light);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--theme-border);
 }
+
+/* Static version under cart items */
+.checkout-bar.static-bar {
+  position: static;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  margin: 1.5rem auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  padding: 0; /* let .container or px-4 handle it */
+}
+
 
 
 /* --------------------------------------
@@ -1154,19 +1183,49 @@ body.sidebar-open {
   cursor: pointer;
 }
 
-/* .avatar-circle {
-  width: 38px;
-  height: 38px;
-  background-color: #dec6b3;
-  color: #fff;
-  border-radius: 50%;
+/* Global modal override */
+.modal-overlay-fix {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999999 !important; /* Super high and forced */
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 1rem;
-  border: 2px solid #8B6F52;
-} */
+  justify-content: center;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+/* buttons  */
+/* Common hover */
+.custom-hover {
+  transition: all 0.25s ease-in-out;
+  border-radius: 0.75rem;
+}
+
+/* Light/filled buttons */
+.btn-light.custom-hover:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+/* Outline buttons */
+.btn-outline-secondary.custom-hover:hover {
+  background-color: rgba(108, 117, 125, 0.06); /* Light tint of secondary */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.btn-outline-secondary.custom-hover:hover i,
+.btn-outline-secondary.custom-hover:hover span {
+  color: #6c757d; /* Bootstrap secondary */
+}
+
+
+
 
 /* --------------------------------------
   FOOTER

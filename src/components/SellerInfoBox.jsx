@@ -14,7 +14,6 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
   
   const initialFollowers = seller.followers ?? getFakeFollowers(seller.id);
 
-
   if (!seller) return null;
 
   // Utilities

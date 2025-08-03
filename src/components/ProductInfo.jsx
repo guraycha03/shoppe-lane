@@ -3,6 +3,7 @@ import VariantSelector from "./VariantSelector";
 import QuantitySelector from "./QuantitySelector";
 import AddToCartButton from "./AddToCartButton";
 import BuyNowButton from "./BuyNowButton";
+import { buildCartItem } from '../utils/cartUtils';
 
 
 function ProductInfo({
@@ -80,31 +81,32 @@ function ProductInfo({
       <div className="d-flex align-items-center gap-3 flex-wrap mb-4 mt-3">
       <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
          {/* Add To Cart Button */}
-        <AddToCartButton
-          onClick={(e) => {
-            e.stopPropagation();
+         <AddToCartButton
+            onClick={(e) => {
+              e.stopPropagation();
 
-            if (!isLoggedIn) {
-              setNotification("Please log in to add items to your cart.");
-              setTimeout(() => setNotification(""), 3000);
-              return;
-            }
+              if (!isLoggedIn) {
+                setNotification("Please log in to add items to your cart.");
+                setTimeout(() => setNotification(""), 3000);
+                return;
+              }
 
-            if (product.variants?.length > 0 && !selectedVariant) {
-              setNotification("Please select a color before adding to cart.");
-              setTimeout(() => setNotification(""), 3000);
-              return;
-            }
+              if (product.variants?.length > 0 && !selectedVariant) {
+                setNotification("Please select a color before adding to cart.");
+                setTimeout(() => setNotification(""), 3000);
+                return;
+              }
 
-            if (triggerFlyToCartAnimation) {
-              triggerFlyToCartAnimation(e);
-            }
+              if (triggerFlyToCartAnimation) {
+                triggerFlyToCartAnimation(e);
+              }
 
-            handleAddToCart(product, e, quantity);
-          }}
-          loading={addingToCartId === product.id}
-          disabled={product.variants?.length > 0 && !selectedVariant}
-        />
+              const cartItem = buildCartItem(product, quantity, selectedVariant);
+              handleAddToCart(cartItem, e);
+            }}
+            loading={addingToCartId === product.id}
+            disabled={product.variants?.length > 0 && !selectedVariant}
+          />
 
         {/* Buy Now Button */}
         <BuyNowButton

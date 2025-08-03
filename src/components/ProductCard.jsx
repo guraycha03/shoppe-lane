@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
+import { buildCartItem } from '../utils/cartUtils';
 
 function ProductCard({
   product,
@@ -34,7 +35,8 @@ function ProductCard({
       triggerFlyToCartAnimation(e);
     }
 
-    handleAddToCart(product, e);
+    const cartItem = buildCartItem(product);
+    handleAddToCart(cartItem, e);
   };
 
   const isSmall = size === 'small';

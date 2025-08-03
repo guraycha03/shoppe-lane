@@ -19,32 +19,15 @@ function StorePage({
     showNotification
   }) {
 
-    // const [hasFollowed, setHasFollowed] = useState(false);
-    // const [followers, setFollowers] = useState(0);
-
-    // const isFollowing = getFollowState(currentUser, product.seller);
-    const [isFollowing, setIsFollowing] = useState(false);
-
-    
-    
-    // const toggleFollow = () => {
-    //   const newState = !isFollowing;
-    //   setIsFollowing(newState);
-    //   setFollowState(currentUser, sellerName, newState);
-    // };
-
-  
+  const [isFollowing, setIsFollowing] = useState(false);
   const { sellerId } = useParams();
   const navigate = useNavigate();
-
   const [products, setProducts] = useState([]);
   const [sellerData, setSellerData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const slugify = (str) =>
     str?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-
-  
 
   useEffect(() => {
     setLoading(true);

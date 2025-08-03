@@ -4,18 +4,20 @@
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import Home from './pages/Home';
-import ProductPage from './components/ProductPage';
-
-import Footer from './components/Footer';
 import ProductResultsPage from './components/ProductResultsPage';
+import ProductPage from './components/ProductPage';
+import Cart from './components/Cart';
+import Footer from './components/Footer';
 import AllReviewsPage from './pages/AllReviewsPage';
-import Wishlist from './pages/Wishlist';
 import SignUpPage from './pages/SignUpPage';
 import StorePage from './pages/StorePage';
 import LoginPage from './pages/LoginPage';
+import Wishlist from './pages/Wishlist';
 import Profile from './pages/Profile';
-import Cart from './components/Cart';
+import Order from './pages/Order';
+import Home from './pages/Home';
+
+
 
 
 
@@ -131,7 +133,6 @@ function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, products, .
           }
         />
 
-
         <Route
           path="/login"
           element={
@@ -161,12 +162,6 @@ function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, products, .
           }
         />
 
-
-
-
-
-
-
         <Route
           path="/store/:sellerId"
           element={
@@ -186,12 +181,9 @@ function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, products, .
           }
         />
 
-
-
-
         <Route path="/profile" element={<Profile />} />
+        <Route path="/order" element={<Order />} />
         <Route path="*" element={<Navigate to="/" />} />
-
 
       </Routes>
     </AnimatePresence>

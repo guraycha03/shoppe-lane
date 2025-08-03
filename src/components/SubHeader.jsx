@@ -41,6 +41,7 @@ function SubHeader({
     pathname === '/profile' ||
     pathname === '/search' ||
     pathname === '/login' ||
+    pathname === '/order' ||
     pathname.includes('/reviews');
 
   if (hideSubHeader) return null;

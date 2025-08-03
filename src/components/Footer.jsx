@@ -3,7 +3,8 @@ import '../App.css';
 
 function Footer() {
   return (
-    <footer className="footer-wrapper mt-5 pt-5">
+    <footer id="page-footer" className="footer-wrapper mt-5 pt-5">
+
       <div className="footer-inner text-light">
         <div className="container-fluid px-0 py-4">
           <div className="row gx-4 gy-4 mx-0 px-4">

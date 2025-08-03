@@ -15,6 +15,9 @@ import PrivateRoute from './components/PrivateRoute';
 import AllReviewsPage from './pages/AllReviewsPage';
 import Profile from './pages/Profile';
 import Wishlist from './pages/Wishlist';
+import 'leaflet/dist/leaflet.css';
+
+
 
 function App() {
   const navigate = useNavigate();
@@ -205,38 +208,79 @@ function App() {
   
   const [addingToCartId, setAddingToCartId] = useState(null);
   const addingLockRef = useRef(false); 
-  const handleAddToCart = async (product, event, qty = 1) => {
+  const handleAddToCart = async (product, event, qty = 1, selectedVariant = null) => {
     if (addingLockRef.current || addingToCartId === product.id) return;
-
+  
     addingLockRef.current = true;
     setAddingToCartId(product.id);
   
     await new Promise((resolve) => setTimeout(resolve, 500));
   
+    const seller = product.seller || "Unknown Seller";
+    const sellerId = product.sellerId || null;
+  
+    const variantWithSeller = selectedVariant
+      ? {
+          ...selectedVariant,
+          seller,
+          sellerId,
+        }
+      : null;
+  
+    const variantId = product.id + (variantWithSeller?.name || "");
+  
+    console.log("🧾 New cart item:", {
+      id: variantId,
+      name: product.name,
+      seller: variantWithSeller?.seller || seller,
+      sellerId: variantWithSeller?.sellerId || sellerId,
+      variant: variantWithSeller?.name || null,
+    });
+  
     setCartItems((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+      const existing = prev.find((item) => item.id === variantId);
+  
       if (existing) {
         return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + qty } : item
+          item.id === variantId
+            ? { ...item, quantity: item.quantity + qty }
+            : item
         );
       } else {
-        return [...prev, { ...product, quantity: qty }];
+        return [
+          ...prev,
+          {
+            id: variantId,
+            name: product.name,
+            price: product.price,
+            image: variantWithSeller?.image || product.image,
+            variant: variantWithSeller?.name || null,
+            quantity: qty,
+            seller: variantWithSeller?.seller || seller,
+            sellerId: variantWithSeller?.sellerId || sellerId,
+          },
+        ];
       }
     });
-
+  
     setQuantity(1);
   
+    // Optional: fly-to-cart animation
     if (cartIconRef.current) {
       const el = cartIconRef.current;
-      el.classList.remove('pump');
+      el.classList.remove("pump");
       void el.offsetWidth;
-      el.classList.add('pump');
-      setTimeout(() => el.classList.remove('pump'), 400);
+      el.classList.add("pump");
+      setTimeout(() => el.classList.remove("pump"), 400);
     }
   
     setAddingToCartId(null);
     addingLockRef.current = false;
   };
+  
+  
+  
+  
   
   useEffect(() => {
     if (isLoggedIn && username) {

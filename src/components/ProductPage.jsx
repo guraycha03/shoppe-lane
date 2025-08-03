@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Recommendations from './Recommendations';
 import { useEffect, useState, useRef } from 'react';
 import ProductImages from "../components/ProductImages";
@@ -49,6 +49,8 @@ function ProductPage({
   const [notification, setNotification] = useState('');
   const username = localStorage.getItem('username') || 'guest';
   const product = products.find((p) => String(p.id) === id);
+  const location = useLocation();
+  const previousPage = location.state?.from;
 
   useEffect(() => {
     axios.get('https://687c9936918b6422432ebfe8.mockapi.io/api/products')
@@ -111,12 +113,13 @@ function ProductPage({
           className="btn btn-outline-secondary d-inline-flex align-items-center gap-2 mb-4 px-3 py-2"
           style={{ fontWeight: '500', fontSize: '1rem', borderRadius: '0.5rem' }}
           onClick={() => {
-            if (document.referrer.includes(window.location.host)) {
-              navigate(-1);
+            if (previousPage) {
+              navigate(previousPage);
             } else {
               navigate('/');
             }
           }}
+
         >
           <i className="bi bi-arrow-left-short" style={{ fontSize: '1.2rem' }}></i>
           Back

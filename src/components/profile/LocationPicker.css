@@ -1,0 +1,13 @@
+.leaflet-control-zoom a {
+    background-color: rgba(255, 255, 255, 0.8); /* Light background */
+    color: #505050 !important; /* Dark text for contrast */
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+  
+  .leaflet-control-zoom a:hover {
+    background-color: #f5f5f5;
+    color: #505050 !important;
+  }
+  
