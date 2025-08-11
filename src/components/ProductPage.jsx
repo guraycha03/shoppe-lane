@@ -10,7 +10,7 @@ import RatingSection from './RatingSection';
 import SellerInfoBox from './SellerInfoBox';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { getFollowState, setFollowState } from '../utils/followStorage';
+
 import { CSSTransition } from 'react-transition-group';
 import AddToCartButton from './AddToCartButton';
 import VariantSelector from './VariantSelector';
@@ -119,7 +119,6 @@ function ProductPage({
               navigate('/');
             }
           }}
-
         >
           <i className="bi bi-arrow-left-short" style={{ fontSize: '1.2rem' }}></i>
           Back
@@ -127,7 +126,6 @@ function ProductPage({
 
         <div className="row g-4">
           <div className="col-12 col-md-6">
-
             <ProductImages
               product={product}
               selectedImage={mainImage}

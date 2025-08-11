@@ -92,7 +92,7 @@ header {
 
 .sub-header {
   position: fixed;
-  top: 60px; 
+  top: 50px; 
   left: 0;
   right: 0;
   z-index: 999;
@@ -185,7 +185,7 @@ header {
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 500;
-  padding: 0 20px; /* remove vertical padding */
+  padding: 0 20px; 
   letter-spacing: 1px;
   line-height: 1;
   transition: all 0.3s ease;
@@ -194,13 +194,8 @@ header {
   justify-content: center;
 }
 
-
 .search-btn-neu:hover {
-  background: #dfcbb5; /* slight lighten */
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.1),
-    inset 0 0 3px rgba(255, 255, 255, 0.3);
-  transform: scale(1.01);
+  background: #dfcbb5; 
 }
 
 
@@ -975,19 +970,25 @@ body.sidebar-open {
   box-shadow: 0 0 0 3px rgba(139, 111, 82, 0.3);
 }
 
-/* PRODUCT INFORMATIONS */
+
+/* --------------------------------------
+  SELLER INFO BOX & STORE PAGE
+----------------------------------------- */
 
 .seller-box {
   background-color: #fff8f3;
   border-left: 5px solid var(--theme-accent);
   transition: box-shadow 0.3s ease;
 }
+
 .seller-box:hover {
   box-shadow: 0 0 12px rgba(139, 111, 82, 0.2);
 }
+
 .seller-box i {
   color: var(--theme-accent);
 }
+
 
 
 
@@ -1164,6 +1165,7 @@ body.sidebar-open {
   background-color: #fff;
   border: 1px solid #ddd;
   font-weight: 500;
+
 }
 .google-btn:hover {
   background-color: #f7f7f7;
@@ -1197,13 +1199,14 @@ body.sidebar-open {
 }
 
 /* buttons  */
-/* Common hover */
-.custom-hover {
-  transition: all 0.25s ease-in-out;
+/* Button transitions */
+.custom-hover,
+.logout-hover {
   border-radius: 0.75rem;
+  transition: all 0.25s ease-in-out;
 }
 
-/* Light/filled buttons */
+/* Hover Effects */
 .btn-light.custom-hover:hover {
   background-color: #f0f0f0;
   transform: translateY(-2px);
@@ -1211,9 +1214,8 @@ body.sidebar-open {
   cursor: pointer;
 }
 
-/* Outline buttons */
 .btn-outline-secondary.custom-hover:hover {
-  background-color: rgba(108, 117, 125, 0.06); /* Light tint of secondary */
+  background-color: rgba(108, 117, 125, 0.06);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   cursor: pointer;
@@ -1221,9 +1223,21 @@ body.sidebar-open {
 
 .btn-outline-secondary.custom-hover:hover i,
 .btn-outline-secondary.custom-hover:hover span {
-  color: #6c757d; /* Bootstrap secondary */
+  color: #6c757d;
 }
 
+/* Logout button */
+.logout-hover {
+  border-color: #dc3545;
+  color: #dc3545;
+  background-color: transparent;
+}
+
+.logout-hover:hover {
+  background-color: #dc3545;
+  color: #fff;
+  transform: translateY(-2px);
+}
 
 
 

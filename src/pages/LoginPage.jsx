@@ -41,12 +41,22 @@ function LoginPage({ setIsLoggedIn }) {
 
     // ✅ Save to localStorage immediately
  ;
+    const previousUser = JSON.parse(localStorage.getItem('currentUser'));
+    const previousUsername = previousUser?.username;
+    
+    if (previousUsername && previousUsername !== matchedUser.username) {
+      localStorage.removeItem(`cart-${previousUsername}`);
+      localStorage.removeItem(`likedProducts-${previousUsername}`);
+      localStorage.removeItem(`address-${previousUsername}`);
+      localStorage.removeItem(`following-${previousUsername}`);
+    }
+    
+    // Now save new login
     localStorage.setItem('currentUser', JSON.stringify(matchedUser));
     localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('username', username);
     navigate('/');
-    window.location.reload(); // 🔄 Force a reload so Header sees the updated login state
-
+    window.location.reload();
+    
 
     // ✅ Reset form fields
     setUsername('');

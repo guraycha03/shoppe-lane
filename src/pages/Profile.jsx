@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/common/BackButton';
 import ProfileInfo from '../components/profile/ProfileInfo';
 import LocationPicker from '../components/profile/LocationPicker';
-import { getFollowedSellerIdsForUser } from '../utils/followStorage';
+// import { getFollowedSellerIdsForUser } from '../utils/followStorage';
 import StoresModal from '../components/profile/StoresModal'; // adjust the path
+
+
 
 import axios from 'axios';
 
@@ -20,7 +22,7 @@ function Profile() {
   const [position, setPosition] = useState(null);
   const [followedStores, setFollowedStores] = useState([]);
   const [showStoresModal, setShowStoresModal] = useState(false);
-
+  
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const stored = localStorage.getItem('currentUser');
@@ -33,6 +35,11 @@ function Profile() {
     try {
       const storedUser = JSON.parse(stored);
       setCurrentUser(storedUser);
+      const savedAddress = localStorage.getItem(`address-${storedUser.username}`);
+      if (savedAddress) {
+        setAddress(savedAddress);
+      }
+
       setImage(storedUser.profileImage || '');
       setEditedUsername(storedUser.username || '');
       setEditedEmail(storedUser.email || '');
@@ -61,9 +68,15 @@ function Profile() {
     
         const uniqueStores = sellerIds.map(sellerId => {
           const product = data.find(p => String(p.sellerId) === String(sellerId));
-          console.log("🔍 Matching product for sellerId:", sellerId, "→", product);
-          return product ? { sellerId: product.sellerId, seller: product.seller } : null;
+          return product
+            ? {
+                sellerId: product.sellerId,
+                seller: product.seller,
+                sellerImage: product.sellerImage || product.image || '', // Fallback
+              }
+            : null;
         }).filter(Boolean);
+        
         
     
         setFollowedStores(uniqueStores);
@@ -105,24 +118,47 @@ function Profile() {
 
 
       {/* Buttons */}
-      <div className="d-flex justify-content-between align-items-center mt-4 mb-4 flex-wrap gap-3">
-      <button
-        className="btn btn-light border shadow-sm px-4 py-2 fs-6 d-flex align-items-center gap-2 fw-semibold custom-hover"
-        onClick={() => setShowStoresModal(true)}
-      >
-        <i className="bi bi-shop text-secondary fs-5"></i>
-        <span className="text-secondary">Stores You Follow</span>
-      </button>
+      <div className="row g-3 mt-4 mb-4">
+        <div className="col-12 col-sm-6 col-md-4">
+          <button
+            className="btn btn-light w-100 border shadow-sm px-4 py-2 fs-6 d-flex align-items-center justify-content-center gap-2 fw-semibold custom-hover"
+            onClick={() => setShowStoresModal(true)}
+          >
+            <i className="bi bi-shop text-secondary fs-5"></i>
+            <span className="text-secondary">Stores You Follow</span>
+          </button>
+        </div>
 
-        <button
-          className="btn btn-outline-secondary border shadow-sm px-4 py-2 fs-6 d-flex align-items-center gap-2 fw-semibold custom-hover"
-          onClick={() => alert('Start Selling functionality coming soon!')}
-        >
-          <i className="bi bi-bag-plus text-secondary fs-5"></i> 
-          <span className="text-secondary">Start Selling</span>
-        </button>
+        <div className="col-12 col-sm-6 col-md-4">
+          <button
+            className="btn btn-outline-secondary w-100 border shadow-sm px-4 py-2 fs-6 d-flex align-items-center justify-content-center gap-2 fw-semibold custom-hover"
+            onClick={() => alert('Start Selling functionality coming soon!')}
+          >
+            <i className="bi bi-bag-plus text-secondary fs-5"></i> 
+            <span className="text-secondary">Start Selling</span>
+          </button>
+        </div>
 
+        <div className="col-12 col-md-4">
+          <button
+            className="btn w-100 border shadow-sm px-4 py-2 fs-6 d-flex align-items-center justify-content-center gap-2 fw-semibold logout-hover"
+            onClick={() => {
+              localStorage.removeItem('isLoggedIn');
+              localStorage.removeItem('currentUser');
+              localStorage.removeItem('followedUsers'); // 🔥 clear follow state
+              window.location.href = '/login';
+            }}
+            
+            
+          >
+            <i className="bi bi-box-arrow-right fs-5 text-danger"></i>
+            <span className="text-danger">Logout</span>
+          </button>
+        </div>
       </div>
+
+
+
 
       {/* SECTION 2: Order History (placeholder) */}
       <section className="card p-4 shadow-sm border-0 mb-4">
@@ -134,7 +170,13 @@ function Profile() {
       <section className="card p-4 shadow-sm border-0 mb-4">
         <h5 className="text-muted mb-3">Delivery Address</h5>
 
-        <LocationPicker setAddress={setAddress} setPosition={setPosition} />
+        <LocationPicker
+          setAddress={(addr) => {
+            setAddress(addr);
+            localStorage.setItem(`address-${currentUser.username}`, addr);
+          }}
+          setPosition={setPosition}
+        />
 
         {address && (
           <div className="alert alert-light border mt-3">

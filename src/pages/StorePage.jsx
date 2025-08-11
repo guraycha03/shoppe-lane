@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard';
 
 import useFollowState from '../hooks/useFollowState';
 
+
 import SellerInfoBox from '../components/SellerInfoBox';
 
 function StorePage({
@@ -45,7 +46,7 @@ function StorePage({
         if (sellerProducts.length > 0) {
           setSellerData({
             name: sellerProducts[0].seller,
-            id: sellerProducts[0].sellerId, // ✅ use sellerId from API
+            id: sellerProducts[0].sellerId, 
             totalProducts: sellerProducts.length
           });
           
@@ -71,20 +72,14 @@ function StorePage({
       </button>
 
       {/* Seller Info */}
-      {sellerData && (
+      {sellerData?.id && (
         <div className="mb-4">
-          <div
-            className="clickable-seller-box p-3 rounded border mb-3"
-            onClick={() => navigate(`/store/${slugify(sellerData.name)}`)}
+          <SellerInfoBox
+            seller={sellerData}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser || (JSON.parse(localStorage.getItem('currentUser') || '{}').username) || ''}
+          />
 
-            style={{ cursor: 'pointer', backgroundColor: '#f9f9f9' }}
-            >
-            <SellerInfoBox
-                seller={sellerData}
-                isLoggedIn={isLoggedIn}
-                currentUser={currentUser}
-            />
-            </div>
 
           <div className="text-muted mt-2">
             <i className="bi bi-box-seam me-1"></i>

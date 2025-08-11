@@ -164,7 +164,7 @@ function Header({
               <h1
                 className="m-0 fw-bold d-flex align-items-center gap-2"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Garamond', sans-serif",
                   color: '#8B6F52',
                   fontSize: '1.4rem',
                   letterSpacing: '0.5px',

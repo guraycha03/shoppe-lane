@@ -10,7 +10,11 @@ function Footer() {
           <div className="row gx-4 gy-4 mx-0 px-4">
             {/* Shoppe Lane */}
             <div className="col-sm-6 col-lg-3">
-              <h6 className="fw-bold mb-3">Shoppe Lane</h6>
+              <h6 className="fw-bold mb-3"
+              style={{
+                fontFamily: "'Garamond', sans-serif",fontSize: '1.4rem',}}
+                >Shoppe Lane</h6>
+                
               <ul className="list-unstyled small">
                 <li><a href="#" className="footer-link">About Us</a></li>
                 <li><a href="#" className="footer-link">Contact</a></li>

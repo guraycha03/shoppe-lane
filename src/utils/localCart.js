@@ -7,6 +7,7 @@ export const getCartFromLocalStorage = (username) => {
   
   export const saveCartToLocalStorage = (username, cartItems) => {
     if (!username) return;
-    localStorage.setItem(`cart-${username}`, JSON.stringify(cartItems));
+    localStorage.setItem(`cart_${currentUser}`, JSON.stringify(cartItems));
+
   };
   

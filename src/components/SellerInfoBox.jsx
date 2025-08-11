@@ -1,20 +1,51 @@
-import React from 'react';
+// src/components/SellerInfoBox.jsx
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useFollowState from '../hooks/useFollowState';
-import { getFakeFollowers } from '../utils/fakeFollowers'; 
+import { getFollowersCount } from '../utils/followStorage'; 
 import '../App.css';
 
-function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
-  const navigate = useNavigate();
-  const { hasFollowed, toggleFollow } = useFollowState(
-    currentUser || '',
-    seller?.id || ''
-  );
-  
-  const initialFollowers = seller.followers ?? getFakeFollowers(seller.id);
 
+function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
   if (!seller) return null;
+
+  // top of SellerInfoBox.jsx (replace current top-of-file logic inside component)
+  const navigate = useNavigate();
+
+  // Resolve username robustly: prefer prop, then localStorage 'currentUser' object, then fallback 'username' key
+  const resolvedUser = (() => {
+    if (currentUser && String(currentUser).trim()) return String(currentUser).trim();
+    try {
+      const cu = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      if (cu && cu.username) return String(cu.username);
+    } catch {}
+    const simple = localStorage.getItem('username');
+    if (simple) return String(simple);
+    return ''; // final fallback
+  })();
+
+  const rawSellerId = seller.id ?? seller.name ?? '';
+  const { hasFollowed, toggleFollow } = useFollowState(resolvedUser, rawSellerId);
+
+
+  const [followersCount, setFollowersCount] = useState(0);
+
+  useEffect(() => {
+    // set initial value from storage
+    setFollowersCount(getFollowersCount(rawSellerId));
+
+    const handler = (e) => {
+      if (String(e.detail?.sellerId) === String(rawSellerId)) {
+        setFollowersCount(e.detail.followers);
+      }
+    };
+
+    window.addEventListener('followUpdated', handler);
+    return () => window.removeEventListener('followUpdated', handler);
+  }, [rawSellerId]);
+
+
 
   // Utilities
   const slugify = (str) =>
@@ -38,24 +69,54 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
   const handleFollow = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
+  
+    console.log(
+      '[Follow Debug] isLoggedIn=',
+      isLoggedIn,
+      'prop currentUser=',
+      currentUser,
+      'resolvedUser=',
+      resolvedUser,
+      'sellerId=',
+      rawSellerId
+    );
+    
+  
     if (!isLoggedIn) {
       toast.warning('Please log in to follow sellers.');
       return;
     }
-
+  
+    if (!resolvedUser) {
+      console.warn('[Follow Debug] No username resolved — cannot toggle.');
+      toast.error('Unexpected login state. Please reload or sign in again.');
+      return;
+    }
+  
+    // call toggleFollow with resolvedUser (defensive)
     toggleFollow();
+
   };
+  
+  
+  
 
   // Styles
+  const getAvatarColor = (name) => {
+    if (!name || typeof name !== 'string') return '#ccc';
+    const hue = (name.charCodeAt(0) * 45) % 360;
+    return `hsl(${hue}, 60%, 75%)`;
+  };
+
   const avatarStyle = {
     width: '56px',
     height: '56px',
-    backgroundColor: '#D8C3B1',
+    backgroundColor: getAvatarColor(seller.name),
     color: '#fff',
     fontWeight: 'bold',
     fontSize: '1.25rem',
     flexShrink: 0,
+    textShadow: '0 1px 2px rgba(0,0,0,0.15)',
   };
 
   const followBtnStyle = {
@@ -66,8 +127,7 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
 
   return (
     <div
-      className="card seller-box shadow-sm p-4 rounded-4 border-0"
-      style={{ background: '#FFF8F3' }}
+      className="card seller-box shadow-sm p-4 rounded-4 border-0 bg-seller-info"
       role="region"
       aria-label={`Seller Info: ${seller.name}`}
     >
@@ -97,8 +157,7 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
             </h6>
             <p className="mb-0 text-muted">
               <i className="bi bi-people-fill me-1 text-accent"></i>
-              {formatFollowers(initialFollowers)} followers
-
+              {formatFollowers(followersCount)} followers
             </p>
           </div>
         </div>

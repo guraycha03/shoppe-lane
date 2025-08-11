@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // ✅ Added useNavigate
+import { useParams, useNavigate } from 'react-router-dom'; 
 import productReviews from '../data/productReviews';
 
 function AllReviewsPage({ showNotification, isLoggedIn }) {
   const { id } = useParams();
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate(); 
   const reviews = productReviews[id] || [];
   const [likedIndices, setLikedIndices] = useState([]);
 

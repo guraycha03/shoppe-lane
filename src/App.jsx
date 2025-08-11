@@ -11,13 +11,11 @@ import { getCartFromLocalStorage } from './utils/localCart';
 import NotificationBanner from './components/NotificationBanner';
 import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
-import PrivateRoute from './components/PrivateRoute';
-import AllReviewsPage from './pages/AllReviewsPage';
-import Profile from './pages/Profile';
-import Wishlist from './pages/Wishlist';
+// import PrivateRoute from './components/PrivateRoute';
+// import AllReviewsPage from './pages/AllReviewsPage';
+// import Profile from './pages/Profile';
+// import Wishlist from './pages/Wishlist';
 import 'leaflet/dist/leaflet.css';
-
-
 
 function App() {
   const navigate = useNavigate();
@@ -107,21 +105,27 @@ function App() {
 
   useEffect(() => {
     const storedLogin = localStorage.getItem('isLoggedIn') === 'true';
-    console.log('isLoggedIn from localStorage:', storedLogin);
     const storedUser = localStorage.getItem('currentUser');
-    console.log('user from localStorage:', storedUser);
-
+  
     setIsLoggedIn(storedLogin);
   
     try {
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
+  
+        if (parsedUser.username !== username) {
+          setLikedProducts(new Set());
+          setCartItems([]);
+        }
+  
         setUser(parsedUser);
+        setUsername(parsedUser.username || '');
       }
     } catch (error) {
       console.error('Failed to parse user JSON from localStorage:', error);
     }
   }, []);
+  
 
   useEffect(() => {
     const syncLoginState = () => {
@@ -141,7 +145,7 @@ function App() {
       const stored = localStorage.getItem(key);
       setLikedProducts(new Set(JSON.parse(stored || '[]')));
     } else {
-      setLikedProducts(new Set()); // Clear likes when logged out
+      setLikedProducts(new Set()); 
     }
   }, [isLoggedIn, username]);
   
@@ -151,7 +155,7 @@ function App() {
       const userCart = getCartFromLocalStorage(username);
       setCartItems(userCart);
     } else {
-      setCartItems([]); // Reset cart when logged out
+      setCartItems([]);
     }
   }, [isLoggedIn, username]);
 
@@ -264,8 +268,7 @@ function App() {
     });
   
     setQuantity(1);
-  
-    // Optional: fly-to-cart animation
+
     if (cartIconRef.current) {
       const el = cartIconRef.current;
       el.classList.remove("pump");
@@ -277,9 +280,6 @@ function App() {
     setAddingToCartId(null);
     addingLockRef.current = false;
   };
-  
-  
-  
   
   
   useEffect(() => {
