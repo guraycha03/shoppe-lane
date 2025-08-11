@@ -28,13 +28,31 @@ function Header({
   const mobileDropdownRef = useRef(null);
 
   const categoryScrollRef = useRef(null);
-  const lastScrollY = useRef(window.scrollY);
-
-  const cartIconRefMobile = useRef(null);
-  const cartIconRefDesktop = useRef(null);
   const profileImage = isLoggedIn ? getStoredProfileImage() : null;
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+
+  const lastScrollY = useRef(window.scrollY);
+
+  const [heartPump, setHeartPump] = useState(false);
+  const [cartPump, setCartPump] = useState(false);
+  useEffect(() => {
+    if (likedProducts.size > 0) {
+      setHeartPump(true);
+      const timer = setTimeout(() => setHeartPump(false), 400); // duration matches CSS animation
+      return () => clearTimeout(timer);
+    }
+  }, [likedProducts]);
+  
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      setCartPump(true);
+      const timer = setTimeout(() => setCartPump(false), 400);
+      return () => clearTimeout(timer);
+    }
+  }, [cartItems]);
+  
+
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 576);
@@ -153,147 +171,92 @@ function Header({
     </div>
   );
 
+  const mainNavLinks = [
+    { label: 'Home', path: '/' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Shop', path: '/shop' },
+    { label: 'Contact', path: '/contact' },
+  ];
+
+
   return (
     <>
       <header ref={headerRef} className="bg-white shadow-sm">
         <nav className="container-fluid d-flex align-items-center justify-content-between py-3 flex-nowrap">
-  
+
           {/* Left: Logo */}
-          <div className="d-flex align-items-center gap-5 me-auto">
+          <div className="d-flex align-items-center gap-3">
             <Link to="/" className="text-decoration-none">
-              <h1
-                className="m-0 fw-bold d-flex align-items-center gap-2"
+            <h1
+              className="m-0 fw-bold"
+              style={{
+                fontFamily: "'Garamond', serif",
+                color: '#8B6F52',
+                fontSize: '1.5rem',        // Smaller font size for the text
+                fontWeight: '600',         // Slightly lighter weight if desired
+              }}
+            >
+              <i
+                className="bi bi-bag logo-bag-icon"
                 style={{
-                  fontFamily: "'Garamond', sans-serif",
-                  color: '#8B6F52',
-                  fontSize: '1.4rem',
-                  letterSpacing: '0.5px',
+                  fontSize: '1.3rem',      // Smaller icon size
+                  cursor: 'pointer',
+                  verticalAlign: 'middle'  // Align icon better with text
                 }}
-              >
-                <i
-                  className="bi bi-bag logo-bag-icon"
-                  style={{ fontSize: '1.8rem', cursor: 'pointer' }}
-                  onClick={() => navigate('/')}
-                />
-                <span className="d-none d-sm-inline">Shoppe Lane</span>
-              </h1>
+              />
+              <span className="d-none d-sm-inline" style={{ marginLeft: '0.3rem' }}>
+                Shoppe Lane
+              </span>
+            </h1>
+
             </Link>
           </div>
 
-  
-          {/* Center: Mobile Icons */}
-          <div className="d-flex w-100 justify-content-center d-sm-none">
-            <div className="d-flex justify-content-center gap-5 py-2">
-              {/* Home */}
-              <i className="bi bi-house icon-hover-global" onClick={() => navigate('/')} />
-  
-              {/* Heart */}
-              <div className="position-relative">
-                <i ref={heartIconRef} className="bi bi-heart icon-hover-global" onClick={() => navigate('/wishlist')} />
-                {likedProducts.size > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style={{ fontSize: '0.6rem' }}>
-                    {likedProducts.size}
-                  </span>
-                )}
-              </div>
-  
-              {/* Cart */}
-              <div className="position-relative">
-              <i
-                ref={isMobile ? cartIconRef : null}
-                className="bi bi-cart2 icon-hover-global"
-                onClick={() => navigate('/cart')}
-                style={{ cursor: 'pointer' }}
-              />
+          {/* Center: Main Navigation - visible only on desktop */}
+          <ul className="d-none d-sm-flex list-unstyled gap-4 m-0" style={{ flexGrow: 1, justifyContent: 'center' }}>
+            {mainNavLinks.map(({ label, path }) => (
+              <li key={label}>
+                <Link
+                  to={path}
+                  className="nav-link-underline"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-                {cartItems.length > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style={{ fontSize: '0.6rem' }}>
-                    {cartItems.reduce((total, item) => total + item.quantity, 0)}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-  
-          {/* Right: Desktop Icons + Avatar + Burger */}
-          <div className="d-none d-sm-flex align-items-center gap-4 ms-auto pe-3">
 
-  
-            {/* Home Icon */}
+        {/* Right: Heart and Cart grouped with spacing */}
+        <div className="d-flex align-items-center gap-4">
+          <div className="position-relative">
             <i
-              className="bi bi-house icon-hover-global"
-              onClick={() => navigate('/')}
+              ref={heartIconRef}
+              className={`bi bi-heart icon-hover-global ${heartPump ? 'pump' : ''}`}
+              onClick={() => navigate('/wishlist')}
               style={{ cursor: 'pointer' }}
             />
-  
-            {/* Heart */}
-            <div className="position-relative">
-              <i
-                ref={heartIconRef}
-                className="bi bi-heart icon-hover-global"
-                onClick={() => navigate('/wishlist')}
-              />
-              {likedProducts.size > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style={{ fontSize: '0.6rem' }}>
-                  {likedProducts.size}
-                </span>
-              )}
-            </div>
-  
-            {/* Cart */}
-            <div className="position-relative">
+            {likedProducts.size > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style={{ fontSize: '0.6rem' }}>
+                {likedProducts.size}
+              </span>
+            )}
+          </div>
+
+          <div className="position-relative">
             <i
-              ref={!isMobile ? cartIconRef : null}
-              className="bi bi-cart2 icon-hover-global"
+              ref={cartIconRef}
+              className={`bi bi-cart2 icon-hover-global ${cartPump ? 'pump' : ''}`}
               onClick={() => navigate('/cart')}
               style={{ cursor: 'pointer' }}
             />
-
-              {cartItems.length > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style={{ fontSize: '0.6rem' }}>
-                  {cartItems.reduce((total, item) => total + item.quantity, 0)}
-                </span>
-              )}
-            </div>
-          </div>
-  
-          {/* Profile Icon (always visible) */}
-          <div
-            className="profile-icon ms-3"
-            onClick={handleProfileClick}
-            style={{ cursor: 'pointer' }}
-          >
-            {isLoggedIn ? (
-              profileImage ? (
-                <img
-                  src={profileImage}
-                  alt="Profile"
-                  style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: '2px solid #dee2e6',
-                  }}
-                />
-              ) : (
-                <div className="avatar-circle">
-                  {username && typeof username === 'string'
-                    ? username.charAt(0).toUpperCase()
-                    : '?'}
-                </div>
-              )
-            ) : (
-              <i className="bi bi-person-circle icon-static-profile"></i>
-
+            {cartItems.length > 0 && (
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" style={{ fontSize: '0.6rem' }}>
+                {cartItems.reduce((total, item) => total + item.quantity, 0)}
+              </span>
             )}
-
-
-
-
-
           </div>
-  
+
           {/* Burger Menu */}
           <div
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -318,7 +281,9 @@ function Header({
               }}
             ></i>
           </div>
+        </div>
         </nav>
+
       </header>
 
       <SubHeader
@@ -340,6 +305,7 @@ function Header({
           navigate={navigate}
           expandedSection={expandedSection}
           toggleSection={toggleSection}
+          mainNavLinks={mainNavLinks}
         />
       )}
     </>

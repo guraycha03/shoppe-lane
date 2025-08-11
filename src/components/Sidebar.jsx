@@ -1,6 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-function Sidebar({ isLoggedIn, sidebarOpen, setSidebarOpen, navigate }) {
+function Sidebar({ 
+  isLoggedIn, 
+  sidebarOpen, 
+  setSidebarOpen, 
+  navigate,
+  mainNavLinks = [],  // Receive main nav links as prop
+  expandedSection,
+  toggleSection,
+}) {
   const sidebarRef = useRef(null);
 
   const DEFAULT_AVATAR = 'https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753782519/default-avatar_c38cq7.png';
@@ -54,14 +62,11 @@ function Sidebar({ isLoggedIn, sidebarOpen, setSidebarOpen, navigate }) {
     { label: 'Kids', path: '/category/kids' },
   ];
 
-  
-
   return (
     <>
       <div className="sidebar-overlay" onClick={closeSidebar}></div>
-      <aside className="sidebar-panel" ref={sidebarRef} style={{padding: '1rem'}}>
-        {/* Profile Section - always visible */}
-        {/* Profile Section - always visible */}
+      <aside className="sidebar-panel" ref={sidebarRef} style={{ padding: '1rem' }}>
+        {/* Profile Section */}
         <div
           className="sidebar-profile d-flex flex-column align-items-start mb-4"
           style={{ cursor: 'pointer', backgroundColor: '#faf3e0', padding: '0.75rem 1rem', borderRadius: '10px' }}
@@ -77,19 +82,17 @@ function Sidebar({ isLoggedIn, sidebarOpen, setSidebarOpen, navigate }) {
           <div className="d-flex align-items-center">
             {isLoggedIn ? (
               <img
-              src={profileImage}
-              alt="Profile"
-              style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                marginRight: '0.75rem',
-                border: '2px solid #dee2e6',
-              }}
-            />
-            
-            
+                src={profileImage}
+                alt="Profile"
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  marginRight: '0.75rem',
+                  border: '2px solid #dee2e6',
+                }}
+              />
             ) : (
               <div
                 style={{
@@ -121,7 +124,26 @@ function Sidebar({ isLoggedIn, sidebarOpen, setSidebarOpen, navigate }) {
             </div>
           )}
         </div>
+        
+        {/* Main Navigation - mobile */}
+        <div className="mb-4">
+          <h5 style={{ color: '#5a4a3f', fontWeight: '700', marginBottom: '0.75rem' }}>Navigation</h5>
+          <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+            {mainNavLinks.map(({ label, path }) => (
+              <li 
+                key={label} 
+                onClick={() => handleNavigation(path)} 
+                style={navItemStyle}
+                onMouseEnter={e => (e.currentTarget.style.color = '#a07f64')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#6f5846')}
+              >
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
 
+      
 
         {/* Account Section */}
         <div className="mb-4">
@@ -141,7 +163,6 @@ function Sidebar({ isLoggedIn, sidebarOpen, setSidebarOpen, navigate }) {
               </>
             )}
           </ul>
-
         </div>
 
         {/* Shop Section */}

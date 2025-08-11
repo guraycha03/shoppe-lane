@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { slugify } from '../utils/slugify';
 
 function SubHeader({
   searchTerm,
@@ -15,23 +16,36 @@ function SubHeader({
   const mobileDropdownRef = useRef(null);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
   const [showOnScroll, setShowOnScroll] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    if (pathname !== '/') return;
-
+    // Enable scroll show/hide on homepage and all-products page
+    if (pathname !== '/' && pathname !== '/products') return;
+  
+    if (showMobileDropdown) return;
+  
     const handleScroll = () => {
-      if (showMobileDropdown) return;
       const currentScrollY = window.scrollY;
       setShowOnScroll(currentScrollY < lastScrollY);
       setLastScrollY(currentScrollY);
     };
-
+  
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [pathname, lastScrollY, showMobileDropdown]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && showMobileDropdown) {
+        setShowMobileDropdown(false);
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [showMobileDropdown, setShowMobileDropdown]);
+  
 
   const hideSubHeader =
     pathname.startsWith('/product/') ||
@@ -39,7 +53,7 @@ function SubHeader({
     pathname === '/wishlist' ||
     pathname === '/cart' ||
     pathname === '/profile' ||
-    pathname === '/search' ||
+    // pathname === '/search' ||
     pathname === '/login' ||
     pathname === '/signup' ||
     pathname === '/order' ||
@@ -124,7 +138,7 @@ function SubHeader({
                 onClick={() => {
                   setSelectedCategory(cat);
                   setShowMobileDropdown(false);
-                  navigate(`/category/${cat.toLowerCase()}`);
+                  navigate(`/category/${slugify(cat)}`);
                 }}
               >
                 {cat}
@@ -177,7 +191,7 @@ function SubHeader({
                   onClick={() => {
                     setSelectedCategory(cat);
                     setShowMobileDropdown(false);
-                    navigate(`/category/${cat.toLowerCase()}`);
+                    navigate(`/category/${slugify(cat)}`);
                   }}
                 >
                   {cat}

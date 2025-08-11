@@ -8,9 +8,22 @@ import { HexColorPicker } from 'react-colorful';
 function ProfileBanner({ currentUser, setCurrentUser }) {
   const [bannerColor, setBannerColor] = useState(currentUser.bannerColor || '#f0f2f5');
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const [image, setImage] = useState(currentUser.profileImage || '');
+  const [image, setImage] = useState(getValidProfileImage(currentUser.profileImage));
+
   const fileInputRef = useRef(null);
   const colorPickerRef = useRef(null); // For detecting outside clicks
+  const DEFAULT_AVATAR = 'https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753782519/default-avatar_c38cq7.png';
+
+  function getValidProfileImage(image) {
+    if (
+      typeof image === 'string' &&
+      image.trim() !== '' &&
+      (image.startsWith('http') || image.startsWith('data:'))
+    ) {
+      return image;
+    }
+    return DEFAULT_AVATAR;
+  }
 
   // Close color picker if clicked outside
   useEffect(() => {
@@ -38,8 +51,11 @@ function ProfileBanner({ currentUser, setCurrentUser }) {
       const updatedUser = { ...currentUser, profileImage: base64Image };
       localStorage.setItem('currentUser', JSON.stringify(updatedUser));
       setCurrentUser(updatedUser);
-      setImage(base64Image);
-
+      setImage(base64Image);  // keep this, it updates local state in ProfileBanner
+    
+      // Notify others about the profile image update
+      window.dispatchEvent(new CustomEvent('profileImageUpdated', { detail: base64Image }));
+    
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const updatedUsers = users.map((user) =>
         user.username === currentUser.username || user.email === currentUser.email
@@ -48,6 +64,7 @@ function ProfileBanner({ currentUser, setCurrentUser }) {
       );
       localStorage.setItem('users', JSON.stringify(updatedUsers));
     };
+    
 
     if (file) reader.readAsDataURL(file);
   };
@@ -67,6 +84,8 @@ function ProfileBanner({ currentUser, setCurrentUser }) {
 
     setShowColorPicker(false);
   };
+
+ 
 
   return (
     <div
@@ -186,10 +205,8 @@ function ProfileBanner({ currentUser, setCurrentUser }) {
       <div className="position-absolute start-50 translate-middle" style={{ top: '100%' }}>
         <div className="position-relative">
           <img
-            src={
-              image ||
-              'https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753782519/default-avatar_c38cq7.png'
-            }
+            src={getValidProfileImage(image)}
+
             alt="Profile"
             className="rounded-circle shadow"
             style={{

@@ -16,6 +16,7 @@ import Wishlist from './pages/Wishlist';
 import Profile from './pages/Profile';
 import Order from './pages/Order';
 import Home from './pages/Home';
+import AllProductsPage from './pages/AllProductsPage';  
 
 
 
@@ -108,6 +109,21 @@ function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, products, .
             </PageWrapper>
           }
         />
+
+        <Route
+          path="/products"
+          element={
+            <PageWrapper>
+              <AllProductsPage
+                {...props}
+                triggerFlyToCartAnimation={props.triggerFlyToCartAnimation}
+                isLoggedIn={isLoggedIn}
+                showNotification={showNotification}
+              />
+            </PageWrapper>
+          }
+        />
+
 
         <Route
           path="/reviews/:id"

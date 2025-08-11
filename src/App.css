@@ -157,11 +157,41 @@ header {
 }
 
 .header .logo {
-  margin-left: 0; /* push logo to left edge */
+  margin-left: 0;
 }
 
 .header .burger-menu {
   margin-right: 0; /* push icon to right edge */
+}
+
+.nav-link-underline {
+  position: relative;
+  color: #6f5846;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.3px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* spacing below text */
+  height: 2px;
+  width: 0;
+  background-color: #a07f64;
+  transition: width 0.3s ease;
+}
+
+.nav-link-underline:hover {
+  color: #a07f64;
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
 }
 
 .sub-header .dropdown-menu {
@@ -191,14 +221,6 @@ header {
   cursor: pointer;
   color: #8B6F52;
   transition: color 0.2s ease;
-}
-
-.icon-static-profile {
-  font-size: 1.5rem;
-  padding: 0.10rem;
-  vertical-align: middle;
-  color: #8B6F52;
-  cursor: pointer;
 }
 
 .mobile-icons-container i {
@@ -734,18 +756,6 @@ body.sidebar-open {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* --------------------------------------
   QUANTITY & ICONS
 ----------------------------------------- */
@@ -780,9 +790,6 @@ body.sidebar-open {
   z-index: 9999;
   pointer-events: none;
 }
-
-
-
 
 .cart-bounce {
   animation: bounce 0.4s ease;
