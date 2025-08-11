@@ -11,10 +11,8 @@ import { getCartFromLocalStorage } from './utils/localCart';
 import NotificationBanner from './components/NotificationBanner';
 import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
-// import PrivateRoute from './components/PrivateRoute';
-// import AllReviewsPage from './pages/AllReviewsPage';
-// import Profile from './pages/Profile';
-// import Wishlist from './pages/Wishlist';
+import ScrollButtons from './components/ScrollButtons';
+
 import 'leaflet/dist/leaflet.css';
 
 function App() {
@@ -415,7 +413,7 @@ function App() {
         cartIconMobileRef={cartIconMobileRef}
         cartIconDesktopRef={cartIconDesktopRef}     
       />
-  
+
       <main className="container-fluid px-0">
 
         <ShoppeRoutes
@@ -441,6 +439,7 @@ function App() {
           triggerFlyToCartAnimation={triggerFlyToCartAnimation}  
         />
       </main>
+      <ScrollButtons />
     </div>
   );  
 }

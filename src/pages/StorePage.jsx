@@ -93,13 +93,14 @@ function StorePage({
       {loading && (
         <div className="d-flex justify-content-center align-items-center flex-column py-5">
           <i
-            className="bi bi-bag-heart-fill mb-3"
+            className="bi bi-shop-window mb-3"
             style={{
               fontSize: '3rem',
               color: '#8B6F52',
               animation: 'pulse 1.2s infinite ease-in-out',
             }}
           ></i>
+
           <div className="fw-semibold" style={{ color: '#8B6F52' }}>
             Loading {sellerData?.name ? `${sellerData.name}'s Store` : 'Store'}...
           </div>

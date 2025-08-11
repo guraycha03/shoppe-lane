@@ -84,8 +84,32 @@ function ProductPage({
   }, [id]);
 
   if (loading) {
-    return <p className="text-center mt-5">Loading product details…</p>;
+    return (
+      <div className="d-flex flex-column align-items-center justify-content-center py-5">
+        <i
+          className="bi bi-bag-heart-fill mb-3"
+          style={{
+            fontSize: '3rem',
+            color: '#8B6F52',
+            animation: 'pulse 1.2s infinite ease-in-out',
+          }}
+        ></i>
+        <div className="fw-semibold" style={{ color: '#8B6F52', fontSize: '1.1rem' }}>
+          Loading product details…
+        </div>
+        <style>
+          {`
+            @keyframes pulse {
+              0% { transform: scale(1); opacity: 0.7; }
+              50% { transform: scale(1.2); opacity: 1; }
+              100% { transform: scale(1); opacity: 0.7; }
+            }
+          `}
+        </style>
+      </div>
+    );
   }
+  
 
   if (!product) {
     return <p className="text-center mt-5">Product not found</p>;
@@ -186,7 +210,7 @@ function ProductPage({
             <div className="row g-3">
             <SellerInfoBox
               seller={{
-                sellerId: product.sellerId, // ✅ match store page
+                sellerId: product.sellerId, 
                 name: product.seller
               }}
               isLoggedIn={isLoggedIn}

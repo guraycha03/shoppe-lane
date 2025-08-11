@@ -39,9 +39,6 @@ function Home({
         </div>
       </section>
 
-
-
-
       {/* Product Section */}
       <section className="container mt-0 mb-5">
         <h2 className="text-center mt-5 mb-4">Featured Products</h2>
