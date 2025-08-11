@@ -10,7 +10,6 @@ import RatingSection from './RatingSection';
 import SellerInfoBox from './SellerInfoBox';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-
 import { CSSTransition } from 'react-transition-group';
 import AddToCartButton from './AddToCartButton';
 import VariantSelector from './VariantSelector';
@@ -27,6 +26,7 @@ function ProductPage({
   addingToCartId,
   triggerFlyToCartAnimation,
   isLoggedIn,
+  currentUser,
 }) {
 
   const showNotification = (message, type = 'error') => {
@@ -186,12 +186,13 @@ function ProductPage({
             <div className="row g-3">
             <SellerInfoBox
               seller={{
-                id: product.sellerId, 
-                name: product.seller,
+                sellerId: product.sellerId, // ✅ match store page
+                name: product.seller
               }}
               isLoggedIn={isLoggedIn}
-              currentUser={username}
+              currentUser={currentUser?.username}
             />
+
 
                 <div className="col-12">
                 <ProductDetailsBox

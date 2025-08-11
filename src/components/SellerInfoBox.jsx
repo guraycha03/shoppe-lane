@@ -25,9 +25,9 @@ function SellerInfoBox({ seller, isLoggedIn, currentUser }) {
     return ''; // final fallback
   })();
 
-  const rawSellerId = seller.id ?? seller.name ?? '';
+  // Always normalize sellerId to string
+  const rawSellerId = String(seller.sellerId || seller.id || seller.name || '');
   const { hasFollowed, toggleFollow } = useFollowState(resolvedUser, rawSellerId);
-
 
   const [followersCount, setFollowersCount] = useState(0);
 

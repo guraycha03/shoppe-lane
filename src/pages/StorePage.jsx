@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
-
 import useFollowState from '../hooks/useFollowState';
-
-
 import SellerInfoBox from '../components/SellerInfoBox';
 
 function StorePage({
@@ -75,11 +72,15 @@ function StorePage({
       {sellerData?.id && (
         <div className="mb-4">
           <SellerInfoBox
-            seller={sellerData}
+            seller={{
+              sellerId: products[0]?.sellerId, 
+              name: products[0]?.seller,
+              id: products[0]?.sellerId,     
+              totalProducts: products.length
+            }}
             isLoggedIn={isLoggedIn}
-            currentUser={currentUser || (JSON.parse(localStorage.getItem('currentUser') || '{}').username) || ''}
+            currentUser={currentUser?.username}
           />
-
 
           <div className="text-muted mt-2">
             <i className="bi bi-box-seam me-1"></i>
@@ -87,6 +88,7 @@ function StorePage({
           </div>
         </div>
       )}
+
 
       <h2 className="mb-4">{sellerData?.name}'s Store</h2>
 

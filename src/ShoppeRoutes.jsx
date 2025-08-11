@@ -61,10 +61,12 @@ function ShoppeRoutes({ isLoggedIn, setIsLoggedIn, showNotification, products, .
                 {...props}
                 triggerFlyToCartAnimation={props.triggerFlyToCartAnimation}
                 isLoggedIn={isLoggedIn}
+                currentUser={props.user?.username} 
               />
             </PageWrapper>
           }
         />
+
 
         <Route
           path="/cart"

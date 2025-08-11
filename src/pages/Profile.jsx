@@ -3,11 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/common/BackButton';
 import ProfileInfo from '../components/profile/ProfileInfo';
 import LocationPicker from '../components/profile/LocationPicker';
-// import { getFollowedSellerIdsForUser } from '../utils/followStorage';
-import StoresModal from '../components/profile/StoresModal'; // adjust the path
-
-
-
+import { getFollowedSellerIdsForUser } from '../utils/followStorage';
+import StoresModal from '../components/profile/StoresModal';
 import axios from 'axios';
 
 function Profile() {
@@ -51,43 +48,49 @@ function Profile() {
 
   useEffect(() => {
     if (!currentUser) return;
-
+  
     const fetchFollowedStores = async () => {
       const sellerIds = getFollowedSellerIdsForUser(currentUser.username);
-      console.log("🛒 Followed Seller IDs:", sellerIds); // <-- LOG HERE
-    
+  
       if (!sellerIds.length) {
         setFollowedStores([]);
         return;
       }
-    
+  
       try {
-        const { data } = await axios.get('https://687c9936918b6422432ebfe8.mockapi.io/api/products');
-
-        console.log("📦 Products Fetched:", data.length);
-    
+        const { data } = await axios.get(
+          'https://687c9936918b6422432ebfe8.mockapi.io/api/products'
+        );
+  
         const uniqueStores = sellerIds.map(sellerId => {
           const product = data.find(p => String(p.sellerId) === String(sellerId));
           return product
             ? {
                 sellerId: product.sellerId,
                 seller: product.seller,
-                sellerImage: product.sellerImage || product.image || '', // Fallback
+                sellerImage: product.sellerImage || product.image || '',
               }
             : null;
         }).filter(Boolean);
-        
-        
-    
+  
         setFollowedStores(uniqueStores);
       } catch (error) {
         console.error('Failed to fetch followed stores:', error);
       }
     };
-    
-
+  
+    // ✅ initial fetch
     fetchFollowedStores();
+  
+    // ✅ listen for follow updates from any page
+    const handleFollowUpdated = () => fetchFollowedStores();
+    window.addEventListener('followUpdated', handleFollowUpdated);
+  
+    return () => {
+      window.removeEventListener('followUpdated', handleFollowUpdated);
+    };
   }, [currentUser]);
+  
 
   useEffect(() => {
     if (showStoresModal) document.body.style.overflow = 'hidden';

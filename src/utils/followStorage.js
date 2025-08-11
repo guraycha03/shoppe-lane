@@ -11,3 +11,13 @@ export const setFollowersCount = (sellerId, count) => {
   data[sellerId] = count;
   localStorage.setItem(followersCountKey, JSON.stringify(data));
 };
+
+export const getFollowedSellerIdsForUser = (username) => {
+  if (!username) return [];
+  const storageKey = `followedSellers_${username}`;
+  try {
+    return JSON.parse(localStorage.getItem(storageKey)) || [];
+  } catch {
+    return [];
+  }
+};
