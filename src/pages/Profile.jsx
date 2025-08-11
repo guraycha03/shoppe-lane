@@ -148,20 +148,16 @@ function Profile() {
             onClick={() => {
               localStorage.removeItem('isLoggedIn');
               localStorage.removeItem('currentUser');
-              localStorage.removeItem('followedUsers'); // 🔥 clear follow state
-              window.location.href = '/login';
-            }}
-            
-            
+              localStorage.removeItem('followedUsers'); 
+              navigate('/login');
+
+            }}         
           >
             <i className="bi bi-box-arrow-right fs-5 text-danger"></i>
             <span className="text-danger">Logout</span>
           </button>
         </div>
       </div>
-
-
-
 
       {/* SECTION 2: Order History (placeholder) */}
       <section className="card p-4 shadow-sm border-0 mb-4">

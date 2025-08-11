@@ -9,7 +9,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-
 const isGithubPages = import.meta.env.BASE_URL === '/shoppe-lane/';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

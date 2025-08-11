@@ -85,7 +85,10 @@ function ProductPage({
 
   if (loading) {
     return (
-      <div className="d-flex flex-column align-items-center justify-content-center py-5">
+      <div
+        className="d-flex justify-content-center align-items-center flex-column py-5"
+        style={{ color: '#8B6F52' }}
+      >
         <i
           className="bi bi-bag-heart-fill mb-3"
           style={{
@@ -94,7 +97,7 @@ function ProductPage({
             animation: 'pulse 1.2s infinite ease-in-out',
           }}
         ></i>
-        <div className="fw-semibold" style={{ color: '#8B6F52', fontSize: '1.1rem' }}>
+        <div className="fw-semibold" style={{ color: '#8B6F52' }}>
           Loading product details…
         </div>
         <style>

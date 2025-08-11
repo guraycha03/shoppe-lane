@@ -1,18 +1,24 @@
-// src/components/Sidebar.jsx
+import React, { useEffect, useRef, useState } from 'react';
 
-import { useEffect, useRef } from 'react';
-
-function Sidebar({
-  isLoggedIn,
-  sidebarOpen,
-  setSidebarOpen,
-  navigate,
-  expandedSection,
-  toggleSection
-}) {
+function Sidebar({ isLoggedIn, sidebarOpen, setSidebarOpen, navigate }) {
   const sidebarRef = useRef(null);
 
-  // Close sidebar when clicking outside
+  const DEFAULT_AVATAR = 'https://res.cloudinary.com/dyjd4nbrf/image/upload/v1753782519/default-avatar_c38cq7.png';
+
+  function getValidProfileImage(image) {
+    if (
+      typeof image === 'string' &&
+      image.trim() !== '' &&
+      (image.startsWith('http') || image.startsWith('data:'))
+    ) {
+      return image;
+    }
+    return DEFAULT_AVATAR;
+  }
+
+  const initialUser = JSON.parse(localStorage.getItem('currentUser'));
+  const [profileImage, setProfileImage] = useState(getValidProfileImage(initialUser?.profileImage));
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarOpen && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -20,156 +26,157 @@ function Sidebar({
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [sidebarOpen]);
 
-  // Disable body scroll when sidebar is open
-  useEffect(() => {
-    if (sidebarOpen) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
+    const onProfileImageUpdated = (e) => {
+      setProfileImage(getValidProfileImage(e.detail));
+    };
+    
+    window.addEventListener('profileImageUpdated', onProfileImageUpdated);
+
     return () => {
-      document.body.classList.remove('no-scroll');
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('profileImageUpdated', onProfileImageUpdated);
     };
   }, [sidebarOpen]);
 
   const closeSidebar = () => setSidebarOpen(false);
 
-  const renderDropdown = (title, iconClass, sectionKey, items) => (
-    <div className="dropdown-section mb-5">
-      <div
-        className="fw-semibold mb-3 d-flex justify-content-between align-items-center text-uppercase"
-        style={{
-          fontSize: '1rem',
-          color: '#5a4a3f',
-          cursor: 'pointer',
-          letterSpacing: '0.8px',
-          fontFamily: "'DM Sans', sans-serif",
-          borderBottom: '1px solid #eae2da',
-          paddingBottom: '0.5rem',
-        }}
-        onClick={() => toggleSection(sectionKey)}
-      >
-        <span>
-          <i className={`bi ${iconClass} me-2`} />
-          {title}
-        </span>
-        <i
-          className={`bi ${expandedSection === sectionKey ? 'bi-chevron-up' : 'bi-chevron-down'}`}
-          style={{ fontSize: '1.1rem', color: '#a07f64' }}
-        />
-      </div>
+  const handleNavigation = (path) => {
+    navigate(path);
+    closeSidebar();
+  };
 
-      {expandedSection === sectionKey && (
-        <ul className="list-unstyled ps-2 fade-in" style={{ paddingLeft: '1rem' }}>
-        {items.map((item) => (
-          <li
-            key={item.label}
-            className="mb-3"
-            style={{
-              cursor: 'pointer',
-              fontSize: '1rem',
-              color: '#6f5846',
-              transition: 'color 0.2s ease',
-              fontFamily: "'DM Sans', sans-serif",
-              letterSpacing: '0.5px',
-            }}
-            onClick={() => {
-              if (item.onClick) {
-                item.onClick();
-              } else {
-                navigate(item.path);
-                setSidebarOpen(false);
-              }
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#a07f64')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#6f5846')}
-          >
-            {item.label}
-          </li>
-        ))}
-      </ul>
-      
-      )}
-    </div>
-  );
+  // Minimal categories for Shop
+  const shopCategories = [
+    { label: 'Shop All Products', path: '/shop' },
+    { label: 'Women', path: '/category/women' },
+    { label: 'Men', path: '/category/men' },
+    { label: 'Kids', path: '/category/kids' },
+  ];
+
+  
 
   return (
     <>
       <div className="sidebar-overlay" onClick={closeSidebar}></div>
-      <aside className="sidebar-panel" ref={sidebarRef}>
-        <div className="sidebar-header">
-          <span>Menu</span>
-          <i className="bi bi-x" onClick={closeSidebar}></i>
+      <aside className="sidebar-panel" ref={sidebarRef} style={{padding: '1rem'}}>
+        {/* Profile Section - always visible */}
+        {/* Profile Section - always visible */}
+        <div
+          className="sidebar-profile d-flex flex-column align-items-start mb-4"
+          style={{ cursor: 'pointer', backgroundColor: '#faf3e0', padding: '0.75rem 1rem', borderRadius: '10px' }}
+          onClick={() => {
+            if (isLoggedIn) {
+              navigate('/profile');
+            } else {
+              navigate('/login');
+            }
+            closeSidebar();
+          }}
+        >
+          <div className="d-flex align-items-center">
+            {isLoggedIn ? (
+              <img
+              src={profileImage}
+              alt="Profile"
+              style={{
+                width: '50px',
+                height: '50px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                marginRight: '0.75rem',
+                border: '2px solid #dee2e6',
+              }}
+            />
+            
+            
+            ) : (
+              <div
+                style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: '#ddd',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  fontSize: '1.5rem',
+                  color: '#8B6F52',
+                  marginRight: '0.75rem',
+                }}
+              >
+                <i className="bi bi-person-circle"></i>
+              </div>
+            )}
+            <span style={{ fontWeight: '600', fontSize: '1rem', color: '#5a4a3f' }}>
+              {isLoggedIn ? 'My Profile' : 'Guest'}
+            </span>
+          </div>
+          {isLoggedIn && (
+            <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#7c6a4a' }}>
+              <div>{JSON.parse(localStorage.getItem('currentUser'))?.username || ''}</div>
+              <div style={{ fontSize: '0.75rem', color: '#a89a7e' }}>
+                {JSON.parse(localStorage.getItem('currentUser'))?.email || ''}
+              </div>
+            </div>
+          )}
         </div>
 
-        {renderDropdown('Account & Support', 'bi-person-circle', 'account', [
-          {
-            label: isLoggedIn ? 'My Account' : 'Login',
-            path: null,
-            onClick: () => {
-              if (isLoggedIn) {
-                navigate('/profile');
-              } else {
-                navigate('/login');
-              }
-              setSidebarOpen(false);
-            }
-          },
-          ...(isLoggedIn
-            ? [
-                { label: 'Wishlist', path: '/wishlist' },
-                { label: 'My Orders', path: '/orders' },
-              ]
-            : []),
-          { label: 'Help Center', path: '/help' },
-          { label: 'Contact Us', path: '/contact' },
-        ])}
 
-        {renderDropdown('Shop', 'bi-bag', 'shop', [
-          { label: 'Shop All Products', path: '/shop' },
-          { label: 'Home', path: '/category/home' },
-          { label: 'Women', path: '/category/women' },
-          { label: 'Men', path: '/category/men' },
-          { label: 'Kids', path: '/category/kids' },
-          { label: 'Accessories', path: '/category/accessories' },
-          { label: 'Beauty', path: '/category/beauty' },
-          { label: 'Lifestyle', path: '/category/lifestyle' },
-          { label: 'Essentials', path: '/category/essentials' },
-          { label: 'Stationery', path: '/category/stationery' },
-          { label: 'Office Supplies', path: '/category/office_supplies' },
-          { label: 'Gift Ideas', path: '/category/gift_ideas' },
-        ])}
+        {/* Account Section */}
+        <div className="mb-4">
+          <h5 style={{ color: '#5a4a3f', fontWeight: '700', marginBottom: '0.75rem' }}>Account</h5>
+          <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+            {!isLoggedIn && (
+              <li onClick={() => handleNavigation('/login')} style={navItemStyle}>
+                Login
+              </li>
+            )}
 
-        {renderDropdown('Customer Resources', 'bi-receipt', 'resources', [
-          { label: 'FAQs', path: '/faq' },
-          { label: 'Shipping & Delivery Info', path: '/shipping' },
-          { label: 'Return & Refund Policy', path: '/returns' },
-          { label: 'Order Tracking', path: '/track-order' },
-          { label: 'Size Guide', path: '/size-guide' },
-          { label: 'Gift Cards', path: '/gift-cards' },
-        ])}
+            {isLoggedIn && (
+              <>
+                <li onClick={() => handleNavigation('/cart')} style={navItemStyle}>My Cart</li>
+                <li onClick={() => handleNavigation('/wishlist')} style={navItemStyle}>Wishlist</li>
+                <li onClick={() => handleNavigation('/orders')} style={navItemStyle}>My Orders</li>
+              </>
+            )}
+          </ul>
 
-        {renderDropdown('About & Branding', 'bi-info-circle', 'about', [
-          { label: 'About Us', path: '/about' },
-          { label: 'Our Story / Mission', path: '/mission' },
-          { label: 'Sustainability', path: '/sustainability' },
-          { label: 'Testimonials', path: '/testimonials' },
-          { label: 'Store Locations', path: '/locations' },
-        ])}
+        </div>
 
-        {renderDropdown('Extras & Community', 'bi-stars', 'extras', [
-          { label: 'Newsletter Signup', path: '/newsletter' },
-          { label: 'Refer a Friend', path: '/referral' },
-          { label: 'Blog / Inspiration', path: '/blog' },
-          { label: 'Instagram / TikTok Gallery', path: '/social-gallery' },
-          { label: 'Join Creator Program', path: '/creator-program' },
-        ])}
+        {/* Shop Section */}
+        <div className="mb-4">
+          <h5 style={{ color: '#5a4a3f', fontWeight: '700', marginBottom: '0.75rem' }}>Shop</h5>
+          <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+            {shopCategories.map(({ label, path }) => (
+              <li key={label} onClick={() => handleNavigation(path)} style={navItemStyle}>
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Help Section */}
+        <div>
+          <h5 style={{ color: '#5a4a3f', fontWeight: '700', marginBottom: '0.75rem' }}>Help</h5>
+          <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+            <li onClick={() => handleNavigation('/help')} style={navItemStyle}>Help Center</li>
+            <li onClick={() => handleNavigation('/contact')} style={navItemStyle}>Contact Us</li>
+          </ul>
+        </div>
       </aside>
     </>
   );
 }
+
+const navItemStyle = {
+  cursor: 'pointer',
+  padding: '0.4rem 0',
+  fontSize: '1rem',
+  color: '#6f5846',
+  fontFamily: "'DM Sans', sans-serif",
+  letterSpacing: '0.5px',
+  transition: 'color 0.2s ease',
+};
 
 export default Sidebar;

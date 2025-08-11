@@ -100,34 +100,38 @@ function Recommendations({
                 borderRadius: '0.75rem',
                 transition: 'transform 0.2s ease',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.015)')}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+             
             >
                     <div
-                        style={{
-                            width: '100%',
-                            aspectRatio: '1 / 1',
-                            backgroundColor: '#EDEBE4',
-                            borderTopLeftRadius: '0.75rem',
-                            borderTopRightRadius: '0.75rem',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            padding: '1rem', 
-                            boxSizing: 'border-box',
-                        }}
-                        >
-
-                    <img
+                      className="image-container"
+                      style={{
+                        width: '100%',
+                        aspectRatio: '1 / 1',
+                        backgroundColor: '#EDEBE4',
+                        borderTopLeftRadius: '0.75rem',
+                        borderTopRightRadius: '0.75rem',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxSizing: 'border-box',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <img
                         src={product.image}
                         alt={product.name}
                         style={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                        objectFit: 'contain',
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          borderTopLeftRadius: '0.75rem',
+                          borderTopRightRadius: '0.75rem',
+                          transition: 'transform 0.3s ease',
                         }}
-                    />
+                      />
                     </div>
+
+
 
                 <div className="card-body d-flex flex-column px-2 pt-3 pb-3">
                 <h6

@@ -53,35 +53,39 @@ function ProductCard({
         maxWidth: isSmall ? '220px' : '100%',
         fontSize: isSmall ? '0.85rem' : '1rem',
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.015)')}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+     
     >
       {/* Image section */}
       <div
+        className="image-container"
         style={{
           width: '100%',
-          height: isSmall ? '160px' : 'auto',
-          aspectRatio: isSmall ? undefined : '1 / 1',
+          aspectRatio: '1 / 1',
           backgroundColor: '#EDEBE4',
           borderTopLeftRadius: '0.75rem',
           borderTopRightRadius: '0.75rem',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: isSmall ? '0.5rem' : '0.75rem',
           boxSizing: 'border-box',
+          overflow: 'hidden',
         }}
       >
         <img
           src={product.image}
           alt={product.name}
           style={{
-            maxWidth: '100%',
-            maxHeight: '100%',
-            objectFit: 'contain',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            borderTopLeftRadius: '0.75rem',
+            borderTopRightRadius: '0.75rem',
+            transition: 'transform 0.3s ease',
           }}
         />
       </div>
+
+
 
       {/* Body */}
       <div className="card-body d-flex flex-column px-2 pt-3 pb-3">
